@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 226 33% 98%; /* #F8F9FC */
+    --foreground: 240 28% 14%; /* #1A1A2E */
+
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 240 28% 14%; /* #1A1A2E */
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 28% 14%;
+
+    --primary: 227 55% 24%; /* #1B2A5E */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 14% 46%; /* #6B7280 */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 226 33% 98%; /* #F8F9FC */
+    --muted-foreground: 215 16% 65%; /* #9CA3AF */
+
+    --accent: 25 90% 54%; /* #F47820 */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%; /* #EF4444 */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%; /* #E5E7EB */
+    --input: 214 32% 91%; /* #E5E7EB */
+    --ring: 25 90% 54%; /* #F47820 */
+
+    --radius: 8px;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-inter antialiased min-h-screen selection:bg-accent/20 selection:text-primary overflow-x-hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-poppins text-primary;
+  }
+}
+
+@layer utilities {
+  /* Typography System Extensions */
+  .text-display-xl {
+    @apply text-72 leading-1.1 font-bold;
+  }
+  .text-display {
+    @apply text-56 leading-1.2 font-bold;
+  }
+  .text-display-sm {
+    @apply text-40 leading-1.3 font-semibold;
+  }
+  .text-heading-xl {
+    @apply text-36 leading-1.3 font-bold;
+  }
+  .text-heading-lg {
+    @apply text-28 leading-1.4 font-semibold;
+  }
+  .text-heading-md {
+    @apply text-22 leading-1.4 font-semibold;
+  }
+  .text-heading-sm {
+    @apply text-18 leading-1.5 font-semibold;
+  }
+
+  /* Breakpoint Adjustments (<768px) */
+  @media (max-width: 768px) {
+    .text-display-xl { @apply text-36; }
+    .text-display { @apply text-32; }
+    .text-display-sm { @apply text-28; }
+    .text-heading-xl { @apply text-26; }
+    .text-heading-lg { @apply text-22; }
+  }
+
+  /* Spacing Utility for max-width limits */
+  .page-container {
+    @apply max-w-[1280px] mx-auto px-4 md:px-6;
+  }
+  
+  .narrow-container {
+    @apply max-w-[720px] mx-auto px-4 md:px-6;
+  }
+
+  /* Smooth Transitions */
+  .transition-default {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  .transition-smooth {
+    @apply transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)];
+  }
+  
+  /* Scrollbar hiding util */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Custom Component Classes Based on Design System */
+@layer components {
+  /* Cards */
+  .edudoor-card {
+    @apply bg-card rounded-xl shadow-card border border-[#F1F5F9] p-6 transition-smooth hover:shadow-hover hover:-translate-y-1;
+  }
+  
+  .edudoor-featured-card {
+    @apply bg-card rounded-xl shadow-card border border-[#F1F5F9] border-l-4 border-l-accent p-6 transition-smooth;
+  }
+
+  .edudoor-stat-card {
+    @apply bg-card rounded-2xl shadow-card p-6;
+  }
+
+  /* Inputs */
+  .edudoor-input {
+    @apply h-12 border border-[#E5E7EB] rounded-md bg-white focus:border-accent focus:ring-2 focus:ring-accent/50 transition-default;
+  }
+  
+  /* Badges */
+  .badge-verified {
+    @apply bg-success-light text-success font-medium rounded-full px-3 py-1 text-12 flex items-center gap-1;
+  }
+  
+  .badge-pending {
+    @apply bg-warning-light text-[#92400E] font-medium rounded-full px-3 py-1 text-12 flex items-center gap-1;
+  }
+}
