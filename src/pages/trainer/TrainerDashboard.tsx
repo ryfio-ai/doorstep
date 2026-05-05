@@ -1,10 +1,13 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Calendar, IndianRupee, Users, TrendingUp, Clock, CheckCircle2, ChevronRight, MessageCircle } from 'lucide-react';
+import { Calendar, IndianRupee, Users, TrendingUp, Clock, CheckCircle2, ChevronRight, MessageCircle, MapPin, FileText, Camera, ShieldAlert } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
+import { supabase } from '../../lib/supabase';
+import { toast } from 'sonner';
 import { PageTransition } from '../../components/shared/PageTransition';
 import { Button } from '../../components/ui/button';
 
 export const TrainerDashboard: React.FC = () => {
+  const { user, trainerProfile, isVerifiedTrainer } = useAuth();
+
   return (
     <PageTransition>
       <div className="max-w-[1100px] mx-auto space-y-8">
@@ -14,25 +17,42 @@ export const TrainerDashboard: React.FC = () => {
           <div className="absolute top-[-50%] right-[-10%] w-[400px] h-[400px] bg-accent/20 rounded-full blur-[100px] pointer-events-none"></div>
           
           <div className="relative z-10 flex-1">
-            <div className="inline-flex items-center gap-2 bg-success/20 text-success-light font-inter font-medium text-[11px] px-3 py-1 rounded-full mb-3">
-              <CheckCircle2 className="w-3.5 h-3.5" /> Verified Profile
+            <div className={`inline-flex items-center gap-2 font-inter font-medium text-[11px] px-3 py-1 rounded-full mb-3 ${
+              isVerifiedTrainer ? 'bg-success/20 text-success-light' : 'bg-orange-500/20 text-orange-400'
+            }`}>
+              {isVerifiedTrainer ? (
+                <><CheckCircle2 className="w-3.5 h-3.5" /> Verified Profile</>
+              ) : (
+                <><Clock className="w-3.5 h-3.5" /> Pending Verification</>
+              )}
             </div>
-            <h2 className="font-poppins font-bold text-[28px] text-white leading-tight">Welcome back, Ravi! 👋</h2>
-            <p className="font-inter text-[15px] text-white/70 mt-1">You have 2 classes scheduled today in Anna Nagar.</p>
+            <h2 className="font-poppins font-bold text-[28px] text-white leading-tight">
+              Welcome back, {user?.name?.split(' ')[0] || 'Trainer'}! 👋
+            </h2>
+            <p className="font-inter text-[15px] text-white/70 mt-1">
+              {isVerifiedTrainer 
+                ? "You're all set! Check your schedule for upcoming classes."
+                : "Our team is reviewing your profile. We'll notify you once you're verified."}
+            </p>
           </div>
           
           <div className="relative z-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 w-full md:w-[280px]">
             <div className="flex justify-between items-center mb-2">
-              <span className="font-inter text-[13px] text-white/80">This Month's Earnings</span>
+              <span className="font-inter text-[13px] text-white/80">Pending Payout</span>
               <IndianRupee className="w-4 h-4 text-accent" />
             </div>
             <div className="font-poppins font-bold text-[32px] text-white flex items-baseline gap-2">
-              ₹42,500
-              <span className="font-inter font-medium text-[12px] text-success-light flex items-center bg-success/20 px-1.5 py-0.5 rounded">
-                <TrendingUp className="w-3 h-3 mr-0.5" /> +12%
-              </span>
+              ₹{trainerProfile?.pending_payout || 0}
+              {trainerProfile?.pending_payout ? (
+                <span className="font-inter font-medium text-[12px] text-success-light flex items-center bg-success/20 px-1.5 py-0.5 rounded">
+                  <TrendingUp className="w-3 h-3 mr-0.5" /> +12%
+                </span>
+              ) : null}
             </div>
-            <Button className="w-full mt-4 bg-accent hover:bg-accent-600 text-white font-poppins font-semibold text-[13px] h-10 rounded-lg">
+            <Button 
+              disabled={!trainerProfile?.pending_payout}
+              className="w-full mt-4 bg-accent hover:bg-accent-600 text-white font-poppins font-semibold text-[13px] h-10 rounded-lg"
+            >
               Withdraw Funds
             </Button>
           </div>
@@ -102,11 +122,35 @@ export const TrainerDashboard: React.FC = () => {
                             <Users className="w-3.5 h-3.5" /> Student: Arjun S.
                           </div>
                         </div>
-                        <Button size="sm" className="bg-accent text-white h-8 text-[12px] px-3">Start Nav</Button>
+                        <div className="flex gap-2">
+                          <Button size="sm" variant="outline" className="h-8 text-[12px] border-orange-200 text-orange-600">
+                            <MapPin className="w-3.5 h-3.5 mr-1" /> Nav
+                          </Button>
+                          <Button size="sm" className="bg-accent text-white h-8 text-[12px] px-3">Start Class</Button>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2 mt-3 pt-3 border-t border-orange-200/50">
-                        <MapPin className="w-4 h-4 text-gray-500" />
-                        <span className="font-inter text-[12px] text-gray-600">Flat 4B, Ruby Enclave, Anna Nagar West</span>
+                      
+                      {/* Safety Actions */}
+                      <div className="flex items-center gap-4 mt-3 pt-3 border-t border-orange-200/50">
+                        <div className="flex-1">
+                          <input 
+                            type="text" 
+                            placeholder="Enter 4-digit code" 
+                            maxLength={4}
+                            className="w-full h-8 bg-white border border-orange-200 rounded px-3 text-[12px] focus:ring-1 focus:ring-accent outline-none"
+                          />
+                        </div>
+                        <Button size="sm" variant="ghost" className="h-8 text-destructive hover:bg-destructive/10">
+                          <ShieldAlert className="w-4 h-4 mr-1" /> SOS
+                        </Button>
+                        <Button size="sm" variant="ghost" className="h-8 text-blue-600 hover:bg-blue-50">
+                          <Camera className="w-4 h-4 mr-1" /> Selfie
+                        </Button>
+                      </div>
+
+                      <div className="flex items-center gap-2 mt-2">
+                        <MapPin className="w-4 h-4 text-gray-400" />
+                        <span className="font-inter text-[12px] text-gray-500">Flat 4B, Ruby Enclave, Anna Nagar West</span>
                       </div>
                     </div>
                   </div>

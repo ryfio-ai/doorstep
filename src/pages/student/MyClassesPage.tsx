@@ -1,7 +1,7 @@
-import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
-import { Calendar, Clock, MapPin, Video } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Calendar, Clock, MapPin, Video, ShieldAlert, Key, Map } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 
 const mockClasses = [
@@ -52,15 +52,26 @@ const MyClassesPage: React.FC = () => {
                 </div>
               </div>
               
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-3">
                 {session.status === 'upcoming' && (
                   <>
-                    <Button variant="outline">Reschedule</Button>
-                    <Button className="bg-primary hover:bg-primary-600">Join / Details</Button>
+                    {session.type === 'home' && (
+                      <div className="flex items-center gap-2 bg-orange-50 text-orange-600 px-3 py-1 rounded-lg border border-orange-100">
+                        <Key size={14} />
+                        <span className="text-xs font-bold">Code: 4829</span>
+                      </div>
+                    )}
+                    <Button variant="outline" size="sm">Reschedule</Button>
+                    <Button asChild className="bg-primary hover:bg-primary-600" size="sm">
+                      <Link to={`/student/course-path/${session.id}`}>View Path</Link>
+                    </Button>
+                    <Button variant="ghost" size="sm" className="text-destructive hover:bg-destructive/10">
+                      <ShieldAlert size={16} className="mr-1" /> SOS
+                    </Button>
                   </>
                 )}
                 {session.status === 'completed' && (
-                  <Button variant="secondary">View Notes</Button>
+                  <Button variant="secondary" size="sm">View Notes</Button>
                 )}
               </div>
             </CardContent>

@@ -1,10 +1,16 @@
-import React from 'react';
+import { Calendar, Clock, BookOpen, ChevronRight, Award, CheckCircle2, Flame, Coins, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, BookOpen, ChevronRight, Award, CheckCircle2 } from 'lucide-react';
 import { PageTransition } from '../../components/shared/PageTransition';
 import { Button } from '../../components/ui/button';
+import { useAuth } from '../../context/AuthContext';
+import { useGamification } from '../../context/GamificationContext';
+import BadgeGallery from '../../components/student/BadgeGallery';
+import { Link } from 'react-router-dom';
 
 export const StudentDashboard: React.FC = () => {
+  const { user, studentProfile, isParent } = useAuth();
+  const { stats } = useGamification();
+
   return (
     <PageTransition>
       <div className="max-w-[1100px] mx-auto space-y-8">
@@ -14,18 +20,48 @@ export const StudentDashboard: React.FC = () => {
           <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[80px] pointer-events-none"></div>
           
           <div className="relative z-10 flex-1">
-            <h2 className="font-poppins font-bold text-[28px] text-primary">Welcome back, Arjun! 👋</h2>
-            <p className="font-inter text-[15px] text-gray-500 mt-1">You've completed 12 hours of learning this month. Keep it up!</p>
+            <h2 className="font-poppins font-bold text-[28px] text-primary">
+              Welcome back, {user?.name?.split(' ')[0] || 'Student'}! 👋
+            </h2>
+            <p className="font-inter text-[15px] text-gray-500 mt-1">
+              {isParent 
+                ? `Managing learning for ${studentProfile?.children_count || 0} child(ren).`
+                : `You've completed ${studentProfile?.wallet_balance || 0} modules this month. Keep it up!`}
+            </p>
           </div>
           
           <div className="relative z-10 flex gap-4 w-full md:w-auto">
+            {/* Streak Counter */}
+            <Link to="/student/wallet" className="bg-orange-50 border border-orange-100 rounded-xl p-4 flex-1 md:w-32 text-center group transition-all hover:bg-orange-100">
+              <div className="flex items-center justify-center gap-1">
+                <Flame size={24} className={`${(stats?.streak_days || 0) > 0 ? 'text-orange-500 fill-orange-500' : 'text-gray-300'} animate-pulse`} />
+                <div className="font-poppins font-bold text-[24px] text-primary">
+                  {stats?.streak_days || 0}
+                </div>
+              </div>
+              <div className="font-inter text-[12px] text-gray-600">Day Streak</div>
+            </Link>
+            
+            {/* EduCoins */}
+            <Link to="/student/wallet" className="bg-yellow-50 border border-yellow-100 rounded-xl p-4 flex-1 md:w-32 text-center group transition-all hover:bg-yellow-100">
+              <div className="flex items-center justify-center gap-1">
+                <Coins size={24} className="text-yellow-500" />
+                <div className="font-poppins font-bold text-[24px] text-primary">
+                  {stats?.educoins || 0}
+                </div>
+              </div>
+              <div className="font-inter text-[12px] text-gray-600">EduCoins</div>
+            </Link>
+
+            {/* Level */}
             <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex-1 md:w-32 text-center">
-              <div className="font-poppins font-bold text-[24px] text-blue-600">8</div>
-              <div className="font-inter text-[12px] text-gray-600">Classes Done</div>
-            </div>
-            <div className="bg-orange-50 border border-orange-100 rounded-xl p-4 flex-1 md:w-32 text-center">
-              <div className="font-poppins font-bold text-[24px] text-accent">2</div>
-              <div className="font-inter text-[12px] text-gray-600">Active Courses</div>
+              <div className="flex items-center justify-center gap-1">
+                <Zap size={24} className="text-blue-500" />
+                <div className="font-poppins font-bold text-[24px] text-primary">
+                  {stats?.level || 1}
+                </div>
+              </div>
+              <div className="font-inter text-[12px] text-gray-600">Level</div>
             </div>
           </div>
         </div>
@@ -130,28 +166,18 @@ export const StudentDashboard: React.FC = () => {
               </Button>
             </div>
 
-            {/* Recent Achievements */}
+            {/* Achievements & Badges */}
             <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-              <h3 className="font-poppins font-bold text-[16px] text-primary mb-4 flex items-center gap-2">
-                <Award className="w-5 h-5 text-yellow-500" /> Recent Achievements
-              </h3>
-              
-              <div className="space-y-4">
-                {[
-                  { title: 'Python Beginner', desc: 'Completed module 1', time: '2 days ago', color: 'bg-blue-100 text-blue-600' },
-                  { title: 'Perfect Attendance', desc: 'Attended 5 classes straight', time: '1 week ago', color: 'bg-green-100 text-green-600' }
-                ].map((ach, i) => (
-                  <div key={i} className="flex gap-4">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${ach.color}`}>
-                      <Award className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <div className="font-poppins font-semibold text-[14px] text-primary">{ach.title}</div>
-                      <div className="font-inter text-[12px] text-gray-500">{ach.desc}</div>
-                    </div>
-                  </div>
-                ))}
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="font-poppins font-bold text-[18px] text-primary flex items-center gap-2">
+                  <Award className="w-5 h-5 text-yellow-500" /> My Badges
+                </h3>
+                <Link to="/student/wallet" className="text-accent font-inter text-[13px] hover:underline">
+                  View Wallet
+                </Link>
               </div>
+              
+              <BadgeGallery />
             </div>
 
           </div>

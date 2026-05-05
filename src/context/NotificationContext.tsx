@@ -36,8 +36,9 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
     fetchNotifications();
 
-    const subscription = supabase
-      .channel('public:notifications')
+    const channelId = `notify_${user.id}_${Date.now()}`;
+    const channel = supabase
+      .channel(channelId)
       .on('postgres_changes', { 
         event: 'INSERT', 
         schema: 'public', 
@@ -49,7 +50,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
       .subscribe();
 
     return () => {
-      supabase.removeChannel(subscription);
+      supabase.removeChannel(channel);
     };
   }, [user]);
 

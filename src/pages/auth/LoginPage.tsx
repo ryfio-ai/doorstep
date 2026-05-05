@@ -18,7 +18,7 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,15 +30,25 @@ const LoginPage: React.FC = () => {
     setIsLoading(true);
     try {
       await login(data.email, data.password);
-      // Determine portal based on some logic or user profile after login
-      // For now, let's assume it routes to student dashboard for simplicity
-      navigate('/student/dashboard');
+      // fetchProfile in AuthContext will update the user state
+      // We wait briefly for the state to update or we can just check the role from the user table
+      // Actually, AuthProvider already handles the navigation if we want, but doing it here is fine.
+      // Let's just use a simple approach: if user is trainer, go to trainer dashboard
     } catch (error) {
       console.error(error);
     } finally {
       setIsLoading(false);
     }
   };
+
+  // Use an effect to navigate when user state is updated
+  React.useEffect(() => {
+    if (user) {
+      if (user.role === 'admin') navigate('/admin/dashboard');
+      else if (user.role === 'trainer') navigate('/trainer/dashboard');
+      else navigate('/student/dashboard');
+    }
+  }, [user, navigate]);
 
   return (
     <PageTransition>

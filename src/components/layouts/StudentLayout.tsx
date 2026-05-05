@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, Search, Calendar, Folder, User, LogOut, Bell, Menu, X } from 'lucide-react';
+import { Home, Search, Calendar, Folder, User, LogOut, Bell, Menu, X, Coins, BarChart2, ShieldCheck } from 'lucide-react';
 import { MobileBottomNav } from '../shared/MobileBottomNav';
 import { useAuth } from '../../context/AuthContext';
+import { useGamification } from '../../context/GamificationContext';
+import EduBot from '../student/EduBot';
 
 export const StudentLayout: React.FC = () => {
   const location = useLocation();
-  const { user, logout } = useAuth();
+  const { user, signOut, isParent } = useAuth();
+  const { stats } = useGamification();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const navItems = [
@@ -15,8 +18,14 @@ export const StudentLayout: React.FC = () => {
     { name: 'Discover Courses', path: '/student/courses', icon: Search },
     { name: 'My Classes', path: '/student/classes', icon: Calendar },
     { name: 'Study Materials', path: '/student/materials', icon: Folder },
+    { name: 'Learning Reports', path: '/student/reports', icon: BarChart2 },
+    { name: 'EduCoins Wallet', path: '/student/wallet', icon: Coins },
     { name: 'Profile Settings', path: '/student/profile', icon: User },
   ];
+
+  if (isParent) {
+    navItems.splice(1, 0, { name: 'Parent View', path: '/student/parent-view', icon: ShieldCheck });
+  }
 
   const SidebarContent = () => (
     <>
@@ -61,7 +70,7 @@ export const StudentLayout: React.FC = () => {
         </div>
 
         <button 
-          onClick={() => logout()}
+          onClick={() => signOut()}
           className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/70 hover:bg-white/10 hover:text-white transition-all duration-200 w-full text-left"
         >
           <LogOut className="w-5 h-5" />
@@ -110,6 +119,11 @@ export const StudentLayout: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-5">
+            <Link to="/student/wallet" className="flex items-center gap-2 px-3 py-1.5 bg-orange-50 text-orange-600 rounded-full hover:bg-orange-100 transition-colors border border-orange-100 group">
+              <Coins size={18} className="group-hover:rotate-12 transition-transform" />
+              <span className="font-bold text-sm">{stats?.educoins || 0}</span>
+            </Link>
+
             <button className="relative text-gray-500 hover:text-primary transition-colors">
               <Bell className="w-5 h-5" />
               <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-accent rounded-full border-2 border-white"></span>
@@ -117,11 +131,11 @@ export const StudentLayout: React.FC = () => {
             
             <div className="flex items-center gap-3">
               <div className="text-right hidden sm:block">
-                <div className="font-poppins font-semibold text-[14px] text-primary leading-tight">{user?.name || 'Student'}</div>
+                <div className="font-poppins font-semibold text-[14px] text-primary leading-tight">{user?.full_name || user?.name || 'Student'}</div>
                 <div className="font-inter text-[12px] text-gray-500">Student Account</div>
               </div>
               <div className="w-10 h-10 rounded-full bg-accent/20 text-accent flex items-center justify-center font-poppins font-bold text-[16px]">
-                {(user?.name || 'S').charAt(0)}
+                {(user?.full_name || user?.name || 'S').charAt(0).toUpperCase()}
               </div>
             </div>
           </div>
@@ -137,6 +151,10 @@ export const StudentLayout: React.FC = () => {
       {/* Mobile Bottom Nav */}
       <MobileBottomNav portal="student" />
 
+      {/* AI Assistant */}
+      <EduBot />
     </div>
   );
 };
+
+export default StudentLayout;

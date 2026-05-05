@@ -1,0 +1,20 @@
+{
+  "welcome": "Welcome",
+  "dashboard": "Dashboard",
+  "courses": "Courses",
+  "classes": "My Classes",
+  "wallet": "Wallet",
+  "profile": "Profile",
+  "logout": "Log Out",
+  "book_demo": "Book Free Demo",
+  "enroll_now": "Enroll Now",
+  "next_class": "Next Class",
+  "educoins": "EduCoins",
+  "streak": "Day Streak",
+  "level": "Level",
+  "safety": {
+    "sos": "Emergency SOS",
+    "verification_code": "Verification Code",
+    "start_class": "Start Class"
+  }
+}

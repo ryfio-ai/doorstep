@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Users, BookOpen, GraduationCap, IndianRupee, Activity, Search, Filter } from 'lucide-react';
 import { PageTransition } from '../../components/shared/PageTransition';
+import { useAuth } from '../../context/AuthContext';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 
 const revenueData = [
@@ -25,6 +26,8 @@ const classesData = [
 ];
 
 export const AdminDashboard: React.FC = () => {
+  const { user } = useAuth();
+
   return (
     <PageTransition>
       <div className="max-w-[1400px] mx-auto space-y-6">
@@ -33,7 +36,7 @@ export const AdminDashboard: React.FC = () => {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
           <div>
             <h2 className="font-poppins font-bold text-[24px] text-primary">Overview</h2>
-            <p className="font-inter text-[14px] text-gray-500">Welcome back, Admin</p>
+            <p className="font-inter text-[14px] text-gray-500">Welcome back, {user?.name || 'Admin'}</p>
           </div>
           <div className="flex items-center gap-3">
             <span className="font-inter text-[13px] text-gray-500 font-medium">Filter by City:</span>
