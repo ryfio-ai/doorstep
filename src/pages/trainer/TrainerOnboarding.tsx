@@ -129,7 +129,7 @@ export const TrainerOnboarding: React.FC = () => {
           {/* Header */}
           <div className="text-center mb-10">
             <h1 className="font-poppins font-bold text-[32px] text-primary">Trainer Onboarding</h1>
-            <p className="font-inter text-[15px] text-gray-500 mt-2">Professional details for Tamizh Tech EduDoor verification.</p>
+            <p className="font-inter text-[15px] text-gray-500 mt-2">Professional details for Tamizh Tech திறனொளி verification.</p>
           </div>
 
           {/* Stepper indicator */}

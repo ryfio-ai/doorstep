@@ -1,5 +1,5 @@
 // public/sw.js
-const CACHE_NAME = 'edudoor-cache-v1';
+const CACHE_NAME = 'thiranoli-cache-v1';
 const urlsToCache = [
   '/',
   '/index.html',

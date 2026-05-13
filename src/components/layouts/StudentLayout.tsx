@@ -35,7 +35,7 @@ export const StudentLayout: React.FC = () => {
             <path d="M3 21h18"></path><path d="M19 21v-4"></path><path d="M19 17a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"></path><path d="M15 5h-6a2 2 0 0 0-2 2v8h14V7a2 2 0 0 0-2-2z"></path><path d="M14 11v2"></path>
           </svg>
           <span className="text-[22px] font-poppins font-bold tracking-tight text-white">
-            EduDoor
+            திறனொளி
           </span>
         </Link>
 

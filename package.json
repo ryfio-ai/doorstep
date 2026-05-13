@@ -1,7 +1,7 @@
 {
   "name": "edudoor",
   "version": "1.0.0",
-  "description": "EduDoor - Education at Your Doorstep by Tamizh Tech",
+  "description": "திறனொளி - Global Innovation & Skills Platform by Tamizh Tech",
   "type": "module",
   "scripts": {
     "dev": "vite",

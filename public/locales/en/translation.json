@@ -1,0 +1,124 @@
+{
+  "nav": {
+    "home": "Home",
+    "courses": "Courses",
+    "howItWorks": "How It Works",
+    "trainers": "Trainers",
+    "contact": "Contact",
+    "login": "Login",
+    "startLearning": "Start Learning →"
+  },
+  "hero": {
+    "badge": "🌍 Tamil Brilliance · Global Innovation",
+    "tamilLine": "திறனொளி",
+    "headline": "Where Tamil Brilliance Meets Global Innovation",
+    "subtext": "Robotics · AI · Creative Coding — built for the next generation of makers",
+    "cta1": "Start Your Journey →",
+    "cta2": "Explore Courses",
+    "trustText": "↓ Join 1,200+ learners already building tomorrow"
+  },
+  "trust": {
+    "students": "1,200+ Students",
+    "schools": "40+ Partner Schools",
+    "countries": "5 Countries",
+    "rating": "4.9★ Rating"
+  },
+  "stats": {
+    "students": "Students Taught",
+    "trainers": "Verified Trainers",
+    "courses": "Courses",
+    "rating": "Average Rating"
+  },
+  "ecosystem": {
+    "label": "What We Are",
+    "headline": "Not just courses.",
+    "headlineAccent": "An innovation ecosystem.",
+    "desc": "ThiranOli is a global skills platform — where students, schools, and innovators come to learn, build, and lead.",
+    "point1": "Verified trainers at your doorstep",
+    "point2": "Curriculum built by engineers & researchers",
+    "point3": "Real hardware kits — build actual robots"
+  },
+  "courses": {
+    "label": "Featured Courses",
+    "headline": "Build the Future,",
+    "headlineAccent": "One Skill at a Time",
+    "subtext": "From beginner robotics to advanced AI. Find your path.",
+    "viewAll": "View all 30+ courses →",
+    "enroll": "Enroll →",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
+  },
+  "spotlight": {
+    "label": "Flagship Programs",
+    "headline": "Our Signature Programs",
+    "subtext": "Engineering-grade curriculum. Real-world application. Tamil roots, global standards.",
+    "cta": "Explore Programs →"
+  },
+  "howItWorks": {
+    "label": "The Process",
+    "headline": "Four Steps to Your Future",
+    "step1title": "Discover Your Path",
+    "step1desc": "Browse courses built by real engineers and educators across AI, Robotics, and STEM.",
+    "step2title": "Learn with Mentors",
+    "step2desc": "Interactive sessions, live projects, hands-on robotics kits. Your trainer comes to you.",
+    "step3title": "Build Real Things",
+    "step3desc": "Apply skills to real challenges. Compete. Create. Innovate.",
+    "step4title": "Grow Globally",
+    "step4desc": "Join a community of Tamil innovators reaching students in 5 countries."
+  },
+  "testimonials": {
+    "label": "Student Stories",
+    "headline": "What Our Students Say",
+    "subtext": "Real results from real families — India and beyond."
+  },
+  "partners": {
+    "label": "Trusted By",
+    "headline": "Schools Across Tamil Nadu"
+  },
+  "trainers": {
+    "label": "Join as a Trainer",
+    "headline": "Are You an Expert in Your Field?",
+    "subtext": "Earn ₹20,000 – ₹50,000/month teaching from home",
+    "point1": "Students automatically assigned to you",
+    "point2": "Flexible hours — you set your schedule",
+    "point3": "Earnings directly to your bank account",
+    "cta": "Join as Verified Trainer →"
+  },
+  "finalCta": {
+    "headline": "Your future starts today.",
+    "subtext": "Join thousands of students already building tomorrow.",
+    "cta": "Start Your Journey →"
+  },
+  "footer": {
+    "tagline": "Where Tamil Brilliance Meets Global Innovation",
+    "poweredBy": "Powered by Tamizh Tech Pvt Ltd",
+    "quickLinks": "Quick Links",
+    "forStudents": "For Students",
+    "ourCities": "Our Cities",
+    "contactUs": "Contact Us",
+    "copyright": "© 2026 ThiranOli · Tamizh Tech Pvt Ltd. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "refund": "Refund Policy"
+  },
+  "auth": {
+    "loginTitle": "Welcome Back",
+    "loginSubtext": "Enter your details to access your dashboard.",
+    "signupTitle": "Join ThiranOli",
+    "signupSubtext": "How would you like to start?",
+    "email": "Email Address",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "signIn": "Sign In",
+    "createAccount": "Create Account",
+    "noAccount": "Don't have an account?",
+    "createOne": "Create one",
+    "haveAccount": "Already have an account?",
+    "signinHere": "Sign in here",
+    "learnRole": "📚 I Want to Learn",
+    "learnRoleDesc": "Student or Parent booking for my child",
+    "teachRole": "🎓 I Want to Teach",
+    "teachRoleDesc": "Earn ₹20,000-50,000/month as a home trainer"
+  }
+}

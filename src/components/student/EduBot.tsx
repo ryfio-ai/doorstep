@@ -93,7 +93,7 @@ const EduBot: React.FC = () => {
     }
 
     try {
-      const systemPrompt = `You are EduBot, a world-class AI learning assistant for EduDoor, a doorstep education platform.
+      const systemPrompt = `You are EduBot, a world-class AI learning assistant for திறனொளி, a doorstep education platform.
       Student Info: Name: ${studentProfile?.full_name}, Grade: ${studentProfile?.grade}, Board: ${studentProfile?.school_board}.
       Tone: Friendly, encouraging, simple language. Use Tamil if the student uses Tamil.
       Tasks: 

@@ -4,9 +4,15 @@ import { AuthProvider } from './context/AuthContext';
 import { NotificationProvider } from './context/NotificationContext';
 import { GamificationProvider } from './context/GamificationContext';
 import { ProtectedRoute } from './components/layouts/ProtectedRoute';
+import { StickyNavbar } from './components/shared/StickyNavbar';
+import { Footer } from './components/shared/Footer';
 
 // Public Pages
 import LandingPage from './pages/LandingPage';
+import LearningPathsPage from './pages/public/LearningPathsPage';
+import RoboticsAIPage from './pages/public/RoboticsAIPage';
+import TrainersPage from './pages/public/TrainersPage';
+import AboutPage from './pages/public/AboutPage';
 import LoginPage from './pages/auth/LoginPage';
 import SignupPage from './pages/auth/SignupPage';
 import ForgotPasswordPage from './pages/auth/ForgotPasswordPage';
@@ -68,12 +74,17 @@ function App() {
       <NotificationProvider>
         <GamificationProvider>
           <Router>
-          <div className="min-h-screen flex flex-col font-inter">
-            <Routes>
+          <div className="min-h-screen flex flex-col font-inter bg-brandBlue">
+            <StickyNavbar />
+            <div className="flex-1 pt-[80px]">
+              <Routes>
               {/* Public Routes */}
               <Route path="/" element={<LandingPage />} />
+              <Route path="/paths" element={<LearningPathsPage />} />
+              <Route path="/robotics" element={<RoboticsAIPage />} />
+              <Route path="/trainers" element={<TrainersPage />} />
+              <Route path="/about" element={<AboutPage />} />
               <Route path="/how-it-works" element={<LandingPage />} />
-              <Route path="/trainers" element={<LandingPage />} />
               <Route path="/contact" element={<LandingPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
@@ -157,6 +168,8 @@ function App() {
               {/* 404 */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
+            </div>
+            <Footer />
           </div>
           </Router>
         </GamificationProvider>

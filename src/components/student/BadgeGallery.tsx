@@ -9,7 +9,7 @@ const BadgeGallery: React.FC = () => {
   const { badges, userBadges } = useGamification();
 
   const handleShare = (badgeName: string) => {
-    const text = `I just earned the "${badgeName}" badge on EduDoor! 🎓 #Learning #EduDoor`;
+    const text = `I just earned the "${badgeName}" badge on திறனொளி! 🎓 #Learning #ThiranOli`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
     toast.success('Sharing to WhatsApp...');
   };

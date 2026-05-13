@@ -84,7 +84,7 @@ const OAuthConsentPage: React.FC = () => {
           <h2 className="text-2xl font-poppins font-bold text-primary mb-2">Something went wrong</h2>
           <p className="text-gray-500 font-inter mb-8">{error}</p>
           <Button onClick={() => navigate('/')} className="w-full bg-primary h-12 rounded-xl">
-            Return to EduDoor
+            Return to திறனொளி
           </Button>
         </div>
       </div>
@@ -115,7 +115,7 @@ const OAuthConsentPage: React.FC = () => {
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F47820" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M3 21h18"></path><path d="M19 21v-4"></path><path d="M19 17a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"></path><path d="M15 5h-6a2 2 0 0 0-2 2v8h14V7a2 2 0 0 0-2-2z"></path><path d="M14 11v2"></path>
             </svg>
-            <span className="text-2xl font-poppins font-bold tracking-tight text-primary">EduDoor</span>
+            <span className="text-2xl font-poppins font-bold tracking-tight text-primary">திறனொளி</span>
           </div>
           
           <div className="relative">
@@ -128,7 +128,7 @@ const OAuthConsentPage: React.FC = () => {
           </div>
           
           <h1 className="mt-6 text-xl font-poppins font-bold text-primary text-center">
-            {details?.client_name} wants to access your EduDoor account
+            {details?.client_name} wants to access your திறனொளி account
           </h1>
           <p className="mt-2 text-[14px] text-gray-500 font-inter text-center">
             This application will be able to:
@@ -158,7 +158,7 @@ const OAuthConsentPage: React.FC = () => {
         <div className="p-4 rounded-xl bg-blue-50 border border-blue-100 mb-10 flex gap-3">
           <ShieldCheck className="w-5 h-5 text-blue-500 shrink-0" />
           <p className="text-[12px] text-blue-700 font-inter leading-relaxed">
-            EduDoor will share your information with <strong>{details?.client_name}</strong>. 
+            திறனொளி will share your information with <strong>{details?.client_name}</strong>.
             You can manage or revoke this access at any time in your account settings.
           </p>
         </div>
@@ -185,7 +185,7 @@ const OAuthConsentPage: React.FC = () => {
         {/* Footer */}
         <div className="mt-10 pt-6 border-t border-gray-100 text-center">
           <p className="text-[11px] text-gray-400 font-inter">
-            By clicking Allow Access, you agree to the EduDoor <a href="/terms" className="text-accent underline">Terms of Service</a> and <a href="/privacy" className="text-accent underline">Privacy Policy</a>.
+            By clicking Allow Access, you agree to the திறனொளி <a href="/terms" className="text-accent underline">Terms of Service</a> and <a href="/privacy" className="text-accent underline">Privacy Policy</a>.
           </p>
         </div>
       </motion.div>

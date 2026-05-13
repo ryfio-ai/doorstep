@@ -34,10 +34,10 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey, {
 });
 
 const mockUsers = [
-  { email: 'student@edudoor.com', password: 'student123', role: 'student', full_name: 'Arjun Student', isParent: false },
-  { email: 'trainer@edudoor.com', password: 'trainer123', role: 'trainer', full_name: 'Ravi Kumar', isParent: false },
-  { email: 'admin@edudoor.com', password: 'admin123', role: 'admin', full_name: 'EduDoor Admin', isParent: false },
-  { email: 'parent@edudoor.com', password: 'parent123', role: 'student', full_name: 'Sangeetha Parent', isParent: true },
+  { email: 'student@thiranoli.com', password: 'student123', role: 'student', full_name: 'Arjun Student', isParent: false },
+  { email: 'trainer@thiranoli.com', password: 'trainer123', role: 'trainer', full_name: 'Ravi Kumar', isParent: false },
+  { email: 'admin@thiranoli.com', password: 'admin123', role: 'admin', full_name: 'ThiranOli Admin', isParent: false },
+  { email: 'parent@thiranoli.com', password: 'parent123', role: 'student', full_name: 'Sangeetha Parent', isParent: true },
 ];
 
 async function seed() {

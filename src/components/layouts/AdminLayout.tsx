@@ -26,7 +26,7 @@ export const AdminLayout: React.FC = () => {
           </div>
           <div className="flex flex-col">
             <span className="text-[20px] font-poppins font-bold tracking-tight text-white leading-none">
-              EduDoor
+              திறனொளி
             </span>
             <span className="text-[10px] font-inter font-medium text-accent uppercase tracking-widest mt-1">
               Admin Portal
