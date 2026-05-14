@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Youtube, Linkedin, Twitter, Github, Mail, ArrowRight, Globe } from 'lucide-react';
+import { Instagram, Youtube, Linkedin, Twitter, Github, Mail, ArrowRight, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export const Footer: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const currentLang = i18n.language?.startsWith('ta') ? 'ta' : 'en';
   const toggleLanguage = () => i18n.changeLanguage(currentLang === 'en' ? 'ta' : 'en');
 

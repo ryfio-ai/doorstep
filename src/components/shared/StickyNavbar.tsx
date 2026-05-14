@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, ChevronDown, BookOpen, Cpu, Users, ArrowRight, Code, Trophy, Sparkles, Video } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Menu, X, Globe, ChevronDown, BookOpen, Cpu, ArrowRight, Code, Sparkles, Video } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
 export const StickyNavbar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const currentLang = i18n.language?.startsWith('ta') ? 'ta' : 'en';
   const toggleLanguage = () => i18n.changeLanguage(currentLang === 'en' ? 'ta' : 'en');
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 80);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Keep for potential future use or remove if completely unnecessary
   }, []);
 
   useEffect(() => {

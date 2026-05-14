@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, Zap, Wrench, Package, ArrowRight } from 'lucide-react';
+import { Cpu, Zap, Package, ArrowRight } from 'lucide-react';
 import { PageTransition } from '../../components/shared/PageTransition';
 
 const RoboticsAIPage: React.FC = () => {

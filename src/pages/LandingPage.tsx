@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { motion, useAnimation, useInView } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
-import { Play, ArrowRight, Brain, Cpu, Code, Trophy, Users, Star, CheckCircle, Smartphone, Globe, MessageSquare, Zap, ShieldCheck, BookOpen } from 'lucide-react';
+import { Play, ArrowRight, Brain, Cpu, Code, Trophy, Users, Star, CheckCircle, Smartphone, Globe, ShieldCheck, BookOpen } from 'lucide-react';
 import CountUp from 'react-countup';
-import { useTranslation } from 'react-i18next';
 
 // Reusable Section Fade-in Wrapper
 const FadeIn: React.FC<{ children: React.ReactNode, delay?: number, direction?: 'up' | 'left' | 'right', className?: string }> = ({ children, delay = 0, direction = 'up', className }) => {
@@ -18,8 +17,6 @@ const FadeIn: React.FC<{ children: React.ReactNode, delay?: number, direction?: 
 };
 
 export const LandingPage: React.FC = () => {
-  const { t } = useTranslation();
-
   return (
     <div className="flex flex-col w-full overflow-hidden bg-brandBlue">
 
