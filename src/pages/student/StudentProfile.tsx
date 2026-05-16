@@ -130,3 +130,7 @@ export const StudentProfile: React.FC = () => {
         </div>
       </div>
     </PageTransition>
+  );
+};
+
+export default StudentProfile;
