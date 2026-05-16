@@ -28,7 +28,7 @@ const TrainersPage: React.FC = () => {
             Learn from <span className="text-gradient-orange italic">Industry Leaders</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-[20px] text-textSecondary max-w-2xl mx-auto leading-relaxed">
-            Our trainers are top engineers and innovators who have built real products. Experience world-class learning in both Tamil and English.
+            Our trainers are top engineers and innovators who have built real products. Experience world-class learning in both regional languages and English.
           </motion.p>
         </div>
 

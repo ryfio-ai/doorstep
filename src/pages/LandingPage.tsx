@@ -44,7 +44,7 @@ export const LandingPage: React.FC = () => {
                 </h1>
 
                 <p className="font-inter text-[20px] md:text-[24px] text-textSecondary max-w-xl leading-relaxed">
-                  Tamil Nadu's first AI · Robotics · Creative Coding platform with **verified trainers** who come to you.
+                  Tamil Nadu's first AI · Robotics · Creative Coding platform with <span className="text-brandOrange font-bold">verified trainers</span> who come to you.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center gap-6 pt-4">
@@ -63,7 +63,7 @@ export const LandingPage: React.FC = () => {
                   {[
                     "Government Recognized",
                     "ISO Certified",
-                    "Tamil Medium Available"
+                    "We focus on indian native language"
                   ].map((badge, i) => (
                     <div key={i} className="flex items-center gap-2 text-textSecondary">
                       <ShieldCheck className="w-5 h-5 text-brandOrange" />
@@ -131,7 +131,7 @@ export const LandingPage: React.FC = () => {
                   <span className="text-brandOrange underline decoration-brandOrange/20 italic font-medium">deserves focus.</span>
                 </h2>
                 <p className="font-inter text-[18px] md:text-[20px] text-textSecondary leading-relaxed">
-                  In a world of crowded classrooms, we bring the **Power of Personalized Attention** to your home. Every child learns differently; we teach them exactly the way they understand.
+                  In a world of crowded classrooms, we bring the <span className="text-brandOrange font-bold">Power of Personalized Attention</span> to your home. Every child learns differently; we teach them exactly the way they understand.
                 </p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-8">
@@ -185,10 +185,10 @@ export const LandingPage: React.FC = () => {
                 </h2>
                 <div className="space-y-6 relative z-10">
                   <p className="font-inter text-[18px] text-textSecondary leading-relaxed">
-                    <strong>திறனொளி (ThiranOli)</strong> is a smart learning ecosystem that brings world-class tech education directly to your doorstep.
+                    <span className="text-brandOrange font-bold">திறனொளி (ThiranOli)</span> is a smart learning ecosystem that brings world-class tech education directly to your doorstep.
                   </p>
                   <p className="font-inter text-[18px] text-textSecondary leading-relaxed">
-                    Instead of your child commuting to rigid tuition centers, we bring **Expert Mentors** to your home. We make quality education accessible, safe, and truly personal.
+                    Instead of your child commuting to rigid tuition centers, we bring <span className="text-brandOrange font-bold">Expert Mentors</span> to your home. We make quality education accessible, safe, and truly personal.
                   </p>
                 </div>
               </div>
