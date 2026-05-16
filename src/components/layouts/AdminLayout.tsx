@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { LayoutDashboard, Users, GraduationCap, BookOpen, Settings, LogOut, Bell, Menu, X, ShieldCheck, Search } from 'lucide-react';
+import { LayoutDashboard, Users, GraduationCap, User, LogOut, Bell, Menu, X, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export const AdminLayout: React.FC = () => {
@@ -13,28 +13,24 @@ export const AdminLayout: React.FC = () => {
     { name: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
     { name: 'Students', path: '/admin/students', icon: GraduationCap },
     { name: 'Trainers', path: '/admin/trainers', icon: Users },
-    { name: 'Courses', path: '/admin/courses', icon: BookOpen },
-    { name: 'Settings', path: '/admin/settings', icon: Settings },
+    { name: 'Profile', path: '/admin/profile', icon: User },
   ];
 
   const SidebarContent = () => (
     <>
-      <div className="p-6">
-        <Link to="/" className="flex items-center gap-2 mb-10">
-          <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center shadow-orange">
-            <ShieldCheck className="w-6 h-6 text-white" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[20px] font-poppins font-bold tracking-tight text-white leading-none">
-              திறனொளி
-            </span>
-            <span className="text-[10px] font-inter font-medium text-accent uppercase tracking-widest mt-1">
-              Admin Portal
-            </span>
-          </div>
+      <div className="p-8">
+        <Link to="/" className="flex items-center gap-3 mb-12">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EA580C" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+          </svg>
+          <span className="text-[24px] font-jakarta font-extrabold tracking-tight text-white italic">
+            திறனொளி
+          </span>
         </Link>
 
-        <div className="space-y-1.5">
+        <div className="space-y-1">
           {navItems.map((item) => {
             const isActive = location.pathname.includes(item.path);
             const Icon = item.icon;
@@ -43,50 +39,67 @@ export const AdminLayout: React.FC = () => {
                 key={item.name}
                 to={item.path}
                 onClick={() => setMobileSidebarOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
+                className={`flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 group ${
                   isActive 
-                    ? 'bg-white/10 text-accent font-poppins font-medium border border-white/10 shadow-lg' 
-                    : 'text-white/60 hover:bg-white/5 hover:text-white font-inter font-normal border border-transparent'
+                    ? 'bg-brandOrange text-white font-jakarta font-extrabold shadow-premium-card scale-[1.02] uppercase tracking-widest text-[11px]' 
+                    : 'text-white/40 hover:bg-white/5 hover:text-white font-jakarta font-extrabold uppercase tracking-widest text-[11px]'
                 }`}
               >
-                <Icon className={`w-5 h-5 ${isActive ? 'text-accent' : 'text-white/60'}`} />
-                <span className="text-[14px]">{item.name}</span>
+                <Icon className={`w-5 h-5 transition-transform group-hover:scale-110 ${isActive ? 'text-white' : 'text-white/40'}`} />
+                <span>{item.name}</span>
               </Link>
             );
           })}
         </div>
       </div>
 
-      <div className="mt-auto p-6 border-t border-white/5">
+      <div className="mt-auto p-8">
         <button 
           onClick={() => signOut()}
-          className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/50 hover:bg-red-500/10 hover:text-red-400 transition-all duration-200 w-full text-left group"
+          className="flex items-center gap-4 px-5 py-4 rounded-2xl text-white/40 hover:bg-destructive/10 hover:text-destructive transition-all duration-300 w-full text-left group"
         >
-          <LogOut className="w-5 h-5 group-hover:scale-110 transition-transform" />
-          <span className="font-inter text-[14px]">Logout</span>
+          <LogOut className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+          <span className="font-jakarta font-extrabold text-[11px] uppercase tracking-widest">Logout</span>
         </button>
       </div>
     </>
   );
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex">
+    <div className="min-h-screen bg-offWhite flex font-inter text-textPrimary">
       
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex flex-col w-[280px] bg-navy-darker fixed top-[80px] h-[calc(100vh-80px)] z-20">
+      <aside className="hidden md:flex flex-col w-[300px] bg-brandBlue fixed top-0 h-screen z-20 shadow-2xl border-r border-white/5">
         <SidebarContent />
       </aside>
+
+      {/* Mobile Header */}
+      <header className="md:hidden fixed top-0 left-0 w-full h-16 bg-white border-b border-borderSubtle z-40 px-6 flex items-center justify-between">
+        <button 
+          onClick={() => setMobileSidebarOpen(true)}
+          className="p-2 -ml-2 text-textPrimary"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+        <span className="font-jakarta font-extrabold text-[18px] text-brandBlue italic">
+          திறனொளி
+        </span>
+        <button className="p-2 -mr-2 text-textPrimary relative">
+          <Bell className="w-6 h-6" />
+          <span className="absolute top-2 right-2 w-2 h-2 bg-brandOrange rounded-full border-2 border-white"></span>
+        </button>
+      </header>
 
       {/* Mobile Sidebar Overlay */}
       {mobileSidebarOpen && (
         <div className="md:hidden fixed inset-0 z-[60] flex">
-          <div className="absolute inset-0 bg-navy-darker/60 backdrop-blur-sm" onClick={() => setMobileSidebarOpen(false)} />
+          <div className="absolute inset-0 bg-brandBlue/60 backdrop-blur-md" onClick={() => setMobileSidebarOpen(false)} />
           <motion.div 
-            initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }} transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="relative w-[280px] bg-navy-darker h-full flex flex-col z-10"
+            initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="relative w-[300px] bg-brandBlue h-full flex flex-col z-10"
           >
-            <button className="absolute top-6 right-6 text-white/50 hover:text-white" onClick={() => setMobileSidebarOpen(false)}>
-              <X className="w-6 h-6" />
+            <button className="absolute top-8 right-8 text-white/40 hover:text-white" onClick={() => setMobileSidebarOpen(false)}>
+              <X className="w-7 h-7" />
             </button>
             <SidebarContent />
           </motion.div>
@@ -94,9 +107,9 @@ export const AdminLayout: React.FC = () => {
       )}
 
       {/* Main Content Area */}
-      <main className="flex-1 md:ml-[280px] flex flex-col min-h-screen">
+      <main className="flex-1 md:ml-[300px] pt-16 md:pt-0 flex flex-col min-h-screen">
         {/* Page Content */}
-        <div className="flex-1 p-6 md:p-10 overflow-x-hidden">
+        <div className="flex-1 p-6 md:p-12 overflow-x-hidden">
           <Outlet />
         </div>
       </main>

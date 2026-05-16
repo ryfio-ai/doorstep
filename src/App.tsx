@@ -52,10 +52,13 @@ import TrainerMaterials from './pages/trainer/TrainerMaterials';
 import TrainerEarnings from './pages/trainer/TrainerEarnings';
 import TrainerNotifications from './pages/trainer/TrainerNotifications';
 import TrainerProfile from './pages/trainer/TrainerProfile';
+import TrainerSettings from './pages/trainer/TrainerSettings';
 
 // Admin Portal
 import AdminLayout from './components/layouts/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import { LiveStatus } from './pages/admin/LiveStatus';
+import { AdminProfile } from './pages/admin/AdminProfile';
 import StudentManagement from './pages/admin/StudentManagement';
 import TrainerManagement from './pages/admin/TrainerManagement';
 import CourseManagement from './pages/admin/CourseManagement';
@@ -143,6 +146,7 @@ function AppContent() {
             <Route path="earnings" element={<TrainerEarnings />} />
             <Route path="notifications" element={<TrainerNotifications />} />
             <Route path="profile" element={<TrainerProfile />} />
+            <Route path="settings" element={<TrainerSettings />} />
           </Route>
 
           {/* Admin Portal */}
@@ -153,8 +157,10 @@ function AppContent() {
           }>
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="live-status" element={<LiveStatus />} />
             <Route path="students" element={<StudentManagement />} />
             <Route path="trainers" element={<TrainerManagement />} />
+            <Route path="profile" element={<AdminProfile />} />
             <Route path="courses" element={<CourseManagement />} />
             <Route path="demos" element={<DemoManagement />} />
             <Route path="enrollments" element={<EnrollmentManagement />} />

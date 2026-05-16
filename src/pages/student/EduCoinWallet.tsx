@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Coins, History, TrendingUp, Gift, ArrowRight, ShieldCheck, Star, Zap } from 'lucide-react';
+import { PageTransition } from '../../components/shared/PageTransition';
+import { Button } from '../../components/ui/button';
 import { useGamification } from '../../context/GamificationContext';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../context/AuthContext';
@@ -89,7 +91,7 @@ const EduCoinWallet: React.FC = () => {
                 <div className="text-[24px] font-jakarta font-extrabold text-white leading-tight italic">Level {stats?.level} Expert</div>
                 <div className="text-[14px] text-white/60 mt-1 font-medium italic">{stats?.total_xp} Total Experience Points</div>
               </div>
-              <Button variant="outline" className="h-14 rounded-2xl border-white/10 text-white hover:bg-white/5 font-jakarta font-extrabold uppercase tracking-widest text-[12px]">
+              <Button variant="outline" className="h-14 rounded-2xl border-white/40 text-white bg-transparent hover:bg-white/10 hover:text-white transition-all font-jakarta font-extrabold uppercase tracking-widest text-[12px]">
                 Earn More Coins <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </div>
@@ -163,7 +165,16 @@ const EduCoinWallet: React.FC = () => {
                         </div>
                         <div>
                           <div className="text-[14px] font-jakarta font-extrabold text-textPrimary group-hover:text-brandOrange transition-colors italic leading-tight">{t.reason}</div>
-                          <div className="text-[11px] text-textSecondary/40 font-jakarta font-extrabold uppercase tracking-widest mt-1">{format(new Date(t.created_at), 'MMM d')}</div>
+                          <div className="text-[11px] text-textSecondary/40 font-jakarta font-extrabold uppercase tracking-widest mt-1">
+                            {(() => {
+                              try {
+                                const d = new Date(t.created_at);
+                                return isNaN(d.getTime()) ? 'Recently' : format(d, 'MMM d');
+                              } catch {
+                                return 'Recently';
+                              }
+                            })()}
+                          </div>
                         </div>
                       </div>
                       <div className={`font-jakarta font-extrabold text-[16px] italic ${t.type === 'earn' ? 'text-green-600' : 'text-red-600'}`}>

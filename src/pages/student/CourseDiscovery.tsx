@@ -30,10 +30,10 @@ export const CourseDiscovery: React.FC = () => {
 
   return (
     <PageTransition>
-      <div className="bg-white min-h-screen pt-32 pb-24 font-inter text-textPrimary">
+      <div className="bg-white min-h-screen pt-6 pb-24 font-inter text-textPrimary">
         
         {/* Hero Section */}
-        <div className="bg-offWhite border-b border-borderSubtle py-24 mb-16">
+        <div className="bg-offWhite border-b border-borderSubtle py-12 mb-12">
           <div className="page-container">
             <div className="max-w-4xl">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>

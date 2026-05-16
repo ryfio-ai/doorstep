@@ -328,11 +328,20 @@ const mockSupabase: any = {
       const users = getStorageData('users');
       let user = users.find((u: any) => u.email === email);
       
+      // Auto-repair roles for mock admin/trainer accounts
+      if (user) {
+        const correctRole = email.includes('admin') ? 'admin' : email.includes('trainer') ? 'trainer' : 'student';
+        if (user.role !== correctRole) {
+          user.role = correctRole;
+          setStorageData('users', users);
+        }
+      }
+      
       if (!user) {
         user = { 
           id: Math.random().toString(36).substring(7), 
           email, 
-          role: email.includes('trainer') ? 'trainer' : 'student',
+          role: email.includes('admin') ? 'admin' : email.includes('trainer') ? 'trainer' : 'student',
           name: email.split('@')[0],
           phone_verified: true,
           onboarding_complete: true
@@ -385,94 +394,96 @@ const mockSupabase: any = {
       return { data: { user }, error: null };
     },
   },
-  from: (table: string) => ({
-    select: (columns: string = '*') => ({
-      eq: (column: string, value: any) => ({
-        single: async () => {
-          const data = getStorageData(table);
-          const item = data.find((i: any) => i[column] === value);
-          return { data: item || null, error: item ? null : { code: 'PGRST116', message: 'Not found' } };
-        },
-        maybeSingle: async () => {
-          const data = getStorageData(table);
-          const item = data.find((i: any) => i[column] === value);
-          return { data: item || null, error: null };
-        },
-        order: (col: string, { ascending }: any = {}) => {
-          const data = getStorageData(table).filter((i: any) => i[column] === value);
-          return { data, error: null };
-        },
-      }),
-      order: (col: string, { ascending }: any = {}) => ({
-        data: getStorageData(table).sort((a: any, b: any) => {
+  from: (table: string) => {
+    const builder = {
+      _data: getStorageData(table),
+      select: function(columns = '*') { return this; },
+      eq: function(column: string, value: any) {
+        this._data = this._data.filter((i: any) => i[column] === value);
+        return this;
+      },
+      order: function(col: string, { ascending = false }: any = {}) {
+        this._data.sort((a: any, b: any) => {
           if (ascending) return a[col] > b[col] ? 1 : -1;
           return a[col] < b[col] ? 1 : -1;
+        });
+        return this;
+      },
+      limit: function(n: number) {
+        this._data = this._data.slice(0, n);
+        return this;
+      },
+      single: async function() {
+        return { data: this._data[0] || null, error: this._data[0] ? null : { code: 'PGRST116', message: 'Not found' } };
+      },
+      maybeSingle: async function() {
+        return { data: this._data[0] || null, error: null };
+      },
+      then: function(resolve: any) {
+        resolve({ data: this._data, error: null });
+        return this;
+      },
+      // Insert/Update/Upsert/Delete would need similar builder treatment if chained
+    };
+    return {
+      ...builder,
+      insert: (items: any[]) => ({
+        select: () => ({
+          single: async () => {
+            const data = getStorageData(table);
+            const newItems = Array.isArray(items) ? items : [items];
+            const enrichedItems = newItems.map(item => ({ 
+              id: Math.random().toString(36).substring(7), 
+              created_at: new Date().toISOString(),
+              ...item 
+            }));
+            data.push(...enrichedItems);
+            setStorageData(table, data);
+            return { data: enrichedItems[0], error: null };
+          }
         }),
-        error: null,
-        then: (resolve: any) => resolve({ data: getStorageData(table), error: null }),
-      }),
-      limit: (n: number) => ({
-        data: getStorageData(table).slice(0, n),
-        error: null
-      }),
-      then: (resolve: any) => resolve({ data: getStorageData(table), error: null }),
-    }),
-    insert: (items: any[]) => ({
-      select: () => ({
-        single: async () => {
+        then: (resolve: any) => {
           const data = getStorageData(table);
           const newItems = Array.isArray(items) ? items : [items];
-          const enrichedItems = newItems.map(item => ({ 
-            id: Math.random().toString(36).substring(7), 
-            created_at: new Date().toISOString(),
-            ...item 
-          }));
-          data.push(...enrichedItems);
+          data.push(...newItems);
           setStorageData(table, data);
-          return { data: enrichedItems[0], error: null };
+          resolve({ data: newItems, error: null });
         }
       }),
-      then: (resolve: any) => {
+      update: (updates: any) => ({
+        eq: (column: string, value: any) => {
+          const data = getStorageData(table);
+          const index = data.findIndex((i: any) => i[column] === value);
+          if (index !== -1) {
+            data[index] = { ...data[index], ...updates, updated_at: new Date().toISOString() };
+            setStorageData(table, data);
+          }
+          return Promise.resolve({ data: data[index], error: null });
+        },
+      }),
+      upsert: (items: any) => {
         const data = getStorageData(table);
         const newItems = Array.isArray(items) ? items : [items];
-        data.push(...newItems);
+        newItems.forEach(item => {
+          const index = data.findIndex((i: any) => i.id === item.id || (item.user_id && i.user_id === item.user_id));
+          if (index !== -1) {
+            data[index] = { ...data[index], ...item };
+          } else {
+            data.push({ id: Math.random().toString(36).substring(7), ...item });
+          }
+        });
         setStorageData(table, data);
-        resolve({ data: newItems, error: null });
-      }
-    }),
-    update: (updates: any) => ({
-      eq: (column: string, value: any) => {
-        const data = getStorageData(table);
-        const index = data.findIndex((i: any) => i[column] === value);
-        if (index !== -1) {
-          data[index] = { ...data[index], ...updates, updated_at: new Date().toISOString() };
+        return Promise.resolve({ data: newItems, error: null });
+      },
+      delete: () => ({
+        eq: (column: string, value: any) => {
+          const data = getStorageData(table).filter((i: any) => i[column] !== value);
           setStorageData(table, data);
-        }
-        return Promise.resolve({ data: data[index], error: null });
-      },
-    }),
-    upsert: (items: any) => {
-      const data = getStorageData(table);
-      const newItems = Array.isArray(items) ? items : [items];
-      newItems.forEach(item => {
-        const index = data.findIndex((i: any) => i.id === item.id || (item.user_id && i.user_id === item.user_id));
-        if (index !== -1) {
-          data[index] = { ...data[index], ...item };
-        } else {
-          data.push({ id: Math.random().toString(36).substring(7), ...item });
-        }
-      });
-      setStorageData(table, data);
-      return Promise.resolve({ data: newItems, error: null });
-    },
-    delete: () => ({
-      eq: (column: string, value: any) => {
-        const data = getStorageData(table).filter((i: any) => i[column] !== value);
-        setStorageData(table, data);
-        return Promise.resolve({ error: null });
-      },
-    }),
-  }),
+          return Promise.resolve({ error: null });
+        },
+      }),
+    };
+  },
   storage: {
     from: (bucket: string) => ({
       upload: async (path: string, file: File) => ({ data: { path }, error: null }),

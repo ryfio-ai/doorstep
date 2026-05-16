@@ -31,7 +31,7 @@ export const StudentLayout: React.FC = () => {
     <>
       <div className="p-8">
         <Link to="/" className="flex items-center gap-3 mb-12">
-           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EA580C" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EA580C" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
             <path d="M3 21h18"></path><path d="M19 21v-4"></path><path d="M19 17a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"></path><path d="M15 5h-6a2 2 0 0 0-2 2v8h14V7a2 2 0 0 0-2-2z"></path>
           </svg>
           <span className="text-[24px] font-jakarta font-extrabold tracking-tight text-white italic">
@@ -48,11 +48,10 @@ export const StudentLayout: React.FC = () => {
                 key={item.name}
                 to={item.path}
                 onClick={() => setMobileSidebarOpen(false)}
-                className={`flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 group ${
-                  isActive 
-                    ? 'bg-brandOrange text-white font-jakarta font-extrabold shadow-premium-card scale-[1.02]' 
+                className={`flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 group ${isActive
+                    ? 'bg-brandOrange text-white font-jakarta font-extrabold shadow-premium-card scale-[1.02]'
                     : 'text-white/40 hover:bg-white/5 hover:text-white font-jakarta font-extrabold uppercase tracking-widest text-[11px]'
-                }`}
+                  }`}
               >
                 <Icon className={`w-5 h-5 transition-transform group-hover:scale-110 ${isActive ? 'text-white' : 'text-white/40'}`} />
                 <span className={isActive ? 'text-[15px]' : ''}>{item.name}</span>
@@ -70,7 +69,7 @@ export const StudentLayout: React.FC = () => {
           <div className="text-[12px] font-jakarta font-extrabold text-white/40 mt-1 uppercase tracking-widest">Today, 4:00 PM</div>
         </div>
 
-        <button 
+        <button
           onClick={() => signOut()}
           className="flex items-center gap-4 px-5 py-4 rounded-2xl text-white/40 hover:bg-destructive/10 hover:text-white transition-all duration-300 w-full text-left group"
         >
@@ -83,19 +82,36 @@ export const StudentLayout: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-offWhite flex font-inter text-textPrimary">
-      
+
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex flex-col w-[300px] bg-brandBlue fixed top-[80px] h-[calc(100vh-80px)] z-20 shadow-2xl border-r border-white/5 overflow-y-auto scrollbar-hide">
+      <aside className="hidden md:flex flex-col w-[300px] bg-brandBlue fixed top-0 h-screen z-20 shadow-2xl border-r border-white/5 overflow-y-auto scrollbar-hide">
         <SidebarContent />
       </aside>
+
+      {/* Mobile Header */}
+      <header className="md:hidden fixed top-0 left-0 w-full h-16 bg-white border-b border-borderSubtle z-40 px-6 flex items-center justify-between">
+        <button 
+          onClick={() => setMobileSidebarOpen(true)}
+          className="p-2 -ml-2 text-textPrimary"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+        <span className="font-jakarta font-extrabold text-[18px] text-brandBlue italic">
+          திறனொளி
+        </span>
+        <button className="p-2 -mr-2 text-textPrimary relative">
+          <Bell className="w-6 h-6" />
+          <span className="absolute top-2 right-2 w-2 h-2 bg-brandOrange rounded-full border-2 border-white"></span>
+        </button>
+      </header>
 
       {/* Mobile Sidebar Overlay */}
       {mobileSidebarOpen && (
         <div className="md:hidden fixed inset-0 z-[60] flex">
           <div className="absolute inset-0 bg-brandBlue/60 backdrop-blur-md" onClick={() => setMobileSidebarOpen(false)} />
-          <motion.div 
+          <motion.div
             initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-[300px] bg-brandBlue h-full flex flex-col z-10 overflow-y-auto scrollbar-hide"
+            className="relative w-[300px] bg-brandBlue h-full flex flex-col z-10"
           >
             <button className="absolute top-8 right-8 text-white/40 hover:text-white" onClick={() => setMobileSidebarOpen(false)}>
               <X className="w-7 h-7" />
@@ -106,7 +122,7 @@ export const StudentLayout: React.FC = () => {
       )}
 
       {/* Main Content Area */}
-      <main className="flex-1 md:ml-[300px] pb-[72px] md:pb-0 flex flex-col min-h-screen">
+      <main className="flex-1 md:ml-[300px] pt-16 md:pt-0 pb-[72px] md:pb-0 flex flex-col min-h-screen">
         {/* Page Content */}
         <div className="flex-1 p-6 md:p-12 overflow-x-hidden">
           <Outlet />

@@ -14,6 +14,7 @@ export const TrainerLayout: React.FC = () => {
     { name: 'My Schedule', path: '/trainer/schedule', icon: Calendar },
     { name: 'My Students', path: '/trainer/students', icon: Users },
     { name: 'Earnings', path: '/trainer/earnings', icon: IndianRupee },
+    { name: 'Profile', path: '/trainer/profile', icon: User },
     { name: 'Settings', path: '/trainer/settings', icon: Settings },
   ];
 
@@ -70,9 +71,26 @@ export const TrainerLayout: React.FC = () => {
     <div className="min-h-screen bg-offWhite flex font-inter text-textPrimary">
       
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex flex-col w-[300px] bg-brandBlue fixed top-[80px] h-[calc(100vh-80px)] z-20 shadow-2xl border-r border-white/5">
+      <aside className="hidden md:flex flex-col w-[300px] bg-brandBlue fixed top-0 h-screen z-20 shadow-2xl border-r border-white/5">
         <SidebarContent />
       </aside>
+
+      {/* Mobile Header */}
+      <header className="md:hidden fixed top-0 left-0 w-full h-16 bg-white border-b border-borderSubtle z-40 px-6 flex items-center justify-between">
+        <button 
+          onClick={() => setMobileSidebarOpen(true)}
+          className="p-2 -ml-2 text-textPrimary"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+        <span className="font-jakarta font-extrabold text-[18px] text-brandBlue italic">
+          திறனொளி
+        </span>
+        <button className="p-2 -mr-2 text-textPrimary relative">
+          <Bell className="w-6 h-6" />
+          <span className="absolute top-2 right-2 w-2 h-2 bg-brandOrange rounded-full border-2 border-white"></span>
+        </button>
+      </header>
 
       {/* Mobile Sidebar Overlay */}
       {mobileSidebarOpen && (
@@ -91,7 +109,7 @@ export const TrainerLayout: React.FC = () => {
       )}
 
       {/* Main Content Area */}
-      <main className="flex-1 md:ml-[300px] flex flex-col min-h-screen">
+      <main className="flex-1 md:ml-[300px] pt-16 md:pt-0 flex flex-col min-h-screen">
         {/* Page Content */}
         <div className="flex-1 p-6 md:p-12 overflow-x-hidden">
           <Outlet />
