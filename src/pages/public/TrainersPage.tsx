@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Star, Award, CheckCircle, MapPin } from 'lucide-react';
+import { Star, Award, CheckCircle, MapPin, Users, User } from 'lucide-react';
 import { PageTransition } from '../../components/shared/PageTransition';
 
 const FadeIn: React.FC<{ children: React.ReactNode, delay?: number }> = ({ children, delay = 0 }) => (
@@ -11,10 +11,7 @@ const FadeIn: React.FC<{ children: React.ReactNode, delay?: number }> = ({ child
 
 const TrainersPage: React.FC = () => {
   const trainers = [
-    { name: 'Dr. Karthik R.', role: 'AI & Machine Learning Expert', company: 'Ex-Google', location: 'Chennai', courses: 8, students: '4.2k', rating: 4.9, image: 'https://i.pravatar.cc/150?u=karthik' },
-    { name: 'Priya M.', role: 'Robotics Engineer', company: 'Boston Dynamics Alum', location: 'Coimbatore', courses: 5, students: '2.1k', rating: 4.8, image: 'https://i.pravatar.cc/150?u=priya' },
-    { name: 'Sanjay Kumar', role: 'IoT & Embedded Systems', company: 'TCS Innovation Labs', location: 'Bangalore', courses: 6, students: '3k', rating: 4.7, image: 'https://i.pravatar.cc/150?u=sanjay' },
-    { name: 'Anitha S.', role: 'Software Architecture', company: 'Amazon', location: 'Chennai', courses: 4, students: '1.8k', rating: 4.9, image: 'https://i.pravatar.cc/150?u=anitha' },
+    { name: 'Tamizharasan K', role: 'Founder of ThiranOli', company: 'Tamizh Tech Pvt Ltd', companyUrl: 'https://www.tamizhtech.in/', location: 'Tamil Nadu', courses: 12, students: '100+', rating: 5.0, image: '', bio: '5+ years of experience in Robotics and Electronics.' },
   ];
 
   return (
@@ -44,34 +41,34 @@ const TrainersPage: React.FC = () => {
                 <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-orange-50 to-white"></div>
                 
                 <div className="relative z-10">
-                  <div className="w-24 h-24 mx-auto rounded-full p-1 bg-white shadow-md mb-4 border border-slate-100">
-                    <img src={trainer.image} alt={trainer.name} className="w-full h-full rounded-full object-cover" />
+                  <div className="w-24 h-24 mx-auto rounded-full p-1 bg-white shadow-md mb-4 border border-slate-100 flex items-center justify-center">
+                    <div className="w-full h-full rounded-full bg-slate-50 flex items-center justify-center text-slate-400">
+                      <User className="w-12 h-12" />
+                    </div>
                   </div>
                   
                   <div className="flex items-center justify-center gap-1 mb-1">
                     <h3 className="font-grotesk text-xl font-bold text-slate-900 group-hover:text-brandOrange transition-colors">{trainer.name}</h3>
                     <CheckCircle className="w-4 h-4 text-green-500" />
                   </div>
-                  <p className="text-sm font-medium text-slate-600 mb-1">{trainer.role}</p>
-                  <p className="text-xs text-brandOrange font-semibold uppercase tracking-wider mb-4">{trainer.company}</p>
+                  <p className="text-sm font-bold text-brandOrange mb-1 uppercase tracking-wider">Lead Robotics Expert</p>
+                  <p className="text-sm font-medium text-slate-600 mb-2 px-4">
+                    {trainer.role} &{" "}
+                    <a 
+                      href={trainer.companyUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:underline inline-block"
+                    >
+                      {trainer.company}
+                    </a>
+                  </p>
+                  <p className="text-[13px] text-slate-500 font-inter px-4 mb-4">
+                    {trainer.bio}
+                  </p>
                   
-                  <div className="flex items-center justify-center gap-4 text-sm text-slate-500 mb-6">
+                  <div className="flex items-center justify-center gap-4 text-sm text-slate-500">
                     <span className="flex items-center gap-1"><MapPin className="w-4 h-4"/> {trainer.location}</span>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-2 pt-4 border-t border-slate-100">
-                    <div>
-                      <p className="text-lg font-bold text-slate-900">{trainer.rating}</p>
-                      <p className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold flex items-center justify-center gap-1"><Star className="w-3 h-3 text-yellow-400 fill-yellow-400"/> Rating</p>
-                    </div>
-                    <div>
-                      <p className="text-lg font-bold text-slate-900">{trainer.courses}</p>
-                      <p className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Courses</p>
-                    </div>
-                    <div>
-                      <p className="text-lg font-bold text-slate-900">{trainer.students}</p>
-                      <p className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Learners</p>
-                    </div>
                   </div>
                 </div>
               </div>

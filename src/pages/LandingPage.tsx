@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
-import { Play, ArrowRight, Brain, Cpu, Code, Trophy, Users, Star, CheckCircle, Smartphone, Globe, ShieldCheck, BookOpen } from 'lucide-react';
+import { Play, ArrowRight, Brain, Cpu, Code, Trophy, Users, Star, CheckCircle, Smartphone, Globe, ShieldCheck, BookOpen, Target, Zap, MonitorPlay, Sparkles } from 'lucide-react';
 import CountUp from 'react-countup';
 
 // Reusable Section Fade-in Wrapper
@@ -21,367 +21,443 @@ export const LandingPage: React.FC = () => {
     <div className="flex flex-col w-full overflow-hidden bg-brandBlue">
 
       {/* =========================================
-          SECTION 1: HERO
+          SECTION 1: HERO (THE "MNC" LOOK)
       ========================================= */}
-      <section className="relative min-h-[100vh] pt-[120px] pb-[80px] lg:pt-[160px] lg:pb-[100px] flex items-center overflow-hidden bg-brandBlue">
-        {/* Background Effects */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
-          <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-electricBlue/20 rounded-full blur-[120px] mix-blend-screen animate-pulse-orange"></div>
-          <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-brandOrange/15 rounded-full blur-[150px] mix-blend-screen"></div>
-        </div>
-
-        <div className="page-container relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-
-          {/* Left Content */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left">
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-brandOrange/30 mb-8">
-              <span className="w-2 h-2 rounded-full bg-brandOrange animate-pulse-orange"></span>
-              <span className="font-inter font-medium text-[13px] text-white">🚀 Now Live — AI + Robotics Courses</span>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
-              <h2 className="font-tamil font-bold text-[48px] text-transparent bg-clip-text bg-blue-orange mb-2" style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}>திறனொளி</h2>
-              <h1 className="font-grotesk font-bold text-[56px] lg:text-[72px] leading-[1.05] tracking-tight text-white mb-6">
-                The Future of <br />
-                <span className="text-transparent bg-clip-text bg-orange-gradient">AI + Robotics</span> <br />
-                Education Starts Here
-              </h1>
-              <p className="font-inter font-normal text-[18px] lg:text-[20px] leading-[1.7] text-white/70 max-w-[600px] mb-10">
-                ThiranOli — Light of Skills & Talent. Master cutting-edge AI, Robotics, and innovation skills with world-class mentors. Learn in Tamil. Excel globally.
-              </p>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="flex flex-col sm:flex-row items-center gap-4 mb-12">
-              <Link to="/courses" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-orange-gradient text-white font-grotesk font-semibold text-[16px] flex items-center justify-center gap-2 shadow-glow-orange hover:scale-105 transition-all duration-300">
-                Start Learning Free <ArrowRight className="w-5 h-5" />
-              </Link>
-              <button className="w-full sm:w-auto px-8 py-4 rounded-xl border border-white/20 text-white font-grotesk font-semibold text-[16px] flex items-center justify-center gap-2 hover:bg-white/5 transition-all duration-300">
-                <Play className="w-5 h-5" /> Watch Demo
-              </button>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="flex flex-wrap items-center gap-6 text-[14px] text-white/50 font-inter">
-              <span className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400" /> No credit card required</span>
-              <span className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400" /> Tamil & English</span>
-              <span className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400" /> Industry Certificate</span>
-            </motion.div>
-          </div>
-
-          {/* Right Visual (Floating Elements) */}
-          <div className="lg:col-span-5 relative h-[500px] lg:h-[600px] hidden md:flex items-center justify-center">
-            <motion.div animate={{ y: [-15, 15, -15] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} className="relative z-10 w-full max-w-[400px]">
-              {/* Main Dashboard Mockup */}
-              <div className="w-full aspect-[4/5] rounded-[32px] glass-dark shadow-premium-shadow border border-white/10 p-6 flex flex-col gap-4 overflow-hidden relative">
-                <div className="absolute top-0 left-0 w-full h-1/2 bg-blue-orange opacity-20 blur-3xl"></div>
-
-                {/* Mock UI Elements inside the glass card */}
-                <div className="w-full h-32 rounded-2xl bg-white/5 flex items-center justify-center border border-white/5">
-                  <Cpu className="w-12 h-12 text-brandOrange" />
+      <section className="relative min-h-[90vh] flex items-center pt-24 overflow-hidden bg-brandBlue">
+        {/* Abstract Background Elements */}
+        <div className="absolute top-0 right-0 w-[60%] h-full bg-gradient-to-l from-brandOrange/5 to-transparent pointer-events-none"></div>
+        <div className="absolute -top-[10%] -right-[10%] w-[1000px] h-[1000px] bg-brandOrange/10 rounded-full blur-[150px] pointer-events-none"></div>
+        
+        <div className="page-container relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <FadeIn>
+              <div className="space-y-10">
+                <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl">
+                  <span className="w-2 h-2 rounded-full bg-brandOrange animate-pulse"></span>
+                  <span className="font-grotesk font-bold text-[14px] text-white tracking-[0.2em] uppercase">Powered by Tamizh Tech Pvt Ltd</span>
                 </div>
-                <div className="w-3/4 h-4 bg-white/10 rounded-full mt-4"></div>
-                <div className="w-1/2 h-4 bg-white/10 rounded-full"></div>
 
-                <div className="grid grid-cols-2 gap-4 mt-6">
-                  <div className="h-24 bg-brandOrange/20 rounded-xl border border-brandOrange/30"></div>
-                  <div className="h-24 bg-electricBlue/20 rounded-xl border border-electricBlue/30"></div>
+                <h1 className="font-grotesk font-bold text-[60px] md:text-[88px] text-white leading-[0.95] tracking-tighter">
+                  Education at <br />
+                  <span className="text-transparent bg-clip-text bg-orange-gradient">Your Doorstep.</span>
+                </h1>
+
+                <p className="font-inter text-[20px] md:text-[24px] text-white/70 max-w-xl leading-relaxed">
+                  Bridging the gap between expert mentors and eager learners. **Personalized 1-on-1 learning** right in your living room.
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-center gap-6 pt-6">
+                  <Button asChild size="lg" className="bg-orange-gradient hover:shadow-glow-orange text-white px-10 h-16 rounded-2xl font-grotesk font-bold text-[18px] transition-all w-full sm:w-auto">
+                    <Link to="/courses">Explore Programs</Link>
+                  </Button>
+                  <Button asChild variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10 px-10 h-16 rounded-2xl font-grotesk font-bold text-[18px] transition-all w-full sm:w-auto">
+                    <Link to="/trainers">Join as a Trainer</Link>
+                  </Button>
                 </div>
-              </div>
 
-              {/* Floating Stat Cards */}
-              <motion.div animate={{ y: [-10, 10, -10], rotate: [0, 2, 0] }} transition={{ duration: 4, repeat: Infinity, delay: 0.5 }} className="absolute -right-12 top-10 glass-card px-4 py-3 rounded-2xl shadow-glow-blue border-electricBlue/30 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-electricBlue/20 flex items-center justify-center text-electricBlue"><Users className="w-5 h-5" /></div>
-                <div><p className="text-white font-grotesk font-bold">2,400+</p><p className="text-[10px] text-white/50">Students enrolled</p></div>
-              </motion.div>
-
-              <motion.div animate={{ y: [10, -10, 10], rotate: [0, -2, 0] }} transition={{ duration: 5, repeat: Infinity, delay: 1 }} className="absolute -left-16 bottom-20 glass-orange px-4 py-3 rounded-2xl shadow-glow-orange flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-brandOrange/20 flex items-center justify-center text-brandOrange"><Brain className="w-5 h-5" /></div>
-                <div><p className="text-white font-grotesk font-bold">AI Masterclass</p><p className="text-[10px] text-white/50">Certificate Earned</p></div>
-              </motion.div>
-            </motion.div>
-          </div>
-
-        </div>
-
-        {/* Scrolling Ticker Bottom */}
-        <div className="absolute bottom-0 left-0 w-full bg-black/20 border-t border-white/5 overflow-hidden flex whitespace-nowrap py-4">
-          <div className="animate-marquee flex gap-8 items-center text-white/40 font-grotesk text-[14px] font-semibold tracking-wider uppercase">
-            {['Python', 'Machine Learning', 'Robotics', 'Arduino', 'AI Ethics', 'Data Science', 'Computer Vision', 'Neural Networks', 'IoT', 'Automation', 'Deep Learning', 'NLP'].map((tech, i) => (
-              <React.Fragment key={i}>
-                <span>{tech}</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-brandOrange/50"></span>
-              </React.Fragment>
-            ))}
-            {/* Duplicate for infinite loop */}
-            {['Python', 'Machine Learning', 'Robotics', 'Arduino', 'AI Ethics', 'Data Science', 'Computer Vision', 'Neural Networks', 'IoT', 'Automation', 'Deep Learning', 'NLP'].map((tech, i) => (
-              <React.Fragment key={`dup-${i}`}>
-                <span>{tech}</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-brandOrange/50"></span>
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================
-          SECTION 2: ANIMATED STATS
-      ========================================= */}
-      <section className="py-[120px] bg-navyDeep relative z-10 border-b border-white/5">
-        <div className="page-container">
-          <FadeIn>
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brandOrange/10 border border-brandOrange/20 text-brandOrange font-grotesk font-semibold text-[12px] uppercase tracking-wider mb-4">
-                📊 Our Impact
-              </div>
-              <h2 className="font-grotesk font-bold text-[40px] text-white">Numbers That Define Our Excellence</h2>
-            </div>
-          </FadeIn>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { num: 12000, suffix: '+', label: 'Active Learners', sub: 'Across Tamil Nadu & beyond', icon: Users, color: 'text-blue-400', border: 'border-blue-500/50' },
-              { num: 50, suffix: '+', label: 'Expert Courses', sub: 'AI, Robotics & Innovation', icon: BookOpen, color: 'text-orange-400', border: 'border-orange-500/50' },
-              { num: 4.9, suffix: '★', label: 'Average Rating', sub: 'From 3,200+ reviews', icon: Star, color: 'text-yellow-400', border: 'border-yellow-500/50', decimals: 1 },
-              { num: 98, suffix: '%', label: 'Placement Rate', sub: 'Within 6 months', icon: Trophy, color: 'text-green-400', border: 'border-green-500/50' },
-            ].map((stat, i) => (
-              <FadeIn key={i} delay={i * 0.1}>
-                <div className="glass-card rounded-[24px] p-8 border-t-2 hover:-translate-y-2 transition-transform duration-300 relative group overflow-hidden" style={{ borderTopColor: stat.border.split('-')[1] }}>
-                  <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <stat.icon className={`w-16 h-16 ${stat.color}`} />
+                {/* Core Values */}
+                <div className="grid grid-cols-3 gap-8 pt-12 border-t border-white/10">
+                  <div className="flex flex-col">
+                    <span className="text-white font-grotesk font-bold text-[24px]">100%</span>
+                    <span className="text-white/30 text-[11px] uppercase tracking-widest mt-1">Verified</span>
                   </div>
-                  <h3 className="font-grotesk font-bold text-[48px] text-white mb-2">
-                    <CountUp end={stat.num} decimals={stat.decimals || 0} duration={2.5} enableScrollSpy scrollSpyOnce />
-                    {stat.suffix}
-                  </h3>
-                  <p className="font-inter font-semibold text-[18px] text-white mb-1">{stat.label}</p>
-                  <p className="font-inter text-[14px] text-white/50">{stat.sub}</p>
+                  <div className="flex flex-col">
+                    <span className="text-white font-grotesk font-bold text-[24px]">1-on-1</span>
+                    <span className="text-white/30 text-[11px] uppercase tracking-widest mt-1">Attention</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-white font-grotesk font-bold text-[24px]">Safe</span>
+                    <span className="text-white/30 text-[11px] uppercase tracking-widest mt-1">Learning</span>
+                  </div>
                 </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================
-          SECTION 4: FEATURED COURSES
-      ========================================= */}
-      <section className="py-[120px] bg-richBlack relative z-10 border-b border-white/5">
-        <div className="page-container">
-          <FadeIn>
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 font-grotesk font-semibold text-[12px] uppercase tracking-wider mb-4">
-                  🔥 Trending Now
-                </div>
-                <h2 className="font-grotesk font-bold text-[40px] text-white mb-4">Most Popular Courses</h2>
-                <p className="text-white/60 font-inter text-[18px] max-w-2xl">Hand-picked by our curriculum team and loved by 12,000+ learners across the globe.</p>
               </div>
-              <Link to="/courses" className="shrink-0 text-brandOrange font-grotesk font-semibold flex items-center gap-2 hover:gap-3 transition-all">
-                View All Courses <ArrowRight className="w-5 h-5" />
-              </Link>
-            </div>
-          </FadeIn>
+            </FadeIn>
 
-          {/* Tab Filter Row */}
-          <FadeIn delay={0.1}>
-            <div className="flex overflow-x-auto scrollbar-hide gap-3 mb-10 pb-2">
-              {['All', 'AI & ML', 'Robotics', 'Programming', 'Innovation', 'Free'].map((tab, i) => (
-                <button key={i} className={`shrink-0 px-6 py-2.5 rounded-full font-grotesk font-medium text-[15px] transition-all ${i === 0 ? 'bg-orange-gradient text-white shadow-glow-orange border border-transparent' : 'glass-card text-white/70 hover:text-white hover:bg-white/10'
-                  }`}>
-                  {tab}
-                </button>
-              ))}
-            </div>
-          </FadeIn>
-
-          {/* 3-Col Course Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item, i) => (
-              <FadeIn key={i} delay={i * 0.15}>
-                <div className="glass-card bg-cardDark/80 rounded-[20px] overflow-hidden border border-white/10 hover:-translate-y-2 hover:border-electricBlue/50 hover:shadow-premium-shadow transition-all duration-400 group">
-                  {/* Image Top */}
-                  <div className="relative h-[220px] bg-navyDeep overflow-hidden">
-                    <img src={`https://picsum.photos/seed/${item}/600/400`} alt="Course" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-cardDark via-transparent to-transparent"></div>
-
-                    {/* Badges */}
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 rounded-full bg-electricBlue/90 text-white font-grotesk font-semibold text-[11px] uppercase tracking-wider">Robotics</span>
-                    </div>
-                    <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 rounded-full bg-red-500/90 text-white font-grotesk font-semibold text-[11px] uppercase tracking-wider">HOT</span>
-                    </div>
-                    <div className="absolute bottom-4 left-4">
-                      <span className="px-3 py-1 rounded-full glass-card text-white font-grotesk font-medium text-[12px] flex items-center gap-1 backdrop-blur-md">
-                        ⏱ 6 Weeks
-                      </span>
-                    </div>
+            <div className="hidden lg:block relative">
+              <FadeIn delay={0.3}>
+                <div className="relative">
+                  <div className="w-[540px] h-[640px] rounded-[50px] overflow-hidden border border-white/20 shadow-3xl relative z-10 group">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop" alt="Doorstep Learning" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brandBlue/60 via-transparent to-transparent"></div>
                   </div>
 
-                  {/* Content Area */}
-                  <div className="p-6">
-                    <h4 className="font-grotesk font-bold text-[22px] text-white leading-tight mb-3 group-hover:text-electricBlue transition-colors">Complete Arduino & Robotics Masterclass</h4>
-                    <p className="font-inter text-[14px] text-white/50 mb-5 line-clamp-2">Learn to build, wire, and program your own robots from scratch using Arduino and basic sensors. No prior experience needed.</p>
-
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brandOrange to-electricBlue"></div>
-                      <span className="font-inter text-[13px] text-white/70">by <span className="text-white font-medium">Dr. Karthik R.</span></span>
-                    </div>
-
-                    <div className="flex items-center justify-between py-4 border-t border-white/5">
-                      <div className="flex flex-col">
-                        <span className="text-white/40 text-[12px] line-through">₹2,999</span>
-                        <span className="font-grotesk font-bold text-[24px] text-white">₹999</span>
+                  <div className="absolute -top-10 -left-10 glass-card p-6 rounded-3xl border-white/20 animate-float z-20">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-brandOrange flex items-center justify-center">
+                        <CheckCircle className="text-white w-6 h-6" />
                       </div>
-                      <Button className="bg-brandOrange/10 border border-brandOrange/30 text-brandOrange hover:bg-orange-gradient hover:text-white hover:border-transparent rounded-xl px-6 h-12 transition-all font-grotesk font-semibold">
-                        Enroll Now
-                      </Button>
+                      <span className="text-white font-grotesk font-bold">Verified Mentors</span>
                     </div>
                   </div>
                 </div>
               </FadeIn>
-            ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+      {/* =========================================
+          SECTION 3: WHAT WE DO (MNC STYLE)
+      ========================================= */}
+      <section className="py-[120px] bg-white relative z-10 overflow-hidden">
+        <div className="page-container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <FadeIn>
+              <div className="relative">
+                <div className="absolute -top-20 -left-20 text-[200px] font-grotesk font-black text-slate-50 select-none">WE DO</div>
+                <h2 className="font-grotesk font-bold text-[40px] md:text-[56px] text-slate-900 leading-tight mb-8 relative z-10">
+                  Bridging the gap between <br />
+                  <span className="text-brandOrange underline decoration-brandOrange/30">Skills & Learners.</span>
+                </h2>
+                <div className="space-y-6 relative z-10">
+                  <p className="font-inter text-[18px] text-slate-600 leading-relaxed">
+                    <strong>திறனொளி (Doorstep)</strong> is a smart learning platform that acts as a professional bridge between skilled trainers and eager learners.
+                  </p>
+                  <p className="font-inter text-[18px] text-slate-600 leading-relaxed">
+                    Instead of students traveling to tuition centers, we ensure that <strong>Education comes home</strong>. We make quality education accessible, flexible, and convenient for every locality.
+                  </p>
+                </div>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.2}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {[
+                  { title: "Personalized Learning", desc: "One-to-one or small group learning right at your home.", icon: Target },
+                  { title: "Verified Ecosystem", desc: "Every trainer is background-checked and demo-approved.", icon: ShieldCheck },
+                  { title: "Flexible Scheduling", desc: "Learn based on your availability and comfort.", icon: Globe },
+                  { title: "Accessible Quality", desc: "World-class education brought to your doorstep.", icon: Sparkles }
+                ].map((item, i) => (
+                  <div key={i} className="p-8 rounded-[32px] bg-slate-50 border border-slate-100 hover:border-brandOrange/20 hover:bg-white hover:shadow-xl transition-all group">
+                    <item.icon className="w-10 h-10 text-brandOrange mb-6 group-hover:scale-110 transition-transform" />
+                    <h3 className="font-grotesk font-bold text-[20px] text-slate-900 mb-3">{item.title}</h3>
+                    <p className="font-inter text-[14px] text-slate-500">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
 
       {/* =========================================
-          SECTION 6: HOW IT WORKS (TIMELINE)
+          SECTION: WHY 1-ON-1 MATTERS (PREMIUM)
       ========================================= */}
-      <section className="py-[120px] bg-navyDeep relative z-10">
+      <section className="py-[120px] bg-slate-50 relative z-10 border-y border-slate-100">
+        <div className="page-container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <FadeIn direction="left">
+              <div className="space-y-8">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brandOrange/10 border border-brandOrange/20">
+                  <Users className="w-4 h-4 text-brandOrange" />
+                  <span className="text-[13px] font-bold text-brandOrange tracking-widest uppercase">The 1-on-1 Advantage</span>
+                </div>
+                <h2 className="font-grotesk font-bold text-[44px] md:text-[64px] text-slate-900 leading-[1.1]">
+                  Because your child <br />
+                  <span className="text-brandOrange underline decoration-brandOrange/20 italic font-medium">deserves focus.</span>
+                </h2>
+                <p className="font-inter text-[18px] md:text-[20px] text-slate-500 leading-relaxed">
+                  In a world of crowded classrooms, we bring the **Power of Personalized Attention** to your home. Every child learns differently; we teach them exactly the way they understand.
+                </p>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-8">
+                  <div className="flex flex-col gap-2">
+                    <span className="text-slate-900 font-grotesk font-bold text-[24px]">100% Focus</span>
+                    <p className="text-slate-500 text-[14px]">Undivided attention from the mentor throughout the session.</p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <span className="text-slate-900 font-grotesk font-bold text-[24px]">Zero Pressure</span>
+                    <p className="text-slate-500 text-[14px]">Student learns at their own pace without competition stress.</p>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+
+            <FadeIn direction="right">
+              <div className="grid grid-cols-1 gap-6">
+                {[
+                  { title: "Customized Roadmap", desc: "Curriculum adapted specifically to the student's interest and grasping power.", icon: Target },
+                  { title: "Immediate Clarity", desc: "Zero wait time for doubts. Instant feedback and real-time corrections.", icon: Zap },
+                  { title: "Strong Mentorship", desc: "Builds a deep relationship of trust and guidance between trainer & student.", icon: ShieldCheck }
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-6 p-8 rounded-[32px] bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
+                    <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 group-hover:bg-brandOrange transition-colors">
+                      <item.icon className="w-7 h-7 text-brandOrange group-hover:text-white transition-colors" />
+                    </div>
+                    <div>
+                      <h4 className="font-grotesk font-bold text-[20px] text-slate-900 mb-2">{item.title}</h4>
+                      <p className="text-slate-500 text-[15px] leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================
+          SECTION 4: EXPLORE CATEGORIES (VISUAL GRID)
+      ========================================= */}
+      <section className="py-[120px] bg-white relative z-10">
         <div className="page-container">
           <FadeIn>
             <div className="text-center mb-20">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brandOrange/10 border border-brandOrange/20 text-brandOrange font-grotesk font-semibold text-[12px] uppercase tracking-wider mb-4">
-                🛤️ The Journey
-              </div>
-              <h2 className="font-grotesk font-bold text-[40px] text-white">From Zero to Innovation Hero</h2>
+              <h2 className="font-grotesk font-bold text-[40px] md:text-[56px] text-slate-900 leading-tight">What can you learn?</h2>
+              <p className="text-slate-500 font-inter text-[18px] max-w-2xl mx-auto mt-4">From core academics to advanced robotics, we cover it all.</p>
             </div>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
-            {/* Connector Line (Desktop) */}
-            <div className="hidden md:block absolute top-[40px] left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-electricBlue via-brandOrange to-electricBlue opacity-30"></div>
-
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { num: '01', title: 'Choose Path', desc: 'Find your perfect course in AI or Robotics', icon: Brain },
-              { num: '02', title: 'Learn from Masters', desc: 'Live & recorded sessions in Tamil & English', icon: Play },
-              { num: '03', title: 'Build Real Projects', desc: 'Hands-on hardware and coding assignments', icon: Code },
-              { num: '04', title: 'Get Certified', desc: 'Industry-recognized certificate on completion', icon: Trophy },
-            ].map((step, i) => (
-              <FadeIn key={i} delay={i * 0.2}>
-                <div className="flex flex-col items-center text-center relative z-10 group">
-                  <div className="w-20 h-20 rounded-full glass-card flex items-center justify-center border-2 border-white/10 group-hover:border-brandOrange group-hover:bg-brandOrange/10 transition-all duration-300 shadow-glow-blue mb-6">
-                    <step.icon className="w-8 h-8 text-white group-hover:text-brandOrange transition-colors" />
+              { title: "Robotics & AI", count: "12+ Courses", icon: Cpu, color: "bg-blue-500", path: "/courses", comingSoon: false },
+              { title: "Academic Excellence", count: "All Subjects", icon: BookOpen, color: "bg-orange-500", comingSoon: true },
+              { title: "Coding & Software", count: "8+ Programs", icon: Code, color: "bg-purple-500", comingSoon: true },
+              { title: "Embedded Systems", count: "IoT & Hardware", icon: Brain, color: "bg-emerald-500", comingSoon: true }
+            ].map((cat, i) => (
+              <FadeIn key={i} delay={i * 0.1}>
+                {cat.comingSoon ? (
+                  <div className="group relative overflow-hidden rounded-[40px] bg-slate-50 p-10 h-[300px] flex flex-col justify-end transition-all cursor-not-allowed opacity-70">
+                    <div className="absolute top-6 right-6 px-3 py-1 bg-slate-200 text-slate-500 text-[10px] font-bold uppercase tracking-widest rounded-full">Coming Soon</div>
+                    <cat.icon className="w-12 h-12 text-slate-300 mb-auto" />
+                    <div className="relative z-10">
+                      <h3 className="font-grotesk font-bold text-[24px] text-slate-400 mb-1">{cat.title}</h3>
+                      <p className="font-inter text-slate-400 text-[14px]">Under Development</p>
+                    </div>
                   </div>
-                  <h3 className="font-grotesk font-bold text-[24px] text-white mb-3">{step.title}</h3>
-                  <p className="font-inter text-[15px] text-white/60">{step.desc}</p>
+                ) : (
+                  <Link to={cat.path || "#"} className="group relative overflow-hidden rounded-[40px] bg-slate-50 p-10 h-[300px] flex flex-col justify-end hover:shadow-2xl transition-all cursor-pointer block border border-transparent hover:border-brandOrange/20">
+                    <div className={`absolute top-0 right-0 w-32 h-32 ${cat.color} opacity-[0.03] rounded-bl-full group-hover:scale-[2] transition-transform duration-700`}></div>
+                    <cat.icon className="w-12 h-12 text-slate-300 mb-auto group-hover:text-brandOrange group-hover:scale-110 transition-all duration-500" />
+                    <div className="relative z-10">
+                      <h3 className="font-grotesk font-bold text-[24px] text-slate-900 mb-1">{cat.title}</h3>
+                      <p className="font-inter text-slate-500 text-[14px] flex items-center gap-2">
+                        {cat.count} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </p>
+                    </div>
+                  </Link>
+                )}
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================
+          SECTION 5: HOW IT WORKS (VISUAL TIMELINE)
+      ========================================= */}
+      <section className="py-[120px] bg-slate-900 text-white relative z-10 overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none"></div>
+        <div className="page-container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <FadeIn direction="left">
+              <div>
+                <h2 className="font-grotesk font-bold text-[40px] md:text-[56px] leading-tight mb-8">Simple path to <br /><span className="text-brandOrange">Mastery.</span></h2>
+                <p className="text-white/60 text-[18px] mb-12">We've simplified the journey from curiosity to expertise. Here is how we ensure your success.</p>
+                
+                <div className="space-y-12">
+                  {[
+                    { step: "01", title: "Select your Goal", desc: "Choose from our wide range of skill-based programs." },
+                    { step: "02", title: "Get Matched", desc: "Our AI finds the best verified trainer in your locality." },
+                    { step: "03", title: "Free Demo", desc: "Experience the teaching first-hand at your home." },
+                    { step: "04", title: "Start Learning", desc: "Begin your journey with structured, 1-on-1 guidance." }
+                  ].map((item, i) => (
+                    <div key={i} className="flex gap-6 group">
+                      <span className="font-grotesk font-bold text-[48px] text-white/10 group-hover:text-brandOrange/40 transition-colors leading-none">{item.step}</span>
+                      <div>
+                        <h4 className="font-grotesk font-bold text-[22px] mb-2">{item.title}</h4>
+                        <p className="text-white/40 font-inter">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </FadeIn>
+
+            <FadeIn direction="right">
+              <div className="relative">
+                <div className="aspect-[4/5] rounded-[60px] overflow-hidden border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" alt="Collaborative Learning" className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-1000" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                </div>
+                
+                <div className="absolute -bottom-10 -right-10 glass-card p-8 rounded-[32px] border-white/10 shadow-3xl max-w-[280px]">
+                  <Sparkles className="w-10 h-10 text-brandOrange mb-4" />
+                  <p className="text-white font-grotesk font-bold text-[20px] leading-tight">AI-Powered Matching Algorithm</p>
+                  <p className="text-white/40 text-[14px] mt-2">Connecting you with the top 1% of mentors in minutes.</p>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================
+          SECTION 4: BENEFITS FOR TRAINERS (MNC STYLE)
+      ========================================= */}
+      <section className="py-[120px] bg-brandBlue relative z-10 overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brandOrange/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="page-container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <FadeIn direction="left">
+              <div className="space-y-8">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/80 font-grotesk font-semibold text-[12px] uppercase tracking-wider">
+                  👨‍🏫 Empowering Mentors
+                </div>
+                <h2 className="font-grotesk font-bold text-[40px] md:text-[56px] text-white leading-tight">Empowering Skilled Trainers</h2>
+                <p className="font-inter text-[18px] text-white/60 leading-relaxed">
+                  Join our elite network of mentors and build your personal brand while helping the next generation of innovators locally.
+                </p>
+                
+                <div className="space-y-4 pt-6">
+                  {[
+                    "Get verified student leads consistently",
+                    "Choose your own working hours and locations",
+                    "Earn more by teaching in your nearby areas",
+                    "Build a professional brand via our review system",
+                    "Access structured teaching resources and admin support"
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-4 text-white/80">
+                      <div className="w-6 h-6 rounded-full bg-brandOrange/20 flex items-center justify-center shrink-0">
+                        <CheckCircle className="w-4 h-4 text-brandOrange" />
+                      </div>
+                      <span className="font-inter font-medium">{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="pt-8">
+                  <Button className="bg-white text-brandBlue hover:bg-slate-100 px-10 h-16 rounded-2xl font-grotesk font-bold text-[18px] transition-all">
+                    Apply as a Trainer
+                  </Button>
+                </div>
+              </div>
+            </FadeIn>
+
+            <FadeIn direction="right">
+              <div className="relative">
+                <div className="w-full aspect-square rounded-[40px] overflow-hidden border border-white/10 shadow-3xl">
+                  <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop" alt="Trainer" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brandBlue/80 to-transparent"></div>
+                </div>
+                
+                {/* Floating Stat Card */}
+                <div className="absolute -bottom-10 -left-10 glass-card p-8 rounded-[32px] border-white/20 shadow-glow-orange">
+                  <p className="text-white/60 font-grotesk uppercase tracking-widest text-[12px] mb-2">Trainer Impact</p>
+                  <p className="text-white font-grotesk font-bold text-[32px]">100% Flexible</p>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+
+      <section className="py-[120px] bg-slate-50 relative z-10">
+        <div className="page-container">
+          <div className="flex flex-col lg:flex-row justify-between items-end mb-16 gap-8">
+            <FadeIn direction="left">
+              <div className="max-w-2xl">
+                <h2 className="font-grotesk font-bold text-[40px] md:text-[56px] text-slate-900 leading-tight mb-4">What our students <br />& parents say.</h2>
+                <p className="text-slate-500 text-[18px]">Trusted by 10,000+ families across the state for quality doorstep education.</p>
+              </div>
+            </FadeIn>
+            <FadeIn direction="right">
+              <Button variant="outline" className="rounded-full px-8 h-12 border-slate-200 text-slate-600 hover:text-brandOrange hover:border-brandOrange transition-all">
+                View all stories <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </FadeIn>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { name: "Arun Kumar", role: "Parent", text: "The convenience of having a verified robotics expert come home is unmatched. My son built his first drone in just 4 weeks!", img: "https://i.pravatar.cc/150?u=arun" },
+              { name: "Priya S.", role: "Student", text: "I was struggling with Python logic, but my mentor made it so easy. The hands-on hardware kits are the best part of the course.", img: "https://i.pravatar.cc/150?u=priya" },
+              { name: "Dr. Rajesh", role: "Parent", text: "Safe, professional, and very structured. The performance tracking keeps me updated on my daughter's progress every week.", img: "https://i.pravatar.cc/150?u=rajesh" }
+            ].map((t, i) => (
+              <FadeIn key={i} delay={i * 0.1}>
+                <div className="bg-white p-10 rounded-[40px] border border-slate-100 shadow-sm hover:shadow-xl transition-all h-full flex flex-col">
+                  <div className="flex gap-1 mb-6 text-brandOrange">
+                    {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
+                  </div>
+                  <p className="font-inter text-slate-600 text-[17px] leading-relaxed mb-8 italic">"{t.text}"</p>
+                  <div className="mt-auto flex items-center gap-4">
+                    <img src={t.img} alt={t.name} className="w-12 h-12 rounded-full border-2 border-slate-100" />
+                    <div>
+                      <h4 className="font-grotesk font-bold text-slate-900">{t.name}</h4>
+                      <p className="text-slate-400 text-[12px] font-medium uppercase tracking-wider">{t.role}</p>
+                    </div>
+                  </div>
                 </div>
               </FadeIn>
             ))}
           </div>
-
-          <FadeIn delay={0.8} direction="up">
-            <div className="mt-20 flex justify-center">
-              <Link to="/how-it-works" className="px-8 py-4 rounded-xl bg-orange-gradient text-white font-grotesk font-semibold text-[16px] shadow-glow-orange hover:scale-105 transition-all">
-                Begin Your Journey →
-              </Link>
-            </div>
-          </FadeIn>
         </div>
       </section>
 
       {/* =========================================
-          SECTION 7: BENTO GRID FEATURES
+          SECTION 7: FAQ (CLEAN & PROFESSIONAL)
       ========================================= */}
-      <section className="py-[120px] bg-richBlack relative z-10 border-t border-white/5">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-electricBlue/10 rounded-full blur-[150px] mix-blend-screen pointer-events-none"></div>
-
-        <div className="page-container relative z-10">
-          <FadeIn>
-            <div className="mb-16">
-              <h2 className="font-grotesk font-bold text-[40px] text-white mb-4">Why ThiranOli is Built Different</h2>
-              <p className="text-white/60 font-inter text-[18px] max-w-2xl">We don't just teach theory. We build an ecosystem of innovators right here in Tamil Nadu.</p>
+      <section className="py-[120px] bg-white relative z-10 border-t border-slate-100">
+        <div className="page-container">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="font-grotesk font-bold text-[40px] md:text-[56px] text-slate-900">Common Questions</h2>
+              <p className="text-slate-500 mt-4">Everything you need to know about our doorstep learning model.</p>
             </div>
-          </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[280px]">
-            {/* Big Bento 1 */}
-            <FadeIn delay={0.1} className="md:col-span-2 lg:col-span-2 row-span-1 h-full">
-              <div className="glass-card rounded-[32px] h-full p-8 border border-white/10 hover:border-white/20 transition-all flex flex-col justify-end relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-electricBlue/20 blur-[80px] group-hover:bg-electricBlue/30 transition-all"></div>
-                <Brain className="w-10 h-10 text-electricBlue mb-4 relative z-10" />
-                <h3 className="font-grotesk font-bold text-[28px] text-white mb-2 relative z-10">AI-Personalized Learning</h3>
-                <p className="font-inter text-white/60 relative z-10">Our recommendation engine adapts to your pace, suggesting modules and projects tailored to your specific strengths.</p>
-              </div>
-            </FadeIn>
-
-            {/* Medium Bento 1 */}
-            <FadeIn delay={0.2} className="md:col-span-1 lg:col-span-2 row-span-1 h-full">
-              <div className="glass-orange rounded-[32px] h-full p-8 border border-brandOrange/20 hover:border-brandOrange/40 transition-all flex flex-col justify-end relative overflow-hidden group">
-                <Globe className="w-10 h-10 text-brandOrange mb-4 relative z-10" />
-                <h3 className="font-grotesk font-bold text-[28px] text-white mb-2 relative z-10">Tamil + English Bilingual</h3>
-                <p className="font-inter text-white/60 relative z-10">Learn complex concepts in your native language. Our mentors explain deep tech seamlessly in Tamil and English.</p>
-              </div>
-            </FadeIn>
-
-            {/* Small Bento 1 */}
-            <FadeIn delay={0.3} className="md:col-span-1 lg:col-span-1 row-span-1 h-full">
-              <div className="glass-card rounded-[32px] h-full p-8 flex flex-col justify-end hover:bg-white/5 transition-all">
-                <ShieldCheck className="w-10 h-10 text-green-400 mb-4" />
-                <h3 className="font-grotesk font-bold text-[20px] text-white mb-2">Industry Certificates</h3>
-                <p className="font-inter text-[14px] text-white/60">Recognized by top tech companies worldwide.</p>
-              </div>
-            </FadeIn>
-
-            {/* Small Bento 2 */}
-            <FadeIn delay={0.4} className="md:col-span-1 lg:col-span-1 row-span-1 h-full">
-              <div className="glass-card rounded-[32px] h-full p-8 flex flex-col justify-end hover:bg-white/5 transition-all">
-                <Cpu className="w-10 h-10 text-purple-400 mb-4" />
-                <h3 className="font-grotesk font-bold text-[20px] text-white mb-2">Real Hardware Projects</h3>
-                <p className="font-inter text-[14px] text-white/60">Not just code. Build actual physical robots.</p>
-              </div>
-            </FadeIn>
-
-            {/* Wide Bento */}
-            <FadeIn delay={0.5} className="md:col-span-3 lg:col-span-2 row-span-1 h-full">
-              <div className="glass-card rounded-[32px] h-full p-8 flex flex-col justify-center items-center text-center hover:shadow-glow-blue transition-all relative overflow-hidden border-electricBlue/20">
-                <Smartphone className="w-12 h-12 text-electricBlue mb-4" />
-                <h3 className="font-grotesk font-bold text-[28px] text-white mb-2">Learn Anywhere, Anytime</h3>
-                <p className="font-inter text-white/60 max-w-sm">Fully responsive platform. Download lectures and learn offline on the go.</p>
-              </div>
-            </FadeIn>
+            <div className="space-y-4">
+              {[
+                { q: "How do you verify your trainers?", a: "Every trainer undergoes a rigorous 3-step verification process: Document verification, Technical interview, and a mandatory Demo Session approval by our experts." },
+                { q: "Can I choose my own schedule?", a: "Yes! Our platform allows you to coordinate with the matched trainer to find a schedule that works best for your personal routine." },
+                { q: "Do you provide hardware kits?", a: "For Robotics and Electronics courses, we provide high-quality hardware kits that are brought to your home by the trainer." },
+                { q: "What if I am not happy with the trainer?", a: "We offer a 'Satisfaction Guarantee'. If the demo or initial classes aren't up to mark, we will rematch you with a different trainer immediately." }
+              ].map((faq, i) => (
+                <FadeIn key={i} delay={i * 0.05}>
+                  <div className="group border-b border-slate-100 py-8">
+                    <h3 className="font-grotesk font-bold text-[22px] text-slate-900 mb-4 flex items-center justify-between cursor-pointer group-hover:text-brandOrange transition-colors">
+                      {faq.q}
+                      <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform" />
+                    </h3>
+                    <p className="font-inter text-slate-500 text-[16px] leading-relaxed max-w-3xl">
+                      {faq.a}
+                    </p>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* =========================================
-          SECTION 10: CTA BANNER
+          SECTION 6: CTA BANNER (MNC STYLE)
       ========================================= */}
       <section className="py-[100px] bg-brandBlue relative z-10 border-t border-white/5">
         <div className="page-container relative">
-          <div className="w-full rounded-[40px] overflow-hidden relative shadow-premium-shadow">
-            {/* Complex Background */}
+          <div className="w-full rounded-[60px] overflow-hidden relative shadow-premium-shadow border border-white/10">
             <div className="absolute inset-0 bg-navy-dark-grad"></div>
-            <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-brandOrange/40 via-electricBlue/20 to-transparent mix-blend-screen"></div>
-            <div className="absolute -right-20 -top-20 w-[400px] h-[400px] bg-brandOrange/30 rounded-full blur-[100px]"></div>
+            <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-brandOrange/20 via-electricBlue/10 to-transparent"></div>
 
-            <div className="relative z-10 p-12 md:p-20 flex flex-col items-center text-center">
+            <div className="relative z-10 p-12 md:p-24 text-center">
               <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
-                <span className="font-tamil font-bold text-[24px] text-brandOrange mb-4 block" style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}>இப்போதே தொடங்கு</span>
-                <h2 className="font-grotesk font-bold text-[48px] md:text-[64px] text-white leading-tight mb-6 max-w-3xl">
-                  Your AI & Robotics Journey Starts Today
+                <h2 className="font-grotesk font-bold text-[48px] md:text-[72px] text-white leading-tight mb-8">
+                  The Future of Education <br />
+                  <span className="text-brandOrange underline decoration-brandOrange/30">Starts at Home.</span>
                 </h2>
-                <p className="font-inter text-[20px] text-white/70 mb-10 max-w-2xl mx-auto">
-                  Join 12,000+ innovators building the future. Get instant access to premium courses, expert mentors, and a global community.
+                <p className="font-inter text-[20px] text-white/70 mb-12 max-w-2xl mx-auto">
+                  Join our mission to empower learners through personalized, professional doorstep education.
                 </p>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <Link to="/signup" className="w-full sm:w-auto px-10 py-5 rounded-2xl bg-white text-brandBlue font-grotesk font-bold text-[18px] shadow-glow-orange hover:scale-105 transition-all">
-                    Enroll Now — Free
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                  <Link to="/signup" className="w-full sm:w-auto px-12 py-6 rounded-2xl bg-white text-brandBlue font-grotesk font-bold text-[18px] hover:shadow-glow-blue hover:scale-105 transition-all">
+                    Register as Student
                   </Link>
-                  <Link to="/contact" className="w-full sm:w-auto px-10 py-5 rounded-2xl border-2 border-white/30 text-white font-grotesk font-bold text-[18px] hover:bg-white/10 transition-all">
-                    Book a Free Demo
+                  <Link to="/trainers" className="w-full sm:w-auto px-12 py-6 rounded-2xl border-2 border-white/30 text-white font-grotesk font-bold text-[18px] hover:bg-white/10 transition-all">
+                    Register as Trainer
                   </Link>
                 </div>
               </motion.div>

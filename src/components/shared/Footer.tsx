@@ -138,11 +138,8 @@ export const Footer: React.FC = () => {
         {/* BOTTOM BAR */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-[13px] text-white/40">
-            &copy; 2026 ThiranOli. All rights reserved.
+            &copy; 2026 Tamizh Tech Pvt Ltd. All rights reserved.
           </p>
-          <div className="flex items-center gap-2 text-[13px] text-white/40">
-            Made with <span className="text-red-500">❤️</span> in Tamil Nadu
-          </div>
           <button
             onClick={toggleLanguage}
             className="flex items-center gap-2 text-[13px] text-white/40 hover:text-white transition-colors"

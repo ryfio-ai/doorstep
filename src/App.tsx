@@ -5,6 +5,7 @@ import { GamificationProvider } from './context/GamificationContext';
 import { ProtectedRoute } from './components/layouts/ProtectedRoute';
 import { StickyNavbar } from './components/shared/StickyNavbar';
 import { Footer } from './components/shared/Footer';
+import { SignupPromo } from './components/shared/SignupPromo';
 
 // Public Pages
 import LandingPage from './pages/LandingPage';
@@ -169,6 +170,7 @@ function App() {
             </Routes>
             </div>
             <Footer />
+            <SignupPromo />
           </div>
           </Router>
         </GamificationProvider>

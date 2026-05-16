@@ -29,31 +29,33 @@ export const StickyNavbar: React.FC = () => {
 
   // Mega Dropdown Data
   const courseCategories = [
-    { icon: Cpu, name: 'AI & Machine Learning', desc: 'Neural networks, deep learning, NLP' },
-    { icon: Code, name: 'Robotics & Hardware', desc: 'Arduino, Raspberry Pi, Drones' },
-    { icon: BookOpen, name: 'Software Development', desc: 'Full-stack web and mobile apps' },
+    { icon: Cpu, name: 'Robotics', desc: 'Drones, Robo-Race, Soccer Bots' },
+    { icon: Code, name: 'Coding', desc: 'Python, Automation, AI Logic' },
+    { icon: BookOpen, name: 'Embedded Systems', desc: 'Arduino, Sensors, IoT' },
+    { icon: Sparkles, name: '3D Design', desc: 'Modeling, Printing, Creativity' },
   ];
   const popularCourses = [
-    { name: 'Python for AI Mastery', badge: 'HOT' },
-    { name: 'IoT Automation with ESP32', badge: 'NEW' },
-    { name: 'Computer Vision Basics', badge: '' },
+    { name: 'Young Robotics Engineers', badge: 'HOT' },
+    { name: 'Future Coders with Python', badge: 'POPULAR' },
+    { name: 'ROS Robotics Engineering', badge: 'NEW' },
+    { name: 'Drone Engineering Lab', badge: 'PRO' },
   ];
 
   return (
     <>
       <nav
-        className="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-xl border-b border-slate-200"
+        className="fixed top-0 left-0 w-full z-50 transition-all duration-300 lg:bg-white/95 bg-slate-900 backdrop-blur-xl border-b border-slate-200 lg:border-slate-200 border-slate-800"
       >
         <div className="page-container h-[80px] flex items-center justify-between">
           
           {/* LOGO AREA */}
           <Link to="/" className="flex items-center gap-3 shrink-0 group">
             <div className="flex flex-col leading-none">
-              <span className="font-tamil font-bold text-[28px] leading-tight text-slate-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-orange-gradient transition-all duration-300 relative">
+              <span className="font-tamil font-bold text-[28px] leading-tight lg:text-slate-900 text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-orange-gradient transition-all duration-300 relative">
                 திறனொளி
                 <span className="absolute -right-3 top-1 w-2 h-2 rounded-full bg-brandOrange animate-pulse-orange"></span>
               </span>
-              <span className="font-grotesk font-medium text-[11px] tracking-[0.15em] uppercase text-slate-500 group-hover:text-brandOrange transition-colors">
+              <span className="font-grotesk font-medium text-[11px] tracking-[0.15em] uppercase lg:text-slate-500 text-white/50 group-hover:text-brandOrange transition-colors">
                 ThiranOli
               </span>
             </div>
@@ -137,7 +139,6 @@ export const StickyNavbar: React.FC = () => {
             {/* Normal Links */}
             {[
               { name: 'Learning Paths', path: '/paths' },
-              { name: 'Robotics & AI', path: '/robotics' },
               { name: 'Trainers', path: '/trainers' },
               { name: 'About', path: '/about' },
             ].map(link => (
@@ -219,7 +220,7 @@ export const StickyNavbar: React.FC = () => {
               </div>
 
               <div className="flex flex-col gap-2 p-6 flex-1 overflow-y-auto">
-                {['Courses', 'Learning Paths', 'Robotics & AI', 'Trainers', 'About'].map((item, i) => (
+                {['Courses', 'Learning Paths', 'Trainers', 'About'].map((item, i) => (
                   <motion.div key={item} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
                     <Link to={`/${item.toLowerCase().replace(/ & | /g, '-')}`} onClick={() => setMobileMenuOpen(false)} className="block py-4 text-[18px] font-grotesk font-medium text-slate-800 border-b border-slate-100 hover:text-brandOrange">
                       {item}
