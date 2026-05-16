@@ -1,4 +1,4 @@
-import { Calendar, Clock, BookOpen, ChevronRight, Award, CheckCircle2, Flame, Coins, Zap } from 'lucide-react';
+import { Calendar, Clock, BookOpen, ChevronRight, Award, CheckCircle2, Flame, Coins, Zap, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { PageTransition } from '../../components/shared/PageTransition';
 import { Button } from '../../components/ui/button';
