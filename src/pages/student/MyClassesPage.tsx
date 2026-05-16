@@ -12,73 +12,81 @@ const mockClasses = [
 
 const MyClassesPage: React.FC = () => {
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col space-y-4">
-        <h1 className="text-heading-xl font-poppins font-bold text-primary">My Classes</h1>
-        <p className="text-muted-foreground">Manage your schedule and view past sessions.</p>
-      </div>
+    <PageTransition>
+      <div className="max-w-[1100px] mx-auto space-y-10 font-inter">
+        <div className="flex flex-col space-y-4">
+          <h1 className="font-jakarta text-[36px] md:text-[48px] font-extrabold text-textPrimary leading-none tracking-tighter italic">
+            My <span className="text-brandOrange underline decoration-brandOrange/10">Schedule</span>
+          </h1>
+          <p className="font-inter text-[18px] text-textSecondary font-medium opacity-60 italic">Manage your upcoming home & online sessions.</p>
+        </div>
 
-      <div className="grid gap-6">
-        {mockClasses.map((session) => (
-          <Card key={session.id} className="shadow-sm">
-            <CardHeader className="flex flex-row items-center justify-between py-4 border-b">
-              <div className="space-y-1">
-                <CardTitle className="text-lg font-bold">{session.title}</CardTitle>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <span className="font-medium text-primary">Tutor: {session.tutor}</span>
-                </div>
-              </div>
-              <Badge variant={session.status === 'completed' ? 'secondary' : 'default'} className={session.status === 'upcoming' ? 'bg-accent hover:bg-accent' : ''}>
-                {session.status.toUpperCase()}
-              </Badge>
-            </CardHeader>
-            <CardContent className="py-4 flex flex-col md:flex-row gap-6 md:items-center justify-between">
-              <div className="flex flex-wrap gap-6 text-sm">
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-muted-foreground" />
-                  <span className="font-medium">{session.date}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-muted-foreground" />
-                  <span className="font-medium">{session.time}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  {session.type === 'online' ? (
-                    <Video className="w-4 h-4 text-blue-500" />
-                  ) : (
-                    <MapPin className="w-4 h-4 text-accent" />
-                  )}
-                  <span className="font-medium capitalize">{session.type}</span>
-                </div>
-              </div>
+        <div className="grid gap-8">
+          {mockClasses.map((session) => (
+            <motion.div 
+              key={session.id}
+              whileHover={{ scale: 1.01 }}
+              className="bg-white rounded-[40px] p-8 md:p-10 border border-borderSubtle shadow-premium-card group transition-all relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-brandOrange/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-brandOrange/10 transition-all"></div>
               
-              <div className="flex flex-wrap gap-3">
-                {session.status === 'upcoming' && (
-                  <>
-                    {session.type === 'home' && (
-                      <div className="flex items-center gap-2 bg-orange-50 text-orange-600 px-3 py-1 rounded-lg border border-orange-100">
-                        <Key size={14} />
-                        <span className="text-xs font-bold">Code: 4829</span>
+              <div className="flex flex-col md:flex-row gap-10 items-start md:items-center relative z-10">
+                {/* Date & Time Badge */}
+                <div className="bg-brandBlue rounded-[32px] p-6 min-w-[140px] flex flex-col items-center justify-center border border-white/10 shadow-xl rotate-[-2deg] group-hover:rotate-0 transition-transform">
+                  <span className="font-jakarta font-extrabold text-[12px] text-white/60 uppercase tracking-widest">{new Date(session.date).toLocaleDateString('en-US', { weekday: 'short' })}</span>
+                  <span className="font-jakarta font-extrabold text-[40px] text-brandOrange leading-none my-2 tracking-tighter italic">{session.time.split(' ')[0]}</span>
+                  <span className="font-jakarta font-extrabold text-[12px] text-white/60 uppercase tracking-widest">{session.time.split(' ')[1]}</span>
+                </div>
+
+                <div className="flex-1 space-y-4">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Badge className={`${session.status === 'completed' ? 'bg-green-500/10 text-green-600' : 'bg-brandOrange/10 text-brandOrange'} font-jakarta font-extrabold text-[11px] px-4 py-1.5 rounded-full uppercase tracking-widest border-none`}>
+                      {session.status}
+                    </Badge>
+                    <Badge className="bg-brandBlue/5 text-brandBlue font-jakarta font-extrabold text-[11px] px-4 py-1.5 rounded-full uppercase tracking-widest border-none">
+                      {session.type} Class
+                    </Badge>
+                  </div>
+
+                  <h3 className="font-jakarta font-extrabold text-[24px] md:text-[28px] text-textPrimary tracking-tight italic leading-tight">{session.title}</h3>
+                  
+                  <div className="flex flex-wrap items-center gap-8 text-[15px] font-medium text-textSecondary opacity-70 italic">
+                    <div className="flex items-center gap-2">
+                      <User className="w-4 h-4 text-brandOrange" />
+                      <span>Tutor: {session.tutor}</span>
+                    </div>
+                    {session.address && (
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4 text-brandOrange" />
+                        <span>{session.address}</span>
                       </div>
                     )}
-                    <Button variant="outline" size="sm">Reschedule</Button>
-                    <Button asChild className="bg-primary hover:bg-primary-600" size="sm">
-                      <Link to={`/student/course-path/${session.id}`}>View Path</Link>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row md:flex-col gap-3 w-full md:w-auto">
+                  {session.status === 'upcoming' && (
+                    <>
+                      <Button className="btn-primary h-14 rounded-2xl px-10 text-[15px]">
+                        Join Classroom
+                      </Button>
+                      <Button variant="outline" className="h-14 rounded-2xl px-10 text-[15px] border-brandOrange/20 text-brandOrange hover:bg-brandOrange/5">
+                        Reschedule
+                      </Button>
+                    </>
+                  )}
+                  {session.status === 'completed' && (
+                    <Button variant="outline" className="h-14 rounded-2xl px-10 text-[15px] border-brandBlue/10 text-brandBlue hover:bg-brandBlue/5">
+                      Review Session
                     </Button>
-                    <Button variant="ghost" size="sm" className="text-destructive hover:bg-destructive/10">
-                      <ShieldAlert size={16} className="mr-1" /> SOS
-                    </Button>
-                  </>
-                )}
-                {session.status === 'completed' && (
-                  <Button variant="secondary" size="sm">View Notes</Button>
-                )}
+                  )}
+                </div>
               </div>
-            </CardContent>
-          </Card>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </div>
+    </PageTransition>
   );
 };
 

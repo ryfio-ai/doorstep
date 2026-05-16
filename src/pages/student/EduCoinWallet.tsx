@@ -45,110 +45,142 @@ const EduCoinWallet: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 space-y-8">
-      {/* Balance Card */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 rounded-3xl p-8 text-white shadow-xl"
-      >
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div>
-            <p className="text-orange-100 font-medium mb-1">Your Balance</p>
-            <div className="flex items-center gap-3">
-              <Coins size={48} className="text-yellow-300 drop-shadow-lg" />
-              <h1 className="text-6xl font-bold font-poppins">{stats?.educoins || 0}</h1>
-              <span className="text-2xl font-medium text-orange-100">EduCoins</span>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="bg-white/20 backdrop-blur-md rounded-2xl px-4 py-2 flex items-center gap-2">
-              <TrendingUp size={20} />
-              <span className="text-sm font-medium">Level {stats?.level} • {stats?.total_xp} XP</span>
-            </div>
-            <p className="text-[10px] text-orange-100 italic">*Coins expire after 6 months of inactivity</p>
-          </div>
+    <PageTransition>
+      <div className="max-w-[1100px] mx-auto space-y-12 font-inter">
+        <div className="flex flex-col space-y-4">
+          <h1 className="font-jakarta text-[36px] md:text-[48px] font-extrabold text-textPrimary leading-none tracking-tighter italic">
+            EduCoin <span className="text-brandOrange underline decoration-brandOrange/10">Wallet</span>
+          </h1>
+          <p className="font-inter text-[18px] text-textSecondary font-medium opacity-60 italic">Your rewards for consistent learning and excellence.</p>
         </div>
-        
-        {/* Background blobs */}
-        <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-orange-700/20 rounded-full blur-3xl" />
-      </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Redeem Section */}
-        <div className="md:col-span-2 space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-              <Gift className="text-orange-500" /> Redeem Offers
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {offers.map((offer) => (
-              <motion.div
-                key={offer.id}
-                whileHover={{ scale: 1.02 }}
-                className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between group"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`${offer.color} w-12 h-12 rounded-xl flex items-center justify-center text-white`}>
-                    <offer.icon size={24} />
-                  </div>
-                  <div className="text-right">
-                    <div className="text-xs text-gray-400 font-medium">Cost</div>
-                    <div className="font-bold text-gray-900 flex items-center justify-end gap-1">
-                      <Coins size={14} className="text-orange-500" /> {offer.cost}
-                    </div>
-                  </div>
+        {/* Balance Card */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="relative overflow-hidden bg-brandBlue rounded-[48px] p-10 md:p-16 text-white shadow-premium-elevated group"
+        >
+          {/* Animated Background Elements */}
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brandOrange/20 rounded-full blur-[140px] pointer-events-none group-hover:bg-brandOrange/30 transition-all duration-700"></div>
+          <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-brandOrange/10 rounded-full blur-[100px] pointer-events-none"></div>
+          
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-12">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-xl px-5 py-2 rounded-full border border-white/10 font-jakarta font-extrabold text-[12px] uppercase tracking-widest text-white/80">
+                Current Balance
+              </div>
+              <div className="flex items-center gap-6">
+                <div className="w-24 h-24 rounded-[32px] bg-orange-gradient flex items-center justify-center shadow-glow-orange animate-pulse">
+                  <Coins size={48} className="text-white" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-1">{offer.title}</h3>
-                  <p className="text-xs text-gray-500 mb-4">Instant activation upon redemption</p>
-                  <button
-                    onClick={() => handleRedeem(offer)}
-                    disabled={!stats || stats.educoins < offer.cost}
-                    className="w-full py-2 bg-gray-50 hover:bg-orange-500 hover:text-white rounded-lg text-sm font-semibold transition-all disabled:opacity-50 disabled:hover:bg-gray-50 disabled:hover:text-gray-400"
-                  >
-                    Redeem Now
-                  </button>
+                  <h1 className="text-[64px] md:text-[88px] font-jakarta font-extrabold leading-none tracking-tighter italic text-brandOrange drop-shadow-2xl">{stats?.educoins || 0}</h1>
+                  <span className="text-[18px] font-jakarta font-extrabold text-white/40 uppercase tracking-widest">Available EduCoins</span>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+              </div>
+            </div>
 
-        {/* Transaction History */}
-        <div className="space-y-6">
-          <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-            <History className="text-orange-500" /> History
-          </h2>
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-            {loading ? (
-              <div className="p-8 text-center text-gray-400">Loading...</div>
-            ) : transactions.length === 0 ? (
-              <div className="p-8 text-center text-gray-400">No transactions yet</div>
-            ) : (
-              <div className="divide-y divide-gray-50">
-                {transactions.map((t) => (
-                  <div key={t.id} className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
-                    <div>
-                      <div className="text-sm font-medium text-gray-900">{t.reason}</div>
-                      <div className="text-[10px] text-gray-400">{format(new Date(t.created_at), 'MMM d, h:mm a')}</div>
+            <div className="flex flex-col gap-4">
+              <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/10 min-w-[240px]">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-white/40 font-jakarta font-extrabold text-[11px] uppercase tracking-widest">Learning Stats</span>
+                  <TrendingUp size={16} className="text-brandOrange" />
+                </div>
+                <div className="text-[24px] font-jakarta font-extrabold text-white leading-tight italic">Level {stats?.level} Expert</div>
+                <div className="text-[14px] text-white/60 mt-1 font-medium italic">{stats?.total_xp} Total Experience Points</div>
+              </div>
+              <Button variant="outline" className="h-14 rounded-2xl border-white/10 text-white hover:bg-white/5 font-jakarta font-extrabold uppercase tracking-widest text-[12px]">
+                Earn More Coins <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </div>
+          </div>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {/* Redeem Section */}
+          <div className="lg:col-span-2 space-y-8">
+            <h2 className="font-jakarta text-[24px] font-extrabold text-textPrimary flex items-center gap-3 italic">
+              <Gift className="text-brandOrange w-7 h-7" /> Premium Rewards
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {offers.map((offer) => (
+                <motion.div
+                  key={offer.id}
+                  whileHover={{ y: -5 }}
+                  className="bg-white p-8 rounded-[40px] border border-borderSubtle shadow-premium-card flex flex-col justify-between group relative overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-brandOrange/5 rounded-full blur-2xl -mr-12 -mt-12 group-hover:bg-brandOrange/10 transition-all"></div>
+                  
+                  <div className="flex items-start justify-between mb-8 relative z-10">
+                    <div className={`${offer.color}/10 w-16 h-16 rounded-[24px] flex items-center justify-center text-white shadow-sm`}>
+                      <offer.icon size={28} className={offer.color.replace('bg-', 'text-')} />
                     </div>
-                    <div className={`font-bold ${t.type === 'earn' ? 'text-green-500' : 'text-red-500'}`}>
-                      {t.type === 'earn' ? '+' : ''}{t.amount}
+                    <div className="text-right">
+                      <div className="text-[11px] text-textSecondary/40 font-jakarta font-extrabold uppercase tracking-widest mb-1">Redeem for</div>
+                      <div className="font-jakarta font-extrabold text-[22px] text-textPrimary flex items-center justify-end gap-2 italic">
+                        <Coins size={20} className="text-brandOrange" /> {offer.cost}
+                      </div>
                     </div>
                   </div>
-                ))}
-              </div>
-            )}
-            <button className="w-full p-4 text-xs font-semibold text-orange-500 hover:bg-orange-50 transition-colors border-t border-gray-50 flex items-center justify-center gap-1">
-              View All <ArrowRight size={14} />
-            </button>
+
+                  <div className="relative z-10">
+                    <h3 className="font-jakarta font-extrabold text-[20px] text-textPrimary mb-2 italic leading-tight">{offer.title}</h3>
+                    <p className="font-inter text-[13px] text-textSecondary font-medium italic opacity-60 mb-6">Instantly applied to your account</p>
+                    <Button
+                      onClick={() => handleRedeem(offer)}
+                      disabled={!stats || stats.educoins < offer.cost}
+                      className={`w-full h-12 rounded-xl font-jakarta font-extrabold text-[12px] uppercase tracking-widest transition-all ${
+                        stats && stats.educoins >= offer.cost 
+                          ? 'bg-brandBlue text-white hover:bg-brandOrange shadow-lg' 
+                          : 'bg-offWhite text-textSecondary/40 border border-borderSubtle cursor-not-allowed'
+                      }`}
+                    >
+                      Redeem Reward
+                    </Button>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Transaction History */}
+          <div className="space-y-8">
+            <h2 className="font-jakarta text-[24px] font-extrabold text-textPrimary flex items-center gap-3 italic">
+              <History className="text-brandOrange w-7 h-7" /> Activity
+            </h2>
+            <div className="bg-white rounded-[40px] border border-borderSubtle shadow-premium-card overflow-hidden">
+              {loading ? (
+                <div className="p-12 text-center text-textSecondary/40 italic font-medium">Synchronizing...</div>
+              ) : transactions.length === 0 ? (
+                <div className="p-12 text-center text-textSecondary/40 italic font-medium">No activity yet</div>
+              ) : (
+                <div className="divide-y divide-borderSubtle/30">
+                  {transactions.map((t) => (
+                    <div key={t.id} className="p-6 flex items-center justify-between hover:bg-offWhite transition-colors group">
+                      <div className="flex items-center gap-4">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${t.type === 'earn' ? 'bg-green-500/10' : 'bg-red-500/10'}`}>
+                          {t.type === 'earn' ? <TrendingUp size={16} className="text-green-600" /> : <Gift size={16} className="text-red-600" />}
+                        </div>
+                        <div>
+                          <div className="text-[14px] font-jakarta font-extrabold text-textPrimary group-hover:text-brandOrange transition-colors italic leading-tight">{t.reason}</div>
+                          <div className="text-[11px] text-textSecondary/40 font-jakarta font-extrabold uppercase tracking-widest mt-1">{format(new Date(t.created_at), 'MMM d')}</div>
+                        </div>
+                      </div>
+                      <div className={`font-jakarta font-extrabold text-[16px] italic ${t.type === 'earn' ? 'text-green-600' : 'text-red-600'}`}>
+                        {t.type === 'earn' ? '+' : '-'}{t.amount}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <Button variant="ghost" className="w-full h-16 text-[12px] font-jakarta font-extrabold text-brandOrange hover:bg-brandOrange/5 uppercase tracking-widest rounded-none border-t border-borderSubtle/30">
+                View All Activity <ArrowRight size={16} className="ml-2" />
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </PageTransition>
   );
 };
 

@@ -85,7 +85,7 @@ export const StudentLayout: React.FC = () => {
     <div className="min-h-screen bg-offWhite flex font-inter text-textPrimary">
       
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex flex-col w-[300px] bg-brandBlue fixed top-[80px] h-[calc(100vh-80px)] z-20 shadow-2xl border-r border-white/5">
+      <aside className="hidden md:flex flex-col w-[300px] bg-brandBlue fixed top-[80px] h-[calc(100vh-80px)] z-20 shadow-2xl border-r border-white/5 overflow-y-auto scrollbar-hide">
         <SidebarContent />
       </aside>
 
