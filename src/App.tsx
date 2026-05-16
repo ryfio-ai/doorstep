@@ -75,8 +75,8 @@ function AppContent() {
 
   return (
     <div className={`min-h-screen flex flex-col font-inter ${isPortal ? 'bg-offWhite' : 'bg-white'}`}>
-      <StickyNavbar />
-      <div className="flex-1 pt-[80px]">
+      {!isPortal && <StickyNavbar />}
+      <div className={`flex-1 ${!isPortal ? 'pt-[80px]' : ''}`}>
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<LandingPage />} />
@@ -169,7 +169,7 @@ function AppContent() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
-      <Footer />
+      {!isPortal && <Footer />}
     </div>
   );
 }
