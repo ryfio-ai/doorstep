@@ -92,7 +92,7 @@ export const StudentProfile: React.FC = () => {
                   </select>
                 </div>
               </div>
-            </section> Section
+            </section>
 
             <section className="space-y-8 pt-8 border-t border-borderSubtle/30">
               <h3 className="font-jakarta font-extrabold text-[22px] text-textPrimary flex items-center gap-3 italic">

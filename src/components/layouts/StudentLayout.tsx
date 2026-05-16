@@ -95,7 +95,7 @@ export const StudentLayout: React.FC = () => {
           <div className="absolute inset-0 bg-brandBlue/60 backdrop-blur-md" onClick={() => setMobileSidebarOpen(false)} />
           <motion.div 
             initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-[300px] bg-brandBlue h-full flex flex-col z-10"
+            className="relative w-[300px] bg-brandBlue h-full flex flex-col z-10 overflow-y-auto scrollbar-hide"
           >
             <button className="absolute top-8 right-8 text-white/40 hover:text-white" onClick={() => setMobileSidebarOpen(false)}>
               <X className="w-7 h-7" />
