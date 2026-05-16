@@ -1,0 +1,26 @@
+:root {
+  /* Core Brand Colors (Orange + White Theme) */
+  --color-primary-orange: #EA580C;
+  --color-accent-orange: #F97316;
+  --color-accent-gold: #F59E0B;
+  --color-light-base: #F8F7FF;
+  
+  /* UI Colors */
+  --color-text-primary: #0A1628; /* Deep Indigo-Black for high contrast */
+  --color-text-secondary: #4B5563;
+  --color-border: #E5E7EB;
+  --color-card-bg: #FFFFFF;
+  
+  /* Gradients */
+  --gradient-hero: linear-gradient(135deg, #EA580C 0%, #F97316 50%, #F59E0B 100%);
+  
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(234, 88, 12, 0.08);
+  --shadow-elevated: 0 12px 40px rgba(234, 88, 12, 0.15);
+  
+  /* Typography */
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-tamil: 'Anek Tamil', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}

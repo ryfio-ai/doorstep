@@ -1,12 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
+@import './styles/design_tokens.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  *, *::before, *::after {
-    box-sizing: border-box;
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 24.6 95% 47%; /* Brand Orange #EA580C */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 24.6 95% 47%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 24.6 95% 47%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
   }
 
   html {
@@ -17,12 +41,19 @@
   }
 
   body {
+    @apply bg-white text-textPrimary font-inter antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
     margin: 0;
     padding: 0;
-    background-color: #FFFFFF; /* Base White */
-    color: #0F172A; /* slate-900 */
-    font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-jakarta text-textPrimary tracking-tight;
+  }
+
+  .tamil-text {
+    @apply font-tamil;
   }
 
   #root {
@@ -30,6 +61,24 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+  }
+}
+
+@layer components {
+  .page-container {
+    @apply max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16;
+  }
+
+  .glass-nav {
+    @apply backdrop-blur-xl bg-white/80 border-b border-borderSubtle transition-all duration-300;
+  }
+
+  .premium-card {
+    @apply bg-white rounded-2xl border border-borderSubtle shadow-premium-card transition-all duration-300 hover:shadow-premium-elevated hover:-translate-y-1;
+  }
+
+  .btn-primary {
+    @apply bg-brandOrange text-white font-jakarta font-bold rounded-full px-8 py-3 transition-all hover:bg-vividOrange hover:shadow-glow-orange active:scale-95;
   }
 }
 

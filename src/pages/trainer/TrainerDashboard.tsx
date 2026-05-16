@@ -10,48 +10,53 @@ export const TrainerDashboard: React.FC = () => {
 
   return (
     <PageTransition>
-      <div className="max-w-[1100px] mx-auto space-y-8">
+      <div className="max-w-[1200px] mx-auto space-y-12 font-inter text-textPrimary">
         
         {/* Welcome & Earnings Overview */}
-        <div className="bg-navy-dark rounded-2xl p-8 border border-navy-dark shadow-modal flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden">
-          <div className="absolute top-[-50%] right-[-10%] w-[400px] h-[400px] bg-accent/20 rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="bg-brandBlue rounded-[40px] p-10 md:p-12 border-none shadow-premium-elevated flex flex-col md:flex-row justify-between items-center gap-10 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brandOrange/10 rounded-full blur-[140px] pointer-events-none"></div>
           
           <div className="relative z-10 flex-1">
-            <div className={`inline-flex items-center gap-2 font-inter font-medium text-[11px] px-3 py-1 rounded-full mb-3 ${
-              isVerifiedTrainer ? 'bg-success/20 text-success-light' : 'bg-orange-500/20 text-orange-400'
-            }`}>
-              {isVerifiedTrainer ? (
-                <><CheckCircle2 className="w-3.5 h-3.5" /> Verified Profile</>
-              ) : (
-                <><Clock className="w-3.5 h-3.5" /> Pending Verification</>
-              )}
-            </div>
-            <h2 className="font-poppins font-bold text-[28px] text-white leading-tight">
-              Welcome back, {user?.name?.split(' ')[0] || 'Trainer'}! 👋
-            </h2>
-            <p className="font-inter text-[15px] text-white/70 mt-1">
-              {isVerifiedTrainer 
-                ? "You're all set! Check your schedule for upcoming classes."
-                : "Our team is reviewing your profile. We'll notify you once you're verified."}
-            </p>
+            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
+              <div className={`inline-flex items-center gap-2 font-jakarta font-extrabold text-[11px] px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest ${
+                isVerifiedTrainer ? 'bg-brandOrange/20 text-brandOrange' : 'bg-white/10 text-white/60'
+              }`}>
+                {isVerifiedTrainer ? (
+                  <><CheckCircle2 className="w-4 h-4" /> Professional Tier Certified</>
+                ) : (
+                  <><Clock className="w-4 h-4" /> Verification In Progress</>
+                )}
+              </div>
+              <h2 className="font-jakarta font-extrabold text-[36px] md:text-[48px] text-white leading-[0.9] tracking-tighter italic mb-4">
+                Welcome back, <br/>
+                <span className="text-brandOrange underline decoration-white/10">{user?.name?.split(' ')[0] || 'Trainer'}</span>! 👋
+              </h2>
+              <p className="font-inter text-[17px] text-white/60 mt-4 max-w-lg font-medium">
+                {isVerifiedTrainer 
+                  ? "Your expert teaching is empowering students today. View your schedule below."
+                  : "We are currently validating your engineering credentials. You will be live soon!"}
+              </p>
+            </motion.div>
           </div>
           
-          <div className="relative z-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 w-full md:w-[280px]">
-            <div className="flex justify-between items-center mb-2">
-              <span className="font-inter text-[13px] text-white/80">Pending Payout</span>
-              <IndianRupee className="w-4 h-4 text-accent" />
+          <div className="relative z-10 bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[32px] p-8 w-full md:w-[320px] shadow-2xl">
+            <div className="flex justify-between items-center mb-4">
+              <span className="font-jakarta font-extrabold text-[12px] text-white/40 uppercase tracking-widest">Available Payout</span>
+              <div className="w-10 h-10 rounded-2xl bg-brandOrange/20 flex items-center justify-center">
+                <IndianRupee className="w-5 h-5 text-brandOrange" />
+              </div>
             </div>
-            <div className="font-poppins font-bold text-[32px] text-white flex items-baseline gap-2">
+            <div className="font-jakarta font-extrabold text-[40px] text-white flex items-baseline gap-2 tracking-tighter leading-none mb-8">
               ₹{trainerProfile?.pending_payout || 0}
               {trainerProfile?.pending_payout ? (
-                <span className="font-inter font-medium text-[12px] text-success-light flex items-center bg-success/20 px-1.5 py-0.5 rounded">
-                  <TrendingUp className="w-3 h-3 mr-0.5" /> +12%
+                <span className="font-jakarta font-extrabold text-[12px] text-brandOrange flex items-center bg-brandOrange/10 px-2 py-1 rounded-full border border-brandOrange/20">
+                  <TrendingUp className="w-3.5 h-3.5 mr-1" /> +12%
                 </span>
               ) : null}
             </div>
             <Button 
               disabled={!trainerProfile?.pending_payout}
-              className="w-full mt-4 bg-accent hover:bg-accent-600 text-white font-poppins font-semibold text-[13px] h-10 rounded-lg"
+              className="w-full btn-primary h-14 rounded-2xl text-[15px] shadow-premium-card"
             >
               Withdraw Funds
             </Button>
@@ -59,98 +64,108 @@ export const TrainerDashboard: React.FC = () => {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
-            { label: 'Active Students', value: '14', icon: Users, color: 'text-blue-500', bg: 'bg-blue-50' },
-            { label: 'Classes this week', value: '8', icon: Calendar, color: 'text-orange-500', bg: 'bg-orange-50' },
-            { label: 'Total Hours', value: '124', icon: Clock, color: 'text-purple-500', bg: 'bg-purple-50' },
-            { label: 'Average Rating', value: '4.9', icon: TrendingUp, color: 'text-success', bg: 'bg-success/10' },
+            { label: 'Active Students', value: '14', icon: Users, color: 'text-brandOrange', bg: 'bg-brandOrange/5' },
+            { label: 'Classes this week', value: '08', icon: Calendar, color: 'text-brandOrange', bg: 'bg-brandOrange/5' },
+            { label: 'Total Hours', value: '124', icon: Clock, color: 'text-brandOrange', bg: 'bg-brandOrange/5' },
+            { label: 'Expert Rating', value: '4.9', icon: Star, color: 'text-amberGold', bg: 'bg-amberGold/5' },
           ].map((stat, i) => (
-            <div key={i} className="bg-white border border-gray-100 rounded-2xl p-5 hover:shadow-hover transition-shadow">
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${stat.bg} ${stat.color}`}>
-                <stat.icon className="w-5 h-5" />
+            <motion.div 
+              key={i} 
+              whileHover={{ y: -5 }}
+              className="premium-card p-8 border-none shadow-premium-card hover:shadow-premium-elevated group transition-all"
+            >
+              <div className={`w-14 h-14 rounded-[20px] flex items-center justify-center mb-6 ${stat.bg} ${stat.color} group-hover:scale-110 transition-transform`}>
+                <stat.icon className="w-7 h-7" />
               </div>
-              <div className="font-poppins font-bold text-[24px] text-primary">{stat.value}</div>
-              <div className="font-inter text-[13px] text-gray-500">{stat.label}</div>
-            </div>
+              <div className="font-jakarta font-extrabold text-[32px] text-textPrimary tracking-tighter leading-none mb-1">{stat.value}</div>
+              <div className="font-jakarta font-extrabold text-[11px] text-textPrimary/40 uppercase tracking-[0.2em]">{stat.label}</div>
+            </motion.div>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-12">
           
           {/* Timeline Schedule (Left 2/3) */}
-          <div className="xl:col-span-2 space-y-6">
-            <div className="flex justify-between items-center">
-              <h3 className="font-poppins font-bold text-[18px] text-primary flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-accent" /> Today's Schedule
+          <div className="xl:col-span-2 space-y-8">
+            <div className="flex justify-between items-center px-2">
+              <h3 className="font-jakarta font-extrabold text-[20px] text-textPrimary flex items-center gap-3 uppercase tracking-widest opacity-50">
+                <Calendar className="w-5 h-5 text-brandOrange" /> Session Timeline
               </h3>
-              <Button variant="outline" className="text-gray-600 border-gray-200 font-inter text-[13px] h-9">
-                View Calendar
+              <Button variant="link" className="text-brandOrange font-jakarta font-extrabold text-[14px] p-0 h-auto flex items-center gap-2 hover:gap-4 transition-all uppercase tracking-widest">
+                Full Calendar <ChevronRight className="w-4 h-4" />
               </Button>
             </div>
 
-            <div className="bg-white rounded-2xl border border-gray-100 p-6 relative">
+            <div className="premium-card p-10 relative border-none shadow-premium-card">
               {/* Vertical line connecting timeline */}
-              <div className="absolute left-[39px] top-10 bottom-10 w-0.5 bg-gray-100"></div>
+              <div className="absolute left-[59px] top-12 bottom-12 w-0.5 bg-offWhite"></div>
 
-              <div className="space-y-8">
+              <div className="space-y-12">
                 {/* Class 1 (Completed) */}
-                <div className="flex gap-6 relative z-10">
-                  <div className="w-4 h-4 rounded-full bg-success ring-4 ring-white mt-1"></div>
-                  <div className="flex-1 opacity-60">
-                    <div className="font-poppins font-bold text-[15px] text-primary">10:00 AM - 11:30 AM</div>
-                    <div className="bg-gray-50 rounded-xl p-4 mt-2">
-                      <div className="font-poppins font-semibold text-[14px] text-primary">Mathematics (10th Std)</div>
-                      <div className="font-inter text-[13px] text-gray-500">Student: Aryan M.</div>
-                      <div className="inline-flex items-center gap-1 mt-2 text-success font-inter font-medium text-[11px] bg-success/10 px-2 py-0.5 rounded">
-                        <CheckCircle2 className="w-3 h-3" /> Class Completed
+                <div className="flex gap-10 relative z-10">
+                  <div className="w-5 h-5 rounded-full bg-brandOrange/20 border-4 border-white mt-1.5 shadow-sm"></div>
+                  <div className="flex-1 opacity-40 grayscale-[0.5]">
+                    <div className="font-jakarta font-extrabold text-[16px] text-textPrimary mb-3 tracking-widest uppercase">10:00 AM — 11:30 AM</div>
+                    <div className="bg-offWhite rounded-[28px] p-6 border border-borderSubtle">
+                      <div className="font-jakarta font-extrabold text-[18px] text-textPrimary italic">Advanced Mathematics (10th Std)</div>
+                      <div className="font-inter text-[14px] text-textSecondary font-medium mt-1">Student: Aryan M. • Anna Nagar</div>
+                      <div className="inline-flex items-center gap-2 mt-4 text-brandOrange font-jakarta font-extrabold text-[11px] bg-brandOrange/5 px-3 py-1 rounded-full uppercase tracking-widest border border-brandOrange/10">
+                        <CheckCircle2 className="w-3.5 h-3.5" /> Session Logged
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Class 2 (Upcoming/Current) */}
-                <div className="flex gap-6 relative z-10">
-                  <div className="w-4 h-4 rounded-full bg-accent ring-4 ring-white mt-1 shadow-[0_0_10px_rgba(244,120,32,0.5)]"></div>
+                <div className="flex gap-10 relative z-10">
+                  <div className="w-5 h-5 rounded-full bg-brandOrange ring-[12px] ring-brandOrange/10 border-4 border-white mt-1.5 shadow-[0_0_30px_rgba(234,88,12,0.4)]"></div>
                   <div className="flex-1">
-                    <div className="font-poppins font-bold text-[15px] text-accent">04:00 PM - 05:00 PM</div>
-                    <div className="bg-orange-50 border border-orange-100 rounded-xl p-4 mt-2 shadow-sm">
-                      <div className="flex justify-between items-start mb-2">
+                    <div className="font-jakarta font-extrabold text-[16px] text-brandOrange mb-3 tracking-widest uppercase">04:00 PM — 05:00 PM</div>
+                    <div className="bg-white border-2 border-brandOrange/20 rounded-[32px] p-8 shadow-premium-elevated relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-brandOrange/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+                      
+                      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
                         <div>
-                          <div className="font-poppins font-semibold text-[15px] text-primary">Python Programming</div>
-                          <div className="font-inter text-[13px] text-gray-600 flex items-center gap-1 mt-1">
-                            <Users className="w-3.5 h-3.5" /> Student: Arjun S.
+                          <div className="font-jakarta font-extrabold text-[22px] text-textPrimary italic mb-1">Physical Computing & Python</div>
+                          <div className="font-inter text-[14px] text-textSecondary font-medium flex items-center gap-2">
+                            <Users className="w-4 h-4 text-brandOrange" /> Engineering Scholar: Arjun S.
                           </div>
                         </div>
-                        <div className="flex gap-2">
-                          <Button size="sm" variant="outline" className="h-8 text-[12px] border-orange-200 text-orange-600">
-                            <MapPin className="w-3.5 h-3.5 mr-1" /> Nav
+                        <div className="flex gap-3">
+                          <Button size="sm" variant="outline" className="h-12 px-6 rounded-xl border-borderSubtle text-textPrimary font-jakarta font-extrabold text-[12px] uppercase tracking-widest hover:bg-offWhite">
+                            <MapPin className="w-4 h-4 mr-2 text-brandOrange" /> View Map
                           </Button>
-                          <Button size="sm" className="bg-accent text-white h-8 text-[12px] px-3">Start Class</Button>
+                          <Button size="sm" className="btn-primary h-12 px-8 rounded-xl font-jakarta font-extrabold text-[12px] uppercase tracking-widest shadow-premium-card">
+                            Initiate Class
+                          </Button>
                         </div>
                       </div>
                       
                       {/* Safety Actions */}
-                      <div className="flex items-center gap-4 mt-3 pt-3 border-t border-orange-200/50">
-                        <div className="flex-1">
+                      <div className="flex flex-col md:flex-row items-center gap-4 pt-8 border-t border-offWhite">
+                        <div className="flex-1 w-full">
                           <input 
                             type="text" 
-                            placeholder="Enter 4-digit code" 
-                            maxLength={4}
-                            className="w-full h-8 bg-white border border-orange-200 rounded px-3 text-[12px] focus:ring-1 focus:ring-accent outline-none"
+                            placeholder="Student Verification Code" 
+                            maxLength={6}
+                            className="w-full h-14 bg-offWhite border border-borderSubtle rounded-2xl px-6 text-[15px] font-jakarta font-extrabold text-center tracking-[0.5em] focus:ring-4 focus:ring-brandOrange/5 outline-none transition-all placeholder:tracking-normal placeholder:font-medium"
                           />
                         </div>
-                        <Button size="sm" variant="ghost" className="h-8 text-destructive hover:bg-destructive/10">
-                          <ShieldAlert className="w-4 h-4 mr-1" /> SOS
-                        </Button>
-                        <Button size="sm" variant="ghost" className="h-8 text-blue-600 hover:bg-blue-50">
-                          <Camera className="w-4 h-4 mr-1" /> Selfie
-                        </Button>
+                        <div className="flex gap-3 w-full md:w-auto">
+                          <Button size="lg" variant="ghost" className="h-14 flex-1 rounded-2xl text-brandBlue hover:bg-brandBlue/5 font-jakarta font-extrabold text-[13px] uppercase tracking-widest border border-brandBlue/10">
+                            <Camera className="w-5 h-5 mr-3" /> Check-in
+                          </Button>
+                          <Button size="lg" className="h-14 flex-1 rounded-2xl bg-destructive hover:bg-destructive/90 text-white font-jakarta font-extrabold text-[13px] uppercase tracking-widest shadow-lg shadow-destructive/20">
+                            <ShieldAlert className="w-5 h-5 mr-3" /> SOS Help
+                          </Button>
+                        </div>
                       </div>
 
-                      <div className="flex items-center gap-2 mt-2">
-                        <MapPin className="w-4 h-4 text-gray-400" />
-                        <span className="font-inter text-[12px] text-gray-500">Flat 4B, Ruby Enclave, Anna Nagar West</span>
+                      <div className="flex items-center gap-3 mt-6 p-4 bg-brandOrange/5 rounded-2xl border border-brandOrange/10">
+                        <MapPin className="w-5 h-5 text-brandOrange" />
+                        <span className="font-inter text-[14px] text-textPrimary font-medium italic">Flat 4B, Ruby Enclave, Anna Nagar West, Chennai - 600040</span>
                       </div>
                     </div>
                   </div>
@@ -161,48 +176,48 @@ export const TrainerDashboard: React.FC = () => {
           </div>
 
           {/* New Demo Requests (Right 1/3) */}
-          <div className="space-y-6">
-            <h3 className="font-poppins font-bold text-[18px] text-primary flex items-center gap-2">
-              <Users className="w-5 h-5 text-accent" /> New Requests
+          <div className="space-y-8">
+            <h3 className="font-jakarta font-extrabold text-[20px] text-textPrimary flex items-center gap-3 uppercase tracking-widest opacity-50 px-2">
+              <Users className="w-5 h-5 text-brandOrange" /> Opportunity Hub
             </h3>
 
-            <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm space-y-4">
+            <div className="premium-card p-8 border-none shadow-premium-elevated bg-white space-y-6">
               
               {/* Request Item */}
-              <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
-                <div className="flex justify-between items-start mb-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-[13px]">K</div>
+              <div className="bg-offWhite rounded-[32px] p-6 border border-borderSubtle group hover:border-brandOrange/30 transition-all">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-brandOrange text-white rounded-2xl flex items-center justify-center font-jakarta font-extrabold text-[16px] shadow-lg rotate-3 group-hover:rotate-0 transition-transform">K</div>
                     <div>
-                      <div className="font-poppins font-semibold text-[14px] text-primary">Karthik R.</div>
-                      <div className="font-inter text-[11px] text-gray-500">2.4 km away (T Nagar)</div>
+                      <div className="font-jakarta font-extrabold text-[16px] text-textPrimary">Karthik R.</div>
+                      <div className="font-inter text-[12px] text-textSecondary font-medium">2.4 km away • T Nagar</div>
                     </div>
                   </div>
-                  <span className="bg-accent/10 text-accent font-inter font-medium text-[10px] px-2 py-0.5 rounded uppercase">Demo</span>
+                  <span className="bg-brandOrange/10 text-brandOrange font-jakarta font-extrabold text-[10px] px-3 py-1 rounded-full uppercase tracking-widest border border-brandOrange/10">New Demo</span>
                 </div>
                 
-                <div className="font-inter text-[13px] text-gray-700 mb-3">
-                  Requested: <span className="font-medium">Python Masterclass</span><br/>
-                  Time: <span className="font-medium text-accent">Tomorrow, 6:00 PM</span>
+                <div className="font-inter text-[14px] text-textSecondary mb-6 font-medium leading-relaxed italic">
+                  Requested: <span className="text-textPrimary font-bold">Python Masterclass</span><br/>
+                  Time Slot: <span className="text-brandOrange font-bold">Tomorrow, 6:00 PM</span>
                 </div>
                 
-                <div className="flex gap-2">
-                  <Button className="flex-1 bg-success hover:bg-success/90 text-white h-8 text-[12px] font-poppins">Accept</Button>
-                  <Button variant="outline" className="flex-[0.5] h-8 border-gray-200 text-gray-500 hover:text-destructive hover:border-destructive"><span className="sr-only">Decline</span> X</Button>
+                <div className="flex gap-3">
+                  <Button className="flex-1 btn-primary h-12 rounded-xl text-[12px] uppercase tracking-widest font-jakarta font-extrabold">Accept</Button>
+                  <Button variant="outline" className="w-12 h-12 rounded-xl border-borderSubtle text-textPrimary/40 hover:text-destructive hover:border-destructive transition-colors">X</Button>
                 </div>
               </div>
 
             </div>
 
             {/* Quick Actions */}
-            <div className="grid grid-cols-2 gap-3">
-              <Button variant="outline" className="h-20 flex flex-col items-center justify-center gap-2 border-gray-200 text-gray-600 hover:border-accent hover:text-accent rounded-xl">
-                <MessageCircle className="w-5 h-5" />
-                <span className="font-inter font-medium text-[12px]">Messages</span>
+            <div className="grid grid-cols-2 gap-4">
+              <Button variant="outline" className="h-28 flex flex-col items-center justify-center gap-3 border-borderSubtle text-textPrimary/60 hover:border-brandOrange hover:text-brandOrange rounded-[28px] bg-white transition-all shadow-premium-card hover:shadow-premium-elevated hover:scale-105">
+                <MessageCircle className="w-6 h-6" />
+                <span className="font-jakarta font-extrabold text-[11px] uppercase tracking-widest">Messages</span>
               </Button>
-              <Button variant="outline" className="h-20 flex flex-col items-center justify-center gap-2 border-gray-200 text-gray-600 hover:border-accent hover:text-accent rounded-xl">
-                <FileText className="w-5 h-5" />
-                <span className="font-inter font-medium text-[12px]">Upload Notes</span>
+              <Button variant="outline" className="h-28 flex flex-col items-center justify-center gap-3 border-borderSubtle text-textPrimary/60 hover:border-brandOrange hover:text-brandOrange rounded-[28px] bg-white transition-all shadow-premium-card hover:shadow-premium-elevated hover:scale-105">
+                <FileText className="w-6 h-6" />
+                <span className="font-jakarta font-extrabold text-[11px] uppercase tracking-widest">Resources</span>
               </Button>
             </div>
           </div>

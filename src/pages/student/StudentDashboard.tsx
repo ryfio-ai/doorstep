@@ -13,94 +13,102 @@ export const StudentDashboard: React.FC = () => {
 
   return (
     <PageTransition>
-      <div className="max-w-[1100px] mx-auto space-y-8">
+      <div className="max-w-[1200px] mx-auto space-y-12 font-inter text-textPrimary">
         
         {/* Welcome Section */}
-        <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[80px] pointer-events-none"></div>
+        <div className="premium-card p-10 flex flex-col md:flex-row justify-between items-center gap-10 relative overflow-hidden border-none shadow-premium-elevated bg-white">
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brandOrange/5 rounded-full blur-[100px] pointer-events-none"></div>
           
           <div className="relative z-10 flex-1">
-            <h2 className="font-poppins font-bold text-[28px] text-primary">
-              Welcome back, {user?.name?.split(' ')[0] || 'Student'}! 👋
-            </h2>
-            <p className="font-inter text-[15px] text-gray-500 mt-1">
-              {isParent 
-                ? `Managing learning for ${studentProfile?.children_count || 0} child(ren).`
-                : `You've completed ${studentProfile?.wallet_balance || 0} modules this month. Keep it up!`}
-            </p>
+            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
+              <h2 className="font-jakarta font-extrabold text-[32px] md:text-[40px] text-textPrimary leading-tight tracking-tighter italic">
+                Welcome back, <span className="text-brandOrange underline decoration-brandOrange/10">{user?.name?.split(' ')[0] || 'Student'}</span>! 👋
+              </h2>
+              <p className="font-inter text-[17px] text-textSecondary mt-3 font-medium max-w-xl">
+                {isParent 
+                  ? `You are currently managing the personalized learning journey for ${studentProfile?.children_count || 0} child(ren).`
+                  : `You've completed ${studentProfile?.wallet_balance || 0} modules this month. You're in the top 5% of learners!`}
+              </p>
+            </motion.div>
           </div>
           
           <div className="relative z-10 flex gap-4 w-full md:w-auto">
             {/* Streak Counter */}
-            <Link to="/student/wallet" className="bg-orange-50 border border-orange-100 rounded-xl p-4 flex-1 md:w-32 text-center group transition-all hover:bg-orange-100">
-              <div className="flex items-center justify-center gap-1">
-                <Flame size={24} className={`${(stats?.streak_days || 0) > 0 ? 'text-orange-500 fill-orange-500' : 'text-gray-300'} animate-pulse`} />
-                <div className="font-poppins font-bold text-[24px] text-primary">
+            <Link to="/student/wallet" className="bg-brandOrange/5 border border-brandOrange/10 rounded-[28px] p-6 flex-1 md:w-36 text-center group transition-all hover:bg-brandOrange/10 hover:scale-105">
+              <div className="flex flex-col items-center justify-center gap-1">
+                <Flame size={32} className={`${(stats?.streak_days || 0) > 0 ? 'text-brandOrange fill-brandOrange' : 'text-textPrimary/20'} mb-2`} />
+                <div className="font-jakarta font-extrabold text-[28px] text-textPrimary leading-none tracking-tighter">
                   {stats?.streak_days || 0}
                 </div>
               </div>
-              <div className="font-inter text-[12px] text-gray-600">Day Streak</div>
+              <div className="font-jakarta font-extrabold text-[11px] text-brandOrange uppercase tracking-widest mt-2">Day Streak</div>
             </Link>
             
             {/* EduCoins */}
-            <Link to="/student/wallet" className="bg-yellow-50 border border-yellow-100 rounded-xl p-4 flex-1 md:w-32 text-center group transition-all hover:bg-yellow-100">
-              <div className="flex items-center justify-center gap-1">
-                <Coins size={24} className="text-yellow-500" />
-                <div className="font-poppins font-bold text-[24px] text-primary">
+            <Link to="/student/wallet" className="bg-amberGold/5 border border-amberGold/10 rounded-[28px] p-6 flex-1 md:w-36 text-center group transition-all hover:bg-amberGold/10 hover:scale-105">
+              <div className="flex flex-col items-center justify-center gap-1">
+                <Coins size={32} className="text-amberGold mb-2" />
+                <div className="font-jakarta font-extrabold text-[28px] text-textPrimary leading-none tracking-tighter">
                   {stats?.educoins || 0}
                 </div>
               </div>
-              <div className="font-inter text-[12px] text-gray-600">EduCoins</div>
+              <div className="font-jakarta font-extrabold text-[11px] text-amberGold uppercase tracking-widest mt-2">EduCoins</div>
             </Link>
 
             {/* Level */}
-            <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex-1 md:w-32 text-center">
-              <div className="flex items-center justify-center gap-1">
-                <Zap size={24} className="text-blue-500" />
-                <div className="font-poppins font-bold text-[24px] text-primary">
+            <div className="bg-brandBlue/5 border border-brandBlue/10 rounded-[28px] p-6 flex-1 md:w-36 text-center group transition-all hover:bg-brandBlue/10 hover:scale-105">
+              <div className="flex flex-col items-center justify-center gap-1">
+                <Zap size={32} className="text-brandBlue mb-2" />
+                <div className="font-jakarta font-extrabold text-[28px] text-textPrimary leading-none tracking-tighter">
                   {stats?.level || 1}
                 </div>
               </div>
-              <div className="font-inter text-[12px] text-gray-600">Level</div>
+              <div className="font-jakarta font-extrabold text-[11px] text-brandBlue uppercase tracking-widest mt-2">Level</div>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-12">
           
           {/* Left Column (2/3 width on desktop) */}
-          <div className="xl:col-span-2 space-y-8">
+          <div className="xl:col-span-2 space-y-12">
             
             {/* Next Class Banner */}
             <div>
-              <h3 className="font-poppins font-bold text-[18px] text-primary mb-4 flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-accent" /> Upcoming Schedule
+              <h3 className="font-jakarta font-extrabold text-[20px] text-textPrimary mb-6 flex items-center gap-3 uppercase tracking-widest opacity-50">
+                <Calendar className="w-5 h-5 text-brandOrange" /> Upcoming Schedule
               </h3>
               
-              <div className="bg-navy-dark rounded-2xl p-6 text-white relative overflow-hidden shadow-orange-hover">
-                <div className="absolute right-0 bottom-0 opacity-10">
-                  <BookOpen className="w-48 h-48 -mr-10 -mb-10" />
+              <div className="bg-brandBlue rounded-[40px] p-8 md:p-10 text-white relative overflow-hidden shadow-premium-elevated">
+                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brandOrange/10 rounded-full blur-[100px] pointer-events-none"></div>
+                <div className="absolute right-0 bottom-0 opacity-5">
+                  <BookOpen className="w-64 h-64 -mr-16 -mb-16" />
                 </div>
                 
-                <div className="flex flex-col md:flex-row gap-6 relative z-10">
-                  <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 min-w-[120px] flex flex-col items-center justify-center border border-white/20">
-                    <span className="font-poppins font-bold text-[14px] text-white/80 uppercase">Today</span>
-                    <span className="font-poppins font-extrabold text-[32px] text-accent leading-none my-1">4:00</span>
-                    <span className="font-inter font-medium text-[14px] text-white/80">PM</span>
+                <div className="flex flex-col md:flex-row gap-8 relative z-10 items-center">
+                  <div className="bg-white/10 backdrop-blur-xl rounded-[32px] p-6 min-w-[160px] flex flex-col items-center justify-center border border-white/20 shadow-2xl rotate-[-2deg]">
+                    <span className="font-jakarta font-extrabold text-[13px] text-white/60 uppercase tracking-widest">Today</span>
+                    <span className="font-jakarta font-extrabold text-[44px] text-brandOrange leading-none my-2 tracking-tighter italic">4:00</span>
+                    <span className="font-jakarta font-extrabold text-[15px] text-white/60 uppercase tracking-widest">PM IST</span>
                   </div>
                   
-                  <div className="flex-1 flex flex-col justify-center">
-                    <div className="inline-flex items-center gap-2 bg-success/20 text-success-light font-inter text-[11px] px-2.5 py-1 rounded-full mb-3 w-max">
-                      <Clock className="w-3 h-3" /> Starts in 2 hours
+                  <div className="flex-1 text-center md:text-left">
+                    <div className="inline-flex items-center gap-2 bg-brandOrange/20 text-brandOrange font-jakarta font-extrabold text-[12px] px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest">
+                      <Clock className="w-4 h-4" /> Starts in 2 hours
                     </div>
-                    <h4 className="font-poppins font-bold text-[22px] text-white leading-tight">Python Programming - Logic Building</h4>
-                    <div className="flex items-center gap-4 mt-3">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-orange-grad flex items-center justify-center font-bold text-[14px]">R</div>
-                        <span className="font-inter text-[14px] text-white/80">Ravi Kumar (Trainer)</span>
+                    <h4 className="font-jakarta font-extrabold text-[28px] md:text-[34px] text-white leading-tight tracking-tighter italic mb-4">Python Programming - Logic Building</h4>
+                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-6">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-2xl bg-brandOrange flex items-center justify-center font-jakarta font-extrabold text-[16px] text-white shadow-lg">R</div>
+                        <span className="font-inter text-[15px] text-white/80 font-medium">Ravi Kumar (Senior Trainer)</span>
                       </div>
-                      <span className="text-white/30">•</span>
-                      <span className="font-inter text-[14px] text-white/80">📍 At your home</span>
+                      <div className="hidden md:block w-1.5 h-1.5 rounded-full bg-white/20"></div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center border border-white/10">
+                          <MapPin className="w-5 h-5 text-brandOrange" />
+                        </div>
+                        <span className="font-inter text-[15px] text-white/80 font-medium">Doorstep Learning (Chennai)</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -109,41 +117,47 @@ export const StudentDashboard: React.FC = () => {
 
             {/* Active Courses */}
             <div>
-               <div className="flex justify-between items-center mb-4">
-                <h3 className="font-poppins font-bold text-[18px] text-primary flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-accent" /> My Courses
+               <div className="flex justify-between items-center mb-8">
+                <h3 className="font-jakarta font-extrabold text-[20px] text-textPrimary flex items-center gap-3 uppercase tracking-widest opacity-50">
+                  <BookOpen className="w-5 h-5 text-brandOrange" /> My Learning Path
                 </h3>
-                <Button variant="link" className="text-accent font-inter text-[14px] p-0 h-auto flex items-center">
-                  View All <ChevronRight className="w-4 h-4 ml-0.5" />
+                <Button variant="link" className="text-brandOrange font-jakarta font-extrabold text-[14px] p-0 h-auto flex items-center gap-2 hover:gap-4 transition-all uppercase tracking-widest">
+                  Explore More <ChevronRight className="w-4 h-4" />
                 </Button>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {[
-                  { title: 'Python Mastery', progress: 45, next: 'Variables & Data Types', icon: '💻' },
-                  { title: '10th Std Mathematics', progress: 80, next: 'Trigonometry Pt. 2', icon: '🧮' }
+                  { title: 'Python Mastery', progress: 45, next: 'Variables & Data Types', icon: '💻', color: 'bg-brandOrange/5' },
+                  { title: 'Robotics Pro', progress: 80, next: 'Trigonometry Pt. 2', icon: '🤖', color: 'bg-brandBlue/5' }
                 ].map((course, i) => (
-                  <div key={i} className="bg-white border border-gray-100 rounded-2xl p-5 hover:border-accent hover:shadow-card transition-all cursor-pointer">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center text-[24px]">
+                  <motion.div 
+                    key={i} 
+                    whileHover={{ y: -5 }}
+                    className="premium-card p-8 border-none shadow-premium-card group cursor-pointer"
+                  >
+                    <div className="flex items-start justify-between mb-8">
+                      <div className={`w-16 h-16 ${course.color} rounded-[24px] flex items-center justify-center text-[32px] rotate-3 group-hover:rotate-0 transition-transform`}>
                         {course.icon}
                       </div>
-                      <span className="font-poppins font-semibold text-[13px] text-primary bg-gray-100 px-3 py-1 rounded-full">
-                        {course.progress}%
+                      <span className="font-jakarta font-extrabold text-[14px] text-textPrimary bg-offWhite px-4 py-1.5 rounded-full border border-borderSubtle">
+                        {course.progress}% Complete
                       </span>
                     </div>
                     
-                    <h4 className="font-poppins font-bold text-[16px] text-primary mb-1">{course.title}</h4>
-                    <p className="font-inter text-[13px] text-gray-500 mb-4">Next: {course.next}</p>
+                    <h4 className="font-jakarta font-extrabold text-[22px] text-textPrimary mb-2 leading-tight italic">{course.title}</h4>
+                    <p className="font-inter text-[15px] text-textSecondary mb-8 font-medium italic opacity-60">Next Up: {course.next}</p>
                     
                     {/* Progress Bar */}
-                    <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
-                      <motion.div 
-                        initial={{ width: 0 }} animate={{ width: `${course.progress}%` }} transition={{ duration: 1, delay: 0.2 }}
-                        className="h-full bg-accent rounded-full"
-                      />
+                    <div className="space-y-3">
+                      <div className="w-full h-3 bg-offWhite rounded-full overflow-hidden border border-borderSubtle">
+                        <motion.div 
+                          initial={{ width: 0 }} animate={{ width: `${course.progress}%` }} transition={{ duration: 1, delay: 0.2 }}
+                          className="h-full bg-brandOrange rounded-full shadow-[0_0_15px_rgba(234,88,12,0.3)]"
+                        />
+                      </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -151,29 +165,30 @@ export const StudentDashboard: React.FC = () => {
           </div>
 
           {/* Right Column (1/3 width on desktop) */}
-          <div className="space-y-8">
+          <div className="space-y-12">
             
             {/* Action Needed Card */}
-            <div className="bg-orange-50 border border-orange-100 rounded-2xl p-6">
-              <h3 className="font-poppins font-bold text-[16px] text-primary mb-2 flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-accent" /> Action Needed
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-[40px] p-8 border border-brandOrange/20 shadow-[0_20px_50px_rgba(234,88,12,0.1)] relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-brandOrange/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+              <h3 className="font-jakarta font-extrabold text-[18px] text-textPrimary mb-4 flex items-center gap-3 italic">
+                <CheckCircle2 className="w-6 h-6 text-brandOrange" /> Action Required
               </h3>
-              <p className="font-inter text-[13px] text-gray-600 mb-4 leading-relaxed">
-                Please confirm the completion of your last Mathematics demo class to generate the invoice.
+              <p className="font-inter text-[15px] text-textSecondary mb-8 leading-relaxed font-medium">
+                Your last <span className="text-textPrimary font-bold italic">Mathematics Demo</span> was completed. Please confirm to finalize your enrollment.
               </p>
-              <Button className="w-full bg-accent hover:bg-accent-600 text-white font-poppins font-semibold text-[13px] h-10 rounded-lg">
-                Confirm Class
+              <Button className="w-full btn-primary h-14 rounded-2xl text-[15px]">
+                Confirm Class Now
               </Button>
-            </div>
+            </motion.div>
 
             {/* Achievements & Badges */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="font-poppins font-bold text-[18px] text-primary flex items-center gap-2">
-                  <Award className="w-5 h-5 text-yellow-500" /> My Badges
+            <div className="premium-card p-8 border-none shadow-premium-elevated bg-white">
+              <div className="flex justify-between items-center mb-8">
+                <h3 className="font-jakarta font-extrabold text-[20px] text-textPrimary flex items-center gap-3 uppercase tracking-widest opacity-50">
+                  <Award className="w-6 h-6 text-amberGold" /> Achievements
                 </h3>
-                <Link to="/student/wallet" className="text-accent font-inter text-[13px] hover:underline">
-                  View Wallet
+                <Link to="/student/wallet" className="font-jakarta font-extrabold text-[12px] text-brandOrange hover:text-vividOrange transition-colors uppercase tracking-widest">
+                  Gallery
                 </Link>
               </div>
               

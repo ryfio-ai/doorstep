@@ -21,7 +21,7 @@ function useWindowSizeLocal() {
   return size;
 }
 
-const SignupPage: React.FC = () => {
+export const SignupPage: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const initialRole = searchParams.get('role') as 'student' | 'trainer' | null;
@@ -126,34 +126,34 @@ const SignupPage: React.FC = () => {
   };
 
   const renderStep1 = () => (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, x: -50 }} className="w-full max-w-[540px] mx-auto text-center relative z-10">
-      <h2 className="font-grotesk font-bold text-[40px] text-primary mb-3 tracking-tight">{t('auth.signupTitle')}</h2>
-      <p className="font-inter text-[16px] text-gray-500 mb-10">{t('auth.signupSubtext')}</p>
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, x: -50 }} className="w-full max-w-[600px] mx-auto text-center relative z-10">
+      <h2 className="font-jakarta font-extrabold text-[48px] md:text-[64px] text-textPrimary mb-4 tracking-tighter leading-none italic underline decoration-brandOrange/10 decoration-8 underline-offset-8">{t('auth.signupTitle')}</h2>
+      <p className="font-inter text-[18px] text-textSecondary mb-16 font-medium opacity-70">{t('auth.signupSubtext')}</p>
       
-      <div className="flex flex-col gap-5">
-        <button onClick={() => handleRoleSelect('student')} className="bg-white border-2 border-gray-100 hover:border-accent hover:shadow-orange rounded-3xl p-8 flex items-center gap-6 transition-all duration-300 group text-left transform hover:-translate-y-1">
-          <div className="w-16 h-16 rounded-full bg-primary-100 text-primary flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-colors flex-shrink-0">
-            <BookOpen className="w-7 h-7" />
+      <div className="flex flex-col gap-6">
+        <button onClick={() => handleRoleSelect('student')} className="premium-card p-10 flex items-center gap-8 transition-all duration-500 group text-left hover:scale-[1.02] active:scale-[0.98]">
+          <div className="w-20 h-20 rounded-[24px] bg-brandOrange/5 text-brandOrange flex items-center justify-center group-hover:bg-brandOrange group-hover:text-white transition-all rotate-3 group-hover:rotate-0 flex-shrink-0 shadow-sm">
+            <BookOpen className="w-10 h-10" />
           </div>
           <div>
-            <h3 className="font-grotesk font-bold text-[22px] text-primary">{t('auth.learnRole')}</h3>
-            <p className="font-inter text-[14px] text-gray-500 mt-1">{t('auth.learnRoleDesc')}</p>
+            <h3 className="font-jakarta font-extrabold text-[24px] text-textPrimary group-hover:text-brandOrange transition-colors italic tracking-tight">{t('auth.learnRole')}</h3>
+            <p className="font-inter text-[15px] text-textSecondary mt-1 font-medium opacity-60">{t('auth.learnRoleDesc')}</p>
           </div>
         </button>
-        <button onClick={() => handleRoleSelect('trainer')} className="bg-white border-2 border-gray-100 hover:border-accent hover:shadow-orange rounded-3xl p-8 flex items-center gap-6 transition-all duration-300 group text-left transform hover:-translate-y-1">
-          <div className="w-16 h-16 rounded-full bg-accent/10 text-accent flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-colors flex-shrink-0">
-            <User className="w-7 h-7" />
+        <button onClick={() => handleRoleSelect('trainer')} className="premium-card p-10 flex items-center gap-8 transition-all duration-500 group text-left hover:scale-[1.02] active:scale-[0.98]">
+          <div className="w-20 h-20 rounded-[24px] bg-brandOrange/5 text-brandOrange flex items-center justify-center group-hover:bg-brandOrange group-hover:text-white transition-all -rotate-3 group-hover:rotate-0 flex-shrink-0 shadow-sm">
+            <User className="w-10 h-10" />
           </div>
           <div>
-            <h3 className="font-grotesk font-bold text-[22px] text-primary">{t('auth.teachRole')}</h3>
-            <p className="font-inter text-[14px] text-gray-500 mt-1">{t('auth.teachRoleDesc')}</p>
+            <h3 className="font-jakarta font-extrabold text-[24px] text-textPrimary group-hover:text-brandOrange transition-colors italic tracking-tight">{t('auth.teachRole')}</h3>
+            <p className="font-inter text-[15px] text-textSecondary mt-1 font-medium opacity-60">{t('auth.teachRoleDesc')}</p>
           </div>
         </button>
       </div>
 
-      <div className="mt-12 pt-8 border-t border-gray-100 flex items-center justify-center gap-2">
-        <span className="font-inter text-[14px] text-gray-500">{t('auth.haveAccount')}</span>
-        <Link to="/login" className="font-grotesk font-semibold text-[15px] text-primary hover:text-accent transition-colors">
+      <div className="mt-16 pt-10 border-t border-offWhite flex flex-col sm:flex-row items-center justify-center gap-3">
+        <span className="font-inter text-[15px] text-textSecondary font-medium opacity-60">{t('auth.haveAccount')}</span>
+        <Link to="/login" className="font-jakarta font-extrabold text-[13px] text-brandOrange hover:text-vividOrange transition-all uppercase tracking-widest hover:underline underline-offset-4">
           {t('auth.signinHere')}
         </Link>
       </div>
@@ -161,47 +161,51 @@ const SignupPage: React.FC = () => {
   );
 
   const renderStep1_5 = () => (
-    <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} className="w-full max-w-[500px] mx-auto text-center relative z-10">
-      <button onClick={() => setStep(1)} className="flex items-center gap-1 text-gray-400 hover:text-primary font-inter text-[13px] mb-8 transition-colors mx-auto">
-        <ChevronLeft className="w-4 h-4" /> Back
+    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="w-full max-w-[540px] mx-auto text-center relative z-10">
+      <button onClick={() => setStep(1)} className="font-jakarta font-extrabold text-[11px] text-textPrimary/40 uppercase tracking-[0.3em] mb-12 hover:text-brandOrange transition-colors flex items-center gap-3 mx-auto group">
+        <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Back to Choice
       </button>
-      <h2 className="font-grotesk font-bold text-[36px] text-primary mb-10 tracking-tight">Who are you signing up for?</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <button onClick={() => handleSubtypeSelect(false)} className="bg-white border-2 border-gray-100 hover:border-accent hover:shadow-orange rounded-3xl p-10 flex flex-col items-center gap-5 group transform hover:-translate-y-1 transition-all">
-          <User className="w-8 h-8 text-gray-400 group-hover:text-accent" />
-          <h3 className="font-grotesk font-bold text-[18px] text-primary">For Myself</h3>
+      <h2 className="font-jakarta font-extrabold text-[40px] text-textPrimary mb-12 tracking-tighter italic leading-none">Who are you <br/>signing up for?</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <button onClick={() => handleSubtypeSelect(false)} className="premium-card p-12 flex flex-col items-center gap-8 group hover:scale-[1.05] active:scale-95 transition-all">
+          <div className="w-20 h-20 rounded-[24px] bg-offWhite flex items-center justify-center group-hover:bg-brandOrange/10 group-hover:text-brandOrange transition-all rotate-3 group-hover:rotate-0">
+            <User className="w-10 h-10" />
+          </div>
+          <h3 className="font-jakarta font-extrabold text-[20px] text-textPrimary italic">For Myself</h3>
         </button>
-        <button onClick={() => handleSubtypeSelect(true)} className="bg-white border-2 border-gray-100 hover:border-accent hover:shadow-orange rounded-3xl p-10 flex flex-col items-center gap-5 group transform hover:-translate-y-1 transition-all">
-          <User className="w-8 h-8 text-gray-400 group-hover:text-accent" />
-          <h3 className="font-grotesk font-bold text-[18px] text-primary">For My Child</h3>
+        <button onClick={() => handleSubtypeSelect(true)} className="premium-card p-12 flex flex-col items-center gap-8 group hover:scale-[1.05] active:scale-95 transition-all">
+          <div className="w-20 h-20 rounded-[24px] bg-offWhite flex items-center justify-center group-hover:bg-brandOrange/10 group-hover:text-brandOrange transition-all -rotate-3 group-hover:rotate-0">
+            <Users className="w-10 h-10" />
+          </div>
+          <h3 className="font-jakarta font-extrabold text-[20px] text-textPrimary italic">For My Child</h3>
         </button>
       </div>
     </motion.div>
   );
 
   const renderStep2 = () => (
-    <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} className="w-full max-w-[500px] mx-auto bg-white p-10 rounded-[32px] shadow-[0_8px_32px_rgba(0,0,0,0.04)] border border-gray-100 relative z-10">
-      <button onClick={() => setStep(role === 'student' ? 1.5 : 1)} className="flex items-center gap-1 text-gray-400 hover:text-primary font-inter text-[13px] mb-8 transition-colors">
-        <ChevronLeft className="w-4 h-4" /> Back
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="w-full max-w-[540px] mx-auto premium-card p-12 relative z-10">
+      <button onClick={() => setStep(role === 'student' ? 1.5 : 1)} className="font-jakarta font-extrabold text-[11px] text-textPrimary/40 uppercase tracking-[0.3em] mb-10 hover:text-brandOrange transition-colors flex items-center gap-3 group">
+        <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Go Back
       </button>
-      <h2 className="font-grotesk font-bold text-[32px] text-primary mb-8 tracking-tight">Account Details</h2>
-      <form className="space-y-5" onSubmit={handleSignup}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className="md:col-span-2 space-y-1.5">
-            <label className="text-[12px] font-inter font-medium text-primary/80 uppercase tracking-wide">Full Name</label>
-            <input type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-[14px] font-inter focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all" placeholder="John Doe" />
+      <h2 className="font-jakarta font-extrabold text-[36px] text-textPrimary mb-10 tracking-tighter leading-tight italic">Identity Setup</h2>
+      <form className="space-y-6" onSubmit={handleSignup}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="sm:col-span-2 space-y-2">
+            <label className="font-jakarta font-extrabold text-[10px] text-textPrimary/40 uppercase tracking-[0.3em]">Full Legal Name</label>
+            <input type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full px-5 py-5 bg-offWhite border border-borderSubtle rounded-2xl text-[15px] font-inter focus:border-brandOrange focus:ring-4 focus:ring-brandOrange/5 transition-all" placeholder="Enter full name" />
           </div>
-          <div className="space-y-1.5">
-            <label className="text-[12px] font-inter font-medium text-primary/80 uppercase tracking-wide">Email</label>
-            <input type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-[14px] font-inter focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all" placeholder="john@example.com" />
+          <div className="space-y-2">
+            <label className="font-jakarta font-extrabold text-[10px] text-textPrimary/40 uppercase tracking-[0.3em]">Email Channel</label>
+            <input type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full px-5 py-5 bg-offWhite border border-borderSubtle rounded-2xl text-[15px] font-inter focus:border-brandOrange focus:ring-4 focus:ring-brandOrange/5 transition-all" placeholder="name@example.com" />
           </div>
-          <div className="space-y-1.5">
-            <label className="text-[12px] font-inter font-medium text-primary/80 uppercase tracking-wide">Phone</label>
-            <input type="tel" required value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} className="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-[14px] font-inter focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all" placeholder="+91 98765 43210" />
+          <div className="space-y-2">
+            <label className="font-jakarta font-extrabold text-[10px] text-textPrimary/40 uppercase tracking-[0.3em]">Phone Number</label>
+            <input type="tel" required value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} className="w-full px-5 py-5 bg-offWhite border border-borderSubtle rounded-2xl text-[15px] font-inter focus:border-brandOrange focus:ring-4 focus:ring-brandOrange/5 transition-all" placeholder="+91 00000 00000" />
           </div>
-          <div className="space-y-1.5">
-            <label className="text-[12px] font-inter font-medium text-primary/80 uppercase tracking-wide">City</label>
-            <select value={formData.city} onChange={(e) => setFormData({...formData, city: e.target.value})} className="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-[14px] font-inter focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all">
+          <div className="space-y-2">
+            <label className="font-jakarta font-extrabold text-[10px] text-textPrimary/40 uppercase tracking-[0.3em]">Hub City</label>
+            <select value={formData.city} onChange={(e) => setFormData({...formData, city: e.target.value})} className="w-full px-5 py-5 bg-offWhite border border-borderSubtle rounded-2xl text-[15px] font-inter focus:border-brandOrange focus:ring-4 focus:ring-brandOrange/5 transition-all appearance-none">
               <option value="Coimbatore">Coimbatore</option>
               <option value="Chennai">Chennai</option>
               <option value="Madurai">Madurai</option>
@@ -209,85 +213,75 @@ const SignupPage: React.FC = () => {
               <option value="Bangalore">Bangalore</option>
             </select>
           </div>
-          <div className="space-y-1.5">
-            <label className="text-[12px] font-inter font-medium text-primary/80 uppercase tracking-wide">Locality</label>
-            <input type="text" required value={formData.locality} onChange={(e) => setFormData({...formData, locality: e.target.value})} className="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-[14px] font-inter focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all" placeholder="RS Puram" />
+          <div className="space-y-2">
+            <label className="font-jakarta font-extrabold text-[10px] text-textPrimary/40 uppercase tracking-[0.3em]">Locality</label>
+            <input type="text" required value={formData.locality} onChange={(e) => setFormData({...formData, locality: e.target.value})} className="w-full px-5 py-5 bg-offWhite border border-borderSubtle rounded-2xl text-[15px] font-inter focus:border-brandOrange focus:ring-4 focus:ring-brandOrange/5 transition-all" placeholder="e.g. RS Puram" />
           </div>
-          <div className="md:col-span-2 space-y-1.5">
-            <label className="text-[12px] font-inter font-medium text-primary/80 uppercase tracking-wide">Password</label>
-            <input type="password" required value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})} className="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-[14px] font-inter focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all" placeholder="••••••••" />
+          <div className="sm:col-span-2 space-y-2">
+            <label className="font-jakarta font-extrabold text-[10px] text-textPrimary/40 uppercase tracking-[0.3em]">Master Password</label>
+            <input type="password" required value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})} className="w-full px-5 py-5 bg-offWhite border border-borderSubtle rounded-2xl text-[15px] font-inter focus:border-brandOrange focus:ring-4 focus:ring-brandOrange/5 transition-all" placeholder="••••••••" />
           </div>
         </div>
-        <Button type="submit" disabled={loading} className="w-full bg-accent hover:bg-accent-600 text-white font-grotesk font-semibold text-[15px] h-14 rounded-xl mt-8 shadow-orange hover:shadow-orange-lg hover:scale-[1.01] transition-all">
-          {loading ? 'Processing...' : t('auth.createAccount')} <ArrowRight className="w-4 h-4 ml-2" />
+        <Button type="submit" disabled={loading} className="w-full btn-primary h-18 rounded-2xl mt-8 shadow-premium-elevated hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-4 font-jakarta font-extrabold uppercase tracking-[0.2em] text-[15px]">
+          {loading ? 'Processing...' : t('auth.createAccount')} <ArrowRight className="w-5 h-5" />
         </Button>
       </form>
     </motion.div>
   );
 
   const renderStep2_5 = () => (
-    <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="w-full max-w-[440px] mx-auto bg-white p-10 rounded-[32px] shadow-[0_8px_32px_rgba(0,0,0,0.04)] border border-gray-100 text-center relative z-10">
-      <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-8">
-        <Phone className="w-10 h-10 text-accent" />
+    <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="w-full max-w-[480px] mx-auto premium-card p-12 text-center relative z-10">
+      <div className="w-24 h-24 bg-brandOrange/10 rounded-[32px] flex items-center justify-center mx-auto mb-10 rotate-6 shadow-sm border border-brandOrange/10">
+        <Phone className="w-12 h-12 text-brandOrange" />
       </div>
-      <h2 className="font-grotesk font-bold text-[32px] text-primary mb-3 tracking-tight">Verify your phone</h2>
-      <p className="font-inter text-[15px] text-gray-500 mb-10 leading-relaxed">
-        We've sent a 6-digit code to <span className="font-semibold text-primary">{formData.phone}</span>
+      <h2 className="font-jakarta font-extrabold text-[36px] text-textPrimary mb-4 tracking-tighter italic leading-tight">Verify Identity</h2>
+      <p className="font-inter text-[16px] text-textSecondary mb-12 leading-relaxed font-medium opacity-70">
+        We've sent a security code to <br/><span className="font-extrabold text-textPrimary italic underline decoration-brandOrange/20">{formData.phone}</span>
       </p>
 
       <OTPInput onComplete={handleVerifyOTP} disabled={loading} />
 
-      <div className="mt-10 pt-8 border-t border-gray-50 space-y-4">
+      <div className="mt-12 pt-10 border-t border-offWhite space-y-8">
         <Button 
           variant="ghost" 
           disabled={resendTimer > 0 || loading} 
           onClick={() => sendPhoneOTP(formData.phone)}
-          className="text-accent hover:text-accent-600 font-grotesk font-semibold text-[14px]"
+          className="text-brandOrange hover:text-vividOrange font-jakarta font-extrabold text-[12px] uppercase tracking-[0.3em] h-auto p-0"
         >
-          {resendTimer > 0 ? `Resend code in ${resendTimer}s` : 'Resend Code'} <RefreshCw className={`w-4 h-4 ml-2 ${loading ? 'animate-spin' : ''}`} />
+          {resendTimer > 0 ? `Retry in ${resendTimer}s` : 'Request New Code'} <RefreshCw className={`w-4 h-4 ml-3 ${loading ? 'animate-spin' : ''}`} />
         </Button>
-        <p className="text-[13px] text-gray-400 font-inter">
-          Also check your email <span className="font-medium text-gray-600">{formData.email}</span> for a verification link.
+        <p className="text-[12px] text-textSecondary font-medium opacity-50 uppercase tracking-widest">
+          Check email <span className="text-textPrimary">{formData.email}</span> for backup
         </p>
       </div>
     </motion.div>
   );
 
   const renderStep3 = () => (
-    <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="w-full max-w-[440px] mx-auto text-center relative z-10 bg-white p-10 rounded-[32px] shadow-[0_8px_32px_rgba(0,0,0,0.04)] border border-gray-100">
-      <Confetti width={width} height={height} recycle={false} numberOfPieces={500} colors={['#0A4DA3', '#F57C28', '#10b981', '#ffffff']} />
-      <div className="w-24 h-24 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-8">
-        <CheckCircle2 className="w-12 h-12 text-success" />
+    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="w-full max-w-[500px] mx-auto text-center relative z-10 premium-card p-16">
+      <Confetti width={width} height={height} recycle={false} numberOfPieces={800} colors={['#EA580C', '#0A1628', '#FFFFFF', '#F59E0B']} />
+      <div className="w-28 h-28 bg-brandOrange/10 rounded-[40px] flex items-center justify-center mx-auto mb-10 rotate-12 shadow-premium-card border border-brandOrange/10">
+        <CheckCircle2 className="w-16 h-16 text-brandOrange" />
       </div>
-      <h2 className="font-grotesk font-bold text-[36px] text-primary mb-4 tracking-tight">Welcome to ThiranOli! 🎉</h2>
-      <p className="font-inter text-[16px] text-gray-500 mb-10 leading-relaxed">
-        Your account is ready. {role === 'trainer' ? "Let's complete your professional profile." : "Let's find the perfect program for you."}
+      <h2 className="font-jakarta font-extrabold text-[44px] text-textPrimary mb-6 tracking-tighter leading-none italic">Access Granted! 🎉</h2>
+      <p className="font-inter text-[18px] text-textSecondary mb-12 leading-relaxed font-medium opacity-70">
+        Your digital profile is ready. {role === 'trainer' ? "Proceed to professional verification module." : "Start exploring engineering paths."}
       </p>
-      <Button onClick={() => navigate(role === 'student' ? '/student/dashboard' : '/trainer/onboarding')} className="w-full bg-primary hover:bg-navy-dark text-white font-grotesk font-semibold text-[15px] h-14 rounded-xl transition-colors">
-        Go to Dashboard <ArrowRight className="w-4 h-4 ml-2" />
+      <Button onClick={() => navigate(role === 'student' ? '/student/dashboard' : '/trainer/onboarding')} className="w-full btn-primary h-18 rounded-2xl shadow-premium-elevated flex items-center justify-center gap-4 text-[16px] font-jakarta font-extrabold uppercase tracking-[0.2em] active:scale-95 transition-all">
+        Enter Control Hub <ArrowRight className="w-5 h-5" />
       </Button>
     </motion.div>
   );
 
   return (
     <PageTransition>
-      <div className="min-h-screen flex bg-background relative overflow-hidden">
-        {/* Abstract Background pattern */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #0A4DA3 1px, transparent 0)', backgroundSize: '32px 32px' }} />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="min-h-screen flex bg-white relative overflow-hidden font-inter text-textPrimary">
+        {/* MNC Background Grid */}
+        <div className="absolute inset-0 opacity-[0.3] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #EA580C 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+        <div className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-brandOrange/5 rounded-full blur-[180px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-brandBlue/5 rounded-full blur-[140px] pointer-events-none" />
 
-        {/* Top left logo */}
-        <div className="absolute top-8 left-8 sm:left-12 z-20">
-           <Link to="/" className="flex items-center gap-2">
-            <div className="flex flex-col leading-none">
-              <span className="font-tamil font-bold text-[24px] text-primary" style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}>திறனொளி</span>
-              <span className="font-grotesk font-medium text-[10px] tracking-[0.14em] uppercase text-accent mt-0.5">ThiranOli</span>
-            </div>
-          </Link>
-        </div>
-
-        <div className="w-full flex items-center justify-center px-4 pt-28 pb-12">
+        <div className="w-full flex items-center justify-center px-4 pt-44 pb-20">
           <AnimatePresence mode="wait">
             {step === 1 && renderStep1()}
             {step === 1.5 && renderStep1_5()}

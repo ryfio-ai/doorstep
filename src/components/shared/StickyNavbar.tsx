@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, ChevronDown, BookOpen, Cpu, ArrowRight, Code, Sparkles, Video } from 'lucide-react';
+import { Menu, X, Globe, ChevronDown, Cpu, ArrowRight, Code, Sparkles, MonitorPlay, BookOpen, Layers } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../context/AuthContext';
 
 export const StickyNavbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { i18n } = useTranslation();
+  const { user, signOut } = useAuth();
 
   const currentLang = i18n.language?.startsWith('ta') ? 'ta' : 'en';
   const toggleLanguage = () => i18n.changeLanguage(currentLang === 'en' ? 'ta' : 'en');
 
   useEffect(() => {
-    // Keep for potential future use or remove if completely unnecessary
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -22,121 +27,129 @@ export const StickyNavbar: React.FC = () => {
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
-  // Close dropdown on route change
   useEffect(() => setActiveDropdown(null), [location.pathname]);
 
   const isActive = (path: string) => location.pathname === path;
 
-  // Mega Dropdown Data
-  const courseCategories = [
+  const categories = [
     { icon: Cpu, name: 'Robotics', desc: 'Drones, Robo-Race, Soccer Bots' },
     { icon: Code, name: 'Coding', desc: 'Python, Automation, AI Logic' },
     { icon: BookOpen, name: 'Embedded Systems', desc: 'Arduino, Sensors, IoT' },
-    { icon: Sparkles, name: '3D Design', desc: 'Modeling, Printing, Creativity' },
+    { icon: Layers, name: '3D Design', desc: 'Modeling, Printing, Creativity' },
   ];
+
   const popularCourses = [
-    { name: 'Young Robotics Engineers', badge: 'HOT' },
-    { name: 'Future Coders with Python', badge: 'POPULAR' },
-    { name: 'ROS Robotics Engineering', badge: 'NEW' },
-    { name: 'Drone Engineering Lab', badge: 'PRO' },
+    { name: 'Young Robotics Engineers', tag: 'HOT', color: 'bg-red-100 text-red-600' },
+    { name: 'Future Coders with Python', tag: 'POPULAR', color: 'bg-blue-100 text-blue-600' },
+    { name: 'ROS Robotics Engineering', tag: 'NEW', color: 'bg-blue-100 text-blue-600' },
+    { name: 'Drone Engineering Lab', tag: 'PRO', color: 'bg-blue-100 text-blue-600' },
   ];
 
   return (
     <>
       <nav
-        className="fixed top-0 left-0 w-full z-50 transition-all duration-300 lg:bg-white/95 bg-slate-900 backdrop-blur-xl border-b border-slate-200 lg:border-slate-200 border-slate-800"
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+          scrolled 
+            ? 'h-[80px] bg-white shadow-premium-elevated border-b border-borderSubtle' 
+            : 'h-[100px] bg-transparent'
+        }`}
       >
-        <div className="page-container h-[80px] flex items-center justify-between">
+        <div className="page-container h-full flex items-center justify-between">
           
-          {/* LOGO AREA */}
-          <Link to="/" className="flex items-center gap-3 shrink-0 group">
+          {/* LOGO */}
+          <Link to="/" className="flex items-center gap-3 shrink-0 group relative z-10">
             <div className="flex flex-col leading-none">
-              <span className="font-tamil font-bold text-[28px] leading-tight lg:text-slate-900 text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-orange-gradient transition-all duration-300 relative">
-                திறனொளி
-                <span className="absolute -right-3 top-1 w-2 h-2 rounded-full bg-brandOrange animate-pulse-orange"></span>
-              </span>
-              <span className="font-grotesk font-medium text-[11px] tracking-[0.15em] uppercase lg:text-slate-500 text-white/50 group-hover:text-brandOrange transition-colors">
-                ThiranOli
+              <div className="flex items-center gap-2">
+                <span className="font-tamil font-bold text-[36px] text-textPrimary transition-all duration-500 italic">
+                  திறனொளி
+                </span>
+                <div className="w-2 h-2 rounded-sm bg-brandOrange mt-2"></div>
+              </div>
+              <span className="font-jakarta font-extrabold text-[10px] tracking-[0.3em] uppercase text-textSecondary opacity-60">
+                THIRANOLI
               </span>
             </div>
           </Link>
 
-          {/* DESKTOP NAV LINKS */}
-          <div className="hidden lg:flex items-center gap-8 h-full">
-            {/* Mega Dropdown Trigger */}
+          {/* MAIN NAV */}
+          <div className="hidden lg:flex items-center gap-10">
             <div 
-              className="relative h-full flex items-center"
+              className="relative h-[80px] flex items-center"
               onMouseEnter={() => setActiveDropdown('courses')}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <button className={`flex items-center gap-1.5 font-inter font-medium text-[15px] transition-colors duration-200 ${
-                isActive('/courses') || activeDropdown === 'courses' ? 'text-brandOrange' : 'text-slate-600 hover:text-slate-900'
+              <button className={`flex items-center gap-1.5 font-jakarta font-bold text-[15px] transition-all duration-300 ${
+                activeDropdown === 'courses' ? 'text-brandOrange' : 'text-textSecondary hover:text-brandOrange'
               }`}>
                 Courses
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === 'courses' ? 'rotate-180 text-brandOrange' : ''}`} />
+                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${activeDropdown === 'courses' ? 'rotate-180' : ''} ${activeDropdown === 'courses' ? 'text-brandOrange' : 'text-brandOrange/60'}`} />
               </button>
 
-              {/* Mega Menu Dropdown */}
               <AnimatePresence>
                 {activeDropdown === 'courses' && (
                   <motion.div
-                    initial={{ opacity: 0, y: 10, scaleY: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scaleY: 1 }}
-                    exit={{ opacity: 0, y: 5, scaleY: 0.95 }}
-                    transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute top-[80px] left-1/2 -translate-x-1/2 w-[800px] bg-white border border-slate-200 rounded-2xl shadow-xl p-6 grid grid-cols-3 gap-8 origin-top"
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute top-[80px] left-1/2 -translate-x-1/2 w-[900px] bg-white rounded-[32px] shadow-premium-elevated border border-borderSubtle overflow-hidden grid grid-cols-12"
                   >
-                    {/* Categories Column */}
-                    <div className="flex flex-col gap-4">
-                      <h4 className="text-slate-400 text-[12px] font-grotesk font-semibold tracking-wider uppercase mb-1">Categories</h4>
-                      {courseCategories.map((cat, i) => (
-                        <Link key={i} to="/courses" className="flex items-start gap-3 group">
-                          <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-500 group-hover:text-brandOrange group-hover:bg-brandOrange/10 transition-colors">
-                            <cat.icon className="w-5 h-5" />
-                          </div>
-                          <div>
-                            <p className="text-slate-900 font-inter text-[15px] font-medium group-hover:text-brandOrange transition-colors">{cat.name}</p>
-                            <p className="text-slate-500 font-inter text-[12px] leading-snug mt-0.5">{cat.desc}</p>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-
-                    {/* Popular Column */}
-                    <div className="flex flex-col gap-4">
-                      <h4 className="text-slate-400 text-[12px] font-grotesk font-semibold tracking-wider uppercase mb-1">Popular Courses</h4>
-                      {popularCourses.map((course, i) => (
-                        <Link key={i} to="/courses" className="flex items-center justify-between group">
-                          <span className="text-slate-700 font-inter text-[14px] group-hover:text-brandOrange transition-colors">{course.name}</span>
-                          {course.badge && (
-                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                              course.badge === 'HOT' ? 'bg-red-500/20 text-red-400 border border-red-500/30' : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                            }`}>
-                              {course.badge}
-                            </span>
-                          )}
-                        </Link>
-                      ))}
-                    </div>
-
-                    {/* Resources Column */}
-                    <div className="flex flex-col gap-4 bg-slate-50 -m-6 p-6 rounded-r-2xl border-l border-slate-100">
-                      <h4 className="text-slate-400 text-[12px] font-grotesk font-semibold tracking-wider uppercase mb-1">Free Resources</h4>
-                      <Link to="/how-it-works" className="flex items-center gap-2 text-slate-700 hover:text-brandOrange text-[14px] transition-colors"><Video className="w-4 h-4"/> Free Masterclasses</Link>
-                      <Link to="/" className="flex items-center gap-2 text-slate-700 hover:text-brandOrange text-[14px] transition-colors"><Sparkles className="w-4 h-4"/> Project Guides</Link>
-                      
-                      <div className="mt-auto">
-                        <Link to="/courses" className="flex items-center gap-2 text-brandOrange font-grotesk font-semibold text-[14px] group">
-                          View All Courses <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </Link>
+                    {/* Categories */}
+                    <div className="col-span-5 p-10 space-y-8">
+                      <h4 className="text-textSecondary/40 text-[10px] font-jakarta font-extrabold tracking-[0.2em] uppercase">Categories</h4>
+                      <div className="space-y-6">
+                        {categories.map((cat, i) => (
+                          <Link key={i} to="/courses" className="flex items-center gap-4 group/item">
+                            <div className="w-12 h-12 rounded-full bg-offWhite flex items-center justify-center text-textSecondary group-hover/item:bg-brandOrange/10 group-hover/item:text-brandOrange transition-all">
+                              <cat.icon className="w-5 h-5" />
+                            </div>
+                            <div>
+                              <p className="text-textPrimary font-jakarta font-extrabold text-[15px] leading-tight group-hover/item:text-brandOrange transition-colors">{cat.name}</p>
+                              <p className="text-textSecondary/60 text-[11px] font-inter mt-1 leading-tight">{cat.desc}</p>
+                            </div>
+                          </Link>
+                        ))}
                       </div>
+                    </div>
+
+                    {/* Popular */}
+                    <div className="col-span-4 p-10 space-y-8 border-l border-offWhite">
+                      <h4 className="text-textSecondary/40 text-[10px] font-jakarta font-extrabold tracking-[0.2em] uppercase">Popular Courses</h4>
+                      <div className="space-y-6">
+                        {popularCourses.map((course, i) => (
+                          <Link key={i} to="/courses" className="flex items-center justify-between group/course">
+                            <span className="text-textSecondary font-jakarta font-bold text-[14px] group-hover/course:text-brandOrange transition-colors">{course.name}</span>
+                            <span className={`px-2 py-0.5 rounded-md text-[9px] font-jakarta font-extrabold tracking-wider ${course.color}`}>{course.tag}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Free Resources */}
+                    <div className="col-span-3 bg-offWhite/50 p-10 flex flex-col justify-between">
+                      <div className="space-y-8">
+                        <h4 className="text-textSecondary/40 text-[10px] font-jakarta font-extrabold tracking-[0.2em] uppercase">Free Resources</h4>
+                        <div className="space-y-6">
+                          <Link to="/courses?filter=free" className="flex items-center gap-3 text-textSecondary hover:text-brandOrange transition-colors group/free">
+                            <MonitorPlay className="w-4 h-4 opacity-60 group-hover/free:opacity-100" />
+                            <span className="text-[14px] font-jakarta font-bold">Free Masterclasses</span>
+                          </Link>
+                          <Link to="/courses?filter=free" className="flex items-center gap-3 text-textSecondary hover:text-brandOrange transition-colors group/free">
+                            <Sparkles className="w-4 h-4 opacity-60 group-hover/free:opacity-100" />
+                            <span className="text-[14px] font-jakarta font-bold">Project Guides</span>
+                          </Link>
+                        </div>
+                      </div>
+
+                      <Link to="/courses" className="flex items-center gap-2 text-brandOrange font-jakarta font-extrabold text-[13px] hover:translate-x-1 transition-transform">
+                        View All Courses <ArrowRight className="w-4 h-4" />
+                      </Link>
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
 
-            {/* Normal Links */}
             {[
               { name: 'Learning Paths', path: '/paths' },
               { name: 'Trainers', path: '/trainers' },
@@ -145,55 +158,45 @@ export const StickyNavbar: React.FC = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`relative font-inter font-medium text-[15px] transition-colors duration-200 group h-full flex items-center ${
-                  isActive(link.path) ? 'text-brandOrange' : 'text-slate-600 hover:text-slate-900'
-                }`}
+                className="font-jakarta font-bold text-[15px] text-textSecondary hover:text-brandOrange transition-colors"
               >
                 {link.name}
-                {isActive(link.path) && (
-                  <motion.div layoutId="navbar-underline" className="absolute bottom-0 left-0 w-full h-[3px] bg-brandOrange rounded-t-full" />
-                )}
-                <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-brandOrange opacity-0 group-hover:opacity-100 transition-opacity ${isActive(link.path) ? 'hidden' : ''}`} />
               </Link>
             ))}
           </div>
 
-          {/* CTA AREA */}
-          <div className="hidden lg:flex items-center gap-4">
+          {/* RIGHT ACTIONS */}
+          <div className="hidden lg:flex items-center gap-8">
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-200 text-slate-600 text-[13px] font-grotesk font-medium hover:border-slate-400 hover:text-slate-900 transition-all"
+              className="flex items-center gap-2 px-4 py-2 rounded-full border border-borderSubtle text-textSecondary hover:bg-offWhite transition-all"
             >
               <Globe className="w-4 h-4" />
-              <span>{currentLang === 'en' ? 'தமிழ்' : 'EN'}</span>
+              <span className="text-[14px] font-jakarta font-bold">தமிழ்</span>
             </button>
 
-            <Link to="/login" className="text-slate-600 hover:text-slate-900 font-inter font-medium text-[15px] px-2 transition-colors">
-              Login
-            </Link>
+            {user ? (
+              <Link to="/student/dashboard" className="text-textSecondary font-jakarta font-bold text-[15px] hover:text-brandOrange transition-colors">
+                Dashboard
+              </Link>
+            ) : (
+              <Link to="/login" className="text-textSecondary font-jakarta font-bold text-[15px] hover:text-brandOrange transition-colors">
+                Login
+              </Link>
+            )}
 
             <Link 
               to="/signup" 
-              className="group relative flex items-center gap-2 px-6 py-2.5 rounded-xl bg-orange-gradient text-white font-grotesk font-semibold text-[15px] shadow-glow-orange hover:scale-105 transition-all duration-300"
+              className="px-8 py-3.5 rounded-full bg-orange-gradient text-white font-jakarta font-extrabold text-[15px] shadow-glow-orange hover:shadow-premium-elevated hover:scale-[1.05] transition-all flex items-center gap-2 group"
             >
-              Start Learning
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              Start Learning <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
-          {/* MOBILE HAMBURGER */}
-          <div className="lg:hidden flex items-center gap-3">
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-1.5 px-2 py-1 rounded-full border border-white/20 text-white text-[12px] font-grotesk"
-            >
-              <Globe className="w-3.5 h-3.5" />
-              {currentLang === 'en' ? 'தமிழ்' : 'EN'}
-            </button>
-            <button onClick={() => setMobileMenuOpen(true)} className="p-2 text-white hover:text-brandOrange transition-colors">
-              <Menu className="w-7 h-7" />
-            </button>
-          </div>
+          {/* MOBILE TOGGLE */}
+          <button className="lg:hidden p-2 text-textPrimary" onClick={() => setMobileMenuOpen(true)}>
+            <Menu className="w-7 h-7" />
+          </button>
 
         </div>
       </nav>
@@ -204,38 +207,21 @@ export const StickyNavbar: React.FC = () => {
           <>
             <motion.div
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[60] bg-slate-900/40 backdrop-blur-sm"
+              className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm"
               onClick={() => setMobileMenuOpen(false)}
             />
             <motion.div
               initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 z-[70] w-[85%] max-w-[360px] bg-white border-l border-slate-200 flex flex-col shadow-2xl"
+              className="fixed top-0 right-0 bottom-0 z-[70] w-[80%] bg-white p-10 flex flex-col shadow-2xl"
             >
-              <div className="flex items-center justify-between p-6 border-b border-slate-100">
-                <span className="font-tamil font-bold text-[22px] text-slate-900">திறனொளி</span>
-                <button onClick={() => setMobileMenuOpen(false)} className="text-slate-400 hover:text-slate-900 p-2">
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-
-              <div className="flex flex-col gap-2 p-6 flex-1 overflow-y-auto">
-                {['Courses', 'Learning Paths', 'Trainers', 'About'].map((item, i) => (
-                  <motion.div key={item} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
-                    <Link to={`/${item.toLowerCase().replace(/ & | /g, '-')}`} onClick={() => setMobileMenuOpen(false)} className="block py-4 text-[18px] font-grotesk font-medium text-slate-800 border-b border-slate-100 hover:text-brandOrange">
-                      {item}
-                    </Link>
-                  </motion.div>
+              <button onClick={() => setMobileMenuOpen(false)} className="self-end p-2 mb-10"><X className="w-8 h-8" /></button>
+              <div className="flex flex-col gap-8">
+                {['Courses', 'Learning Paths', 'Trainers', 'About'].map(item => (
+                  <Link key={item} to="/" className="text-[20px] font-jakarta font-extrabold text-textPrimary">{item}</Link>
                 ))}
-              </div>
-
-              <div className="p-6 space-y-4 border-t border-slate-100 bg-slate-50">
-                <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center w-full h-12 rounded-xl border border-slate-200 text-slate-700 font-grotesk font-semibold text-[16px] hover:bg-white">
-                  Login
-                </Link>
-                <Link to="/signup" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center w-full h-12 rounded-xl bg-orange-gradient text-white font-grotesk font-semibold text-[16px] shadow-glow-orange">
-                  Start Learning
-                </Link>
+                <div className="h-px bg-offWhite w-full my-4"></div>
+                <Link to="/login" className="text-[20px] font-jakarta font-extrabold text-textPrimary">Login</Link>
+                <Link to="/signup" className="px-8 py-5 rounded-full bg-brandOrange text-white text-center font-jakarta font-extrabold text-[18px]">Start Learning</Link>
               </div>
             </motion.div>
           </>

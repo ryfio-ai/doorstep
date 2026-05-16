@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { NotificationProvider } from './context/NotificationContext';
 import { GamificationProvider } from './context/GamificationContext';
@@ -68,110 +68,121 @@ import Communications from './pages/admin/Communications';
 import CouponsReferrals from './pages/admin/CouponsReferrals';
 import Reports from './pages/admin/Reports';
 
+function AppContent() {
+  const location = useLocation();
+  const isPortal = location.pathname.startsWith('/student') || 
+                   location.pathname.startsWith('/trainer') || 
+                   location.pathname.startsWith('/admin');
+
+  return (
+    <div className={`min-h-screen flex flex-col font-inter ${isPortal ? 'bg-offWhite' : 'bg-white'}`}>
+      <StickyNavbar />
+      <div className="flex-1 pt-[80px]">
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/paths" element={<LearningPathsPage />} />
+          <Route path="/robotics" element={<RoboticsAIPage />} />
+          <Route path="/trainers" element={<TrainersPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/how-it-works" element={<LandingPage />} />
+          <Route path="/contact" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
+          <Route path="/oauth/consent" element={
+            <ProtectedRoute requireOnboarding={false}>
+              <OAuthConsentPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/payment/callback" element={<PaytmCallback />} />
+          <Route path="/unauthorized" element={<UnauthorizedPage />} />
+          <Route path="/courses" element={<CourseDiscovery />} />
+          <Route path="/courses/:id" element={<CourseDetail />} />
+
+          {/* Student Portal */}
+          <Route path="/student" element={
+            <ProtectedRoute allowedRole="student">
+              <StudentLayout />
+            </ProtectedRoute>
+          }>
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<StudentDashboard />} />
+            <Route path="courses" element={<CourseDiscovery />} />
+            <Route path="courses/:id" element={<CourseDetail />} />
+            <Route path="book-demo/:id" element={<BookDemoPage />} />
+            <Route path="demo-confirmed" element={<DemoConfirmation />} />
+            <Route path="classes" element={<MyClassesPage />} />
+            <Route path="materials" element={<StudyMaterials />} />
+            <Route path="enroll/:id" element={<EnrollPage />} />
+            <Route path="payment-success" element={<PaymentSuccess />} />
+            <Route path="payment-failed" element={<PaymentFailed />} />
+            <Route path="payment-pending" element={<PaymentPending />} />
+            <Route path="payments" element={<PaymentsHistory />} />
+            <Route path="notifications" element={<NotificationsPage />} />
+            <Route path="profile" element={<StudentProfile />} />
+            <Route path="wallet" element={<EduCoinWallet />} />
+            <Route path="course-path/:id" element={<MyCoursePath />} />
+            <Route path="reports" element={<ReportsPage />} />
+            <Route path="parent-view" element={<ParentDashboard />} />
+          </Route>
+
+          {/* Trainer Portal */}
+          <Route path="/trainer" element={
+            <ProtectedRoute allowedRole="trainer">
+              <TrainerLayout />
+            </ProtectedRoute>
+          }>
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="onboarding" element={<TrainerOnboarding />} />
+            <Route path="dashboard" element={<TrainerDashboard />} />
+            <Route path="schedule" element={<TrainerSchedule />} />
+            <Route path="students" element={<TrainerStudents />} />
+            <Route path="materials" element={<TrainerMaterials />} />
+            <Route path="earnings" element={<TrainerEarnings />} />
+            <Route path="notifications" element={<TrainerNotifications />} />
+            <Route path="profile" element={<TrainerProfile />} />
+          </Route>
+
+          {/* Admin Portal */}
+          <Route path="/admin" element={
+            <ProtectedRoute allowedRole="admin">
+              <AdminLayout />
+            </ProtectedRoute>
+          }>
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="students" element={<StudentManagement />} />
+            <Route path="trainers" element={<TrainerManagement />} />
+            <Route path="courses" element={<CourseManagement />} />
+            <Route path="demos" element={<DemoManagement />} />
+            <Route path="enrollments" element={<EnrollmentManagement />} />
+            <Route path="payments" element={<PaymentManagement />} />
+            <Route path="assignment" element={<AutoAssignment />} />
+            <Route path="communications" element={<Communications />} />
+            <Route path="coupons" element={<CouponsReferrals />} />
+            <Route path="reports" element={<Reports />} />
+          </Route>
+
+          {/* 404 */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </div>
+      <Footer />
+      {!isPortal && <SignupPromo />}
+    </div>
+  );
+}
+
 function App() {
   return (
     <AuthProvider>
       <NotificationProvider>
         <GamificationProvider>
           <Router>
-          <div className="min-h-screen flex flex-col font-inter bg-brandBlue">
-            <StickyNavbar />
-            <div className="flex-1 pt-[80px]">
-              <Routes>
-              {/* Public Routes */}
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/paths" element={<LearningPathsPage />} />
-              <Route path="/robotics" element={<RoboticsAIPage />} />
-              <Route path="/trainers" element={<TrainersPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/how-it-works" element={<LandingPage />} />
-              <Route path="/contact" element={<LandingPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-              <Route path="/reset-password" element={<ResetPasswordPage />} />
-              <Route path="/auth/callback" element={<AuthCallback />} />
-              <Route path="/oauth/consent" element={
-                <ProtectedRoute requireOnboarding={false}>
-                  <OAuthConsentPage />
-                </ProtectedRoute>
-              } />
-              <Route path="/payment/callback" element={<PaytmCallback />} />
-              <Route path="/unauthorized" element={<UnauthorizedPage />} />
-              <Route path="/courses" element={<CourseDiscovery />} />
-              <Route path="/courses/:id" element={<CourseDetail />} />
-
-              {/* Student Portal */}
-              <Route path="/student" element={
-                <ProtectedRoute allowedRole="student">
-                  <StudentLayout />
-                </ProtectedRoute>
-              }>
-                <Route index element={<Navigate to="dashboard" replace />} />
-                <Route path="dashboard" element={<StudentDashboard />} />
-                <Route path="courses" element={<CourseDiscovery />} />
-                <Route path="courses/:id" element={<CourseDetail />} />
-                <Route path="book-demo/:id" element={<BookDemoPage />} />
-                <Route path="demo-confirmed" element={<DemoConfirmation />} />
-                <Route path="classes" element={<MyClassesPage />} />
-                <Route path="materials" element={<StudyMaterials />} />
-                <Route path="enroll/:id" element={<EnrollPage />} />
-                <Route path="payment-success" element={<PaymentSuccess />} />
-                <Route path="payment-failed" element={<PaymentFailed />} />
-                <Route path="payment-pending" element={<PaymentPending />} />
-                <Route path="payments" element={<PaymentsHistory />} />
-                <Route path="notifications" element={<NotificationsPage />} />
-                <Route path="profile" element={<StudentProfile />} />
-                <Route path="wallet" element={<EduCoinWallet />} />
-                <Route path="course-path/:id" element={<MyCoursePath />} />
-                <Route path="reports" element={<ReportsPage />} />
-                <Route path="parent-view" element={<ParentDashboard />} />
-              </Route>
-
-              {/* Trainer Portal */}
-              <Route path="/trainer" element={
-                <ProtectedRoute allowedRole="trainer">
-                  <TrainerLayout />
-                </ProtectedRoute>
-              }>
-                <Route index element={<Navigate to="dashboard" replace />} />
-                <Route path="onboarding" element={<TrainerOnboarding />} />
-                <Route path="dashboard" element={<TrainerDashboard />} />
-                <Route path="schedule" element={<TrainerSchedule />} />
-                <Route path="students" element={<TrainerStudents />} />
-                <Route path="materials" element={<TrainerMaterials />} />
-                <Route path="earnings" element={<TrainerEarnings />} />
-                <Route path="notifications" element={<TrainerNotifications />} />
-                <Route path="profile" element={<TrainerProfile />} />
-              </Route>
-
-              {/* Admin Portal */}
-              <Route path="/admin" element={
-                <ProtectedRoute allowedRole="admin">
-                  <AdminLayout />
-                </ProtectedRoute>
-              }>
-                <Route index element={<Navigate to="dashboard" replace />} />
-                <Route path="dashboard" element={<AdminDashboard />} />
-                <Route path="students" element={<StudentManagement />} />
-                <Route path="trainers" element={<TrainerManagement />} />
-                <Route path="courses" element={<CourseManagement />} />
-                <Route path="demos" element={<DemoManagement />} />
-                <Route path="enrollments" element={<EnrollmentManagement />} />
-                <Route path="payments" element={<PaymentManagement />} />
-                <Route path="assignment" element={<AutoAssignment />} />
-                <Route path="communications" element={<Communications />} />
-                <Route path="coupons" element={<CouponsReferrals />} />
-                <Route path="reports" element={<Reports />} />
-              </Route>
-
-              {/* 404 */}
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-            </div>
-            <Footer />
-            <SignupPromo />
-          </div>
+            <AppContent />
           </Router>
         </GamificationProvider>
       </NotificationProvider>

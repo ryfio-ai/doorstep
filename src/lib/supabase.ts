@@ -14,7 +14,7 @@ const INITIAL_DATA: Record<string, any[]> = {
       category: "Robotics",
       description: "A comprehensive journey into the world of robotics, from basic electronics to AI-integrated machines.",
       price: "₹2026/mo",
-      original_price: "₹2,499",
+      original_price: "₹3,499",
       rating: 4.8,
       students: 1200,
       duration: "8 Levels",
@@ -37,7 +37,7 @@ const INITIAL_DATA: Record<string, any[]> = {
       category: "Electronics",
       description: "Learn the core principles of electronics and build smart circuits and IoT-enabled devices.",
       price: "₹2026/mo",
-      original_price: "₹1,999",
+      original_price: "₹3,499",
       rating: 4.7,
       students: 850,
       duration: "8 Levels",
@@ -60,7 +60,7 @@ const INITIAL_DATA: Record<string, any[]> = {
       category: "Embedded Systems",
       description: "Dive deep into microcontrollers and build intelligent, connected systems using Arduino and sensors.",
       price: "₹2026/mo",
-      original_price: "₹2,999",
+      original_price: "₹3,499",
       rating: 4.9,
       students: 420,
       duration: "8 Levels",
@@ -83,7 +83,7 @@ const INITIAL_DATA: Record<string, any[]> = {
       category: "Coding",
       description: "A fun and interactive introduction to coding using Python, the world's most popular programming language.",
       price: "₹2026/mo",
-      original_price: "₹1,499",
+      original_price: "₹3,499",
       rating: 4.8,
       students: 2000,
       duration: "8 Levels",
@@ -106,7 +106,7 @@ const INITIAL_DATA: Record<string, any[]> = {
       category: "Robotics",
       description: "Build and program a robot that can navigate and track lines autonomously using IR sensors.",
       price: "₹2026/mo",
-      original_price: "₹3,200",
+      original_price: "₹3,499",
       rating: 4.7,
       students: 600,
       duration: "8 Levels",
@@ -129,7 +129,7 @@ const INITIAL_DATA: Record<string, any[]> = {
       category: "Robotics",
       description: "Design and build high-speed racing robots and compete in track-based challenges.",
       price: "₹2026/mo",
-      original_price: "₹3,999",
+      original_price: "₹3,499",
       rating: 4.9,
       students: 350,
       duration: "8 Levels",
@@ -152,7 +152,7 @@ const INITIAL_DATA: Record<string, any[]> = {
       category: "Robotics",
       description: "Create robots capable of playing soccer, complete with dribbling and kicking mechanisms.",
       price: "₹2026/mo",
-      original_price: "₹4,500",
+      original_price: "₹3,499",
       rating: 4.9,
       students: 280,
       duration: "8 Levels",
@@ -175,7 +175,7 @@ const INITIAL_DATA: Record<string, any[]> = {
       category: "3D Design",
       description: "Learn digital modeling and 3D printing to bring your creative ideas into the physical world.",
       price: "₹2026/mo",
-      original_price: "₹1,799",
+      original_price: "₹3,499",
       rating: 4.8,
       students: 500,
       duration: "8 Levels",
@@ -198,7 +198,7 @@ const INITIAL_DATA: Record<string, any[]> = {
       category: "Robotics",
       description: "Build, program, and fly your own drones while learning aerodynamics and flight control systems.",
       price: "₹2026/mo",
-      original_price: "₹4,999",
+      original_price: "₹3,499",
       rating: 4.9,
       students: 150,
       duration: "8 Levels",
@@ -221,7 +221,7 @@ const INITIAL_DATA: Record<string, any[]> = {
       category: "Electronics",
       description: "Learn how robots perceive the world using various sensors and how to program sensor-driven behaviors.",
       price: "₹2026/mo",
-      original_price: "₹2,299",
+      original_price: "₹3,499",
       rating: 4.7,
       students: 400,
       duration: "8 Levels",
@@ -244,7 +244,7 @@ const INITIAL_DATA: Record<string, any[]> = {
       category: "Robotics",
       description: "Master robot kinematics and multi-axis movement by building advanced robotic arms and humanoid joints.",
       price: "₹2026/mo",
-      original_price: "₹3,500",
+      original_price: "₹3,499",
       rating: 4.8,
       students: 300,
       duration: "8 Levels",
@@ -267,7 +267,7 @@ const INITIAL_DATA: Record<string, any[]> = {
       category: "Robotics",
       description: "Learn the industry-standard Robot Operating System (ROS) to build professional-grade autonomous robots.",
       price: "₹2026/mo",
-      original_price: "₹5,999",
+      original_price: "₹3,499",
       rating: 4.9,
       students: 200,
       duration: "8 Levels",
@@ -289,8 +289,11 @@ const INITIAL_DATA: Record<string, any[]> = {
 
 
 
+const getActualKey = (key: string) => key === 'courses' ? `doorstep_v2_${key}` : `doorstep_${key}`;
+
 const getStorageData = (key: string) => {
-  const data = localStorage.getItem(`doorstep_${key}`);
+  const actualKey = getActualKey(key);
+  const data = localStorage.getItem(actualKey);
   if (!data && INITIAL_DATA[key]) {
     setStorageData(key, INITIAL_DATA[key]);
     return INITIAL_DATA[key];
@@ -299,7 +302,7 @@ const getStorageData = (key: string) => {
 };
 
 const setStorageData = (key: string, data: any) => {
-  localStorage.setItem(`doorstep_${key}`, JSON.stringify(data));
+  localStorage.setItem(getActualKey(key), JSON.stringify(data));
 };
 
 const authListeners: any[] = [];
