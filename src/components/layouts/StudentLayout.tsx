@@ -75,7 +75,7 @@ export const StudentLayout: React.FC = () => {
           className="flex items-center gap-4 px-5 py-4 rounded-2xl text-white/40 hover:bg-destructive/10 hover:text-white transition-all duration-300 w-full text-left group"
         >
           <LogOut className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-          <span className="font-jakarta font-extrabold text-[11px] uppercase tracking-widest">Terminate Session</span>
+          <span className="font-jakarta font-extrabold text-[11px] uppercase tracking-widest">Logout</span>
         </button>
       </div>
     </>
