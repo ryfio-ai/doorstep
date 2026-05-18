@@ -23,13 +23,13 @@ export const LandingPage: React.FC = () => {
       {/* =========================================
           SECTION 1: HERO (MNC ORANGE + WHITE)
       ========================================= */}
-      <section className="relative min-h-screen flex items-center pt-24 overflow-hidden">
+      <section className="relative pt-[160px] lg:pt-[200px] pb-20 lg:pb-32 overflow-hidden">
         {/* Background Accents */}
         <div className="absolute top-0 right-0 w-[50%] h-full bg-soft-orange-radial pointer-events-none"></div>
         <div className="absolute -top-[10%] -right-[10%] w-[800px] h-[800px] bg-brandOrange/5 rounded-full blur-[120px] pointer-events-none"></div>
         
         <div className="page-container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 xl:gap-16 items-center">
             <FadeIn>
               <div className="space-y-10">
                 <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-offWhite border border-borderSubtle shadow-sm">
@@ -86,19 +86,19 @@ export const LandingPage: React.FC = () => {
             </FadeIn>
 
             {/* Hero Visual */}
-            <div className="hidden lg:block relative">
+            <div className="hidden lg:block relative max-w-full">
               <FadeIn delay={0.3}>
-                <div className="relative">
+                <div className="relative w-full max-w-[500px] xl:max-w-none mx-auto">
                   <div className="relative z-10 animate-float">
                     <img 
                       src="/hero_robotics_visual.png" 
                       alt="Robotics Learning" 
-                      className="w-full h-auto drop-shadow-3xl"
+                      className="w-full h-auto drop-shadow-3xl object-contain"
                     />
                   </div>
                   {/* Floating Tech Elements */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-brandOrange/10 rounded-full blur-3xl animate-pulse"></div>
-                  <div className="absolute bottom-20 -left-10 glass-nav p-6 rounded-2xl border-brandOrange/20 shadow-premium-elevated flex items-center gap-4 animate-float-delayed">
+                  <div className="absolute bottom-10 xl:bottom-20 -left-4 xl:-left-10 glass-nav p-4 xl:p-6 rounded-2xl border-brandOrange/20 shadow-premium-elevated flex items-center gap-4 animate-float-delayed z-20">
                     <div className="w-12 h-12 rounded-xl bg-brandOrange flex items-center justify-center">
                       <Cpu className="text-white w-7 h-7" />
                     </div>
