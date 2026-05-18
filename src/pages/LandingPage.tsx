@@ -23,7 +23,7 @@ export const LandingPage: React.FC = () => {
       {/* =========================================
           SECTION 1: HERO (MNC ORANGE + WHITE)
       ========================================= */}
-      <section className="relative pt-[160px] lg:pt-[200px] pb-20 lg:pb-32 overflow-hidden">
+      <section className="relative pt-[120px] lg:pt-[140px] pb-16 lg:pb-24 overflow-hidden">
         {/* Background Accents */}
         <div className="absolute top-0 right-0 w-[50%] h-full bg-soft-orange-radial pointer-events-none"></div>
         <div className="absolute -top-[10%] -right-[10%] w-[800px] h-[800px] bg-brandOrange/5 rounded-full blur-[120px] pointer-events-none"></div>
