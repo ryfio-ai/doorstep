@@ -23,8 +23,8 @@ export const LandingPage: React.FC = () => {
   return (
     <div className="flex flex-col w-full overflow-hidden bg-white">
       <SEO 
-        title="Innovation at Your Doorstep"
-        description="ThiranOli is a global skills ecosystem bringing world-class Robotics, AI, and Creative Coding education directly to your doorstep with verified expert mentors."
+        title="Innovation Delivered to Your Doorstep"
+        description="ThiranOli brings world-class Robotics, AI, and Creative Coding education directly to your doorstep with verified expert mentors in Tamil Nadu."
         keywords="Robotics, AI, Creative Coding in Tamil Nadu, Learn Robotics at Home, ThiranOli, doorstep learning"
         faqs={[
           {
