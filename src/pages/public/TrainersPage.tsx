@@ -12,7 +12,7 @@ const FadeIn: React.FC<{ children: React.ReactNode, delay?: number }> = ({ child
 
 const TrainersPage: React.FC = () => {
   const trainers = [
-    { name: 'Tamizharasan K', role: 'Founder of ThiranOli', company: 'Tamizh Tech Pvt Ltd', companyUrl: 'https://www.tamizhtech.in/', location: 'Tamil Nadu', courses: 12, students: '100+', rating: 5.0, image: '', bio: '5+ years of experience in Robotics and Electronics.' },
+    { name: 'Tamizharasan K', role: 'Founder of ThiranOli', company: 'Tamizh Tech Pvt Ltd', companyUrl: 'https://www.tamizhtech.in/', location: 'Tamil Nadu', courses: 12, students: '100+', rating: 5.0, image: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=200&auto=format&fit=crop', bio: '5+ years of experience in Robotics and Electronics.' },
   ];
 
   return (
@@ -42,9 +42,13 @@ const TrainersPage: React.FC = () => {
                 
                 <div className="relative z-10 flex flex-col h-full">
                   <div className="w-24 h-24 mx-auto rounded-[24px] p-1 bg-white shadow-sm mb-6 border border-borderSubtle flex items-center justify-center group-hover:rotate-6 transition-transform">
-                    <div className="w-full h-full rounded-[20px] bg-offWhite flex items-center justify-center text-brandOrange/30">
-                      <User className="w-10 h-10" />
-                    </div>
+                    {trainer.image ? (
+                      <img src={trainer.image} alt={trainer.name} className="w-full h-full object-cover rounded-[20px]" />
+                    ) : (
+                      <div className="w-full h-full rounded-[20px] bg-offWhite flex items-center justify-center text-brandOrange/30">
+                        <User className="w-10 h-10" />
+                      </div>
+                    )}
                   </div>
                   
                   <div className="flex items-center justify-center gap-2 mb-1.5">

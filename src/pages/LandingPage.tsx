@@ -243,7 +243,7 @@ export const LandingPage: React.FC = () => {
               { title: "Academic Excellence", count: "All Subjects", icon: BookOpen, color: "bg-brandOrange", comingSoon: true },
               { title: "Coding & Software", count: "8+ Programs", icon: Code, color: "bg-vividOrange", comingSoon: true },
               { title: "Embedded Systems", count: "IoT & Hardware", icon: Brain, color: "bg-amberGold", comingSoon: true }
-            ].map((cat, i) => (
+            ].filter(cat => !cat.comingSoon).map((cat, i) => (
               <FadeIn key={i} delay={i * 0.1}>
                 {cat.comingSoon ? (
                   <div className="premium-card p-10 h-[320px] flex flex-col justify-end opacity-60 grayscale cursor-not-allowed">
@@ -364,7 +364,7 @@ export const LandingPage: React.FC = () => {
             <FadeIn direction="right">
               <div className="relative">
                 <div className="w-full aspect-square rounded-[40px] overflow-hidden border border-borderSubtle shadow-premium-card">
-                  <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop" alt="Trainer" className="w-full h-full object-cover" />
+                  <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop" alt="Trainer" className="w-full h-full object-cover" />
                 </div>
                 
                 <div className="absolute -bottom-10 -left-10 bg-white p-8 rounded-[32px] border border-borderSubtle shadow-premium-elevated">
@@ -398,9 +398,9 @@ export const LandingPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { name: "Arun Kumar", role: "Parent", text: "The convenience of having a verified robotics expert come home is unmatched. My son built his first drone in just 4 weeks!", img: "https://i.pravatar.cc/150?u=arun" },
-              { name: "Priya S.", role: "Student", text: "I was struggling with Python logic, but my mentor made it so easy. The hands-on hardware kits are the best part of the course.", img: "https://i.pravatar.cc/150?u=priya" },
-              { name: "Dr. Rajesh", role: "Parent", text: "Safe, professional, and very structured. The performance tracking keeps me updated on my daughter's progress every week.", img: "https://i.pravatar.cc/150?u=rajesh" }
+              { name: "Arun Kumar", role: "Parent", text: "The convenience of having a verified robotics expert come home is unmatched. My son built his first drone in just 4 weeks!", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&auto=format&fit=crop" },
+              { name: "Priya S.", role: "Student", text: "I was struggling with Python logic, but my mentor made it so easy. The hands-on hardware kits are the best part of the course.", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop" },
+              { name: "Dr. Rajesh", role: "Parent", text: "Safe, professional, and very structured. The performance tracking keeps me updated on my daughter's progress every week.", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150&auto=format&fit=crop" }
             ].map((t, i) => (
               <FadeIn key={i} delay={i * 0.1}>
                 <div className="premium-card p-10 h-full flex flex-col">
@@ -409,6 +409,7 @@ export const LandingPage: React.FC = () => {
                   </div>
                   <p className="font-inter text-textSecondary text-[17px] leading-relaxed mb-8 italic">"{t.text}"</p>
                   <div className="mt-auto flex items-center gap-4 pt-8 border-t border-offWhite">
+                    <img src={t.img} alt={t.name} className="w-12 h-12 rounded-full object-cover shadow-sm border border-borderSubtle" />
                     <div>
                       <h4 className="font-jakarta font-extrabold text-textPrimary">{t.name}</h4>
                       <p className="text-textSecondary text-[12px] font-bold uppercase tracking-wider">{t.role}</p>
