@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Analytics } from '@vercel/analytics/react';
 import App from './App.tsx';
 import './styles/globals.css';
 import { AuthProvider } from './context/AuthContext.tsx';
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <NotificationProvider>
             <App />
             <Toaster richColors position="top-right" />
+            <Analytics />
           </NotificationProvider>
         </AppProvider>
       </AuthProvider>
