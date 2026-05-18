@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Play, ArrowRight, Brain, Cpu, Code, Trophy, Users, Star, CheckCircle, Smartphone, Globe, ShieldCheck, BookOpen, Target, Zap, MonitorPlay, Sparkles } from 'lucide-react';
@@ -18,6 +18,8 @@ const FadeIn: React.FC<{ children: React.ReactNode, delay?: number, direction?: 
 };
 
 export const LandingPage: React.FC = () => {
+  const [openFaq, setOpenFaq] = React.useState<number | null>(0);
+
   return (
     <div className="flex flex-col w-full overflow-hidden bg-white">
       <SEO 
@@ -441,14 +443,29 @@ export const LandingPage: React.FC = () => {
                 { q: "What if I am not happy with the trainer?", a: "We offer a 'Satisfaction Guarantee'. If the demo or initial classes don't meet your expectations, we will rematch you with a different trainer immediately." }
               ].map((faq, i) => (
                 <FadeIn key={i} delay={i * 0.05}>
-                  <div className="group border-b border-borderSubtle py-10 transition-all hover:pl-4">
-                    <h3 className="font-jakarta font-extrabold text-[22px] text-textPrimary mb-4 flex items-center justify-between cursor-pointer group-hover:text-brandOrange transition-colors">
+                  <div 
+                    className="group border-b border-borderSubtle py-8 transition-all cursor-pointer hover:bg-white hover:px-6 hover:-mx-6 rounded-2xl"
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  >
+                    <h3 className={`font-jakarta font-extrabold text-[20px] md:text-[22px] flex items-center justify-between transition-colors ${openFaq === i ? 'text-brandOrange' : 'text-textPrimary group-hover:text-brandOrange'}`}>
                       {faq.q}
-                      <ArrowRight className="w-6 h-6 -rotate-45 group-hover:rotate-0 transition-transform" />
+                      <ArrowRight className={`w-6 h-6 shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-90 text-brandOrange' : 'rotate-0 text-textSecondary group-hover:text-brandOrange'}`} />
                     </h3>
-                    <p className="font-inter text-textSecondary text-[17px] leading-relaxed max-w-3xl">
-                      {faq.a}
-                    </p>
+                    <AnimatePresence>
+                      {openFaq === i && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: 'easeInOut' }}
+                          className="overflow-hidden"
+                        >
+                          <p className="font-inter text-textSecondary text-[16px] md:text-[17px] leading-relaxed max-w-3xl mt-4 pt-2 border-t border-offWhite">
+                            {faq.a}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </FadeIn>
               ))}

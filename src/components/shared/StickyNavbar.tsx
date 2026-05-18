@@ -165,7 +165,9 @@ export const StickyNavbar: React.FC = () => {
               className="flex items-center gap-2 px-4 py-2 rounded-full border border-borderSubtle text-textSecondary hover:bg-offWhite transition-all"
             >
               <Globe className="w-4 h-4" />
-              <span className="text-[14px] font-jakarta font-bold">தமிழ்</span>
+              <span className="text-[14px] font-jakarta font-bold">
+                {currentLang === 'en' ? 'தமிழ்' : 'English'}
+              </span>
             </button>
 
             {user ? (

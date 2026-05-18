@@ -6,6 +6,7 @@ import { ProtectedRoute } from './components/layouts/ProtectedRoute';
 import { StickyNavbar } from './components/shared/StickyNavbar';
 import { Footer } from './components/shared/Footer';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 // Public Pages
 import LandingPage from './pages/LandingPage';
 import LearningPathsPage from './pages/public/LearningPathsPage';
@@ -195,6 +196,7 @@ function App() {
             <AppContent />
           </Router>
           <Analytics />
+          <SpeedInsights />
         </GamificationProvider>
       </NotificationProvider>
     </AuthProvider>
