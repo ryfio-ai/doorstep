@@ -23,7 +23,7 @@ export const LandingPage: React.FC = () => {
       {/* =========================================
           SECTION 1: HERO (MNC ORANGE + WHITE)
       ========================================= */}
-      <section className="relative pt-[120px] lg:pt-[140px] pb-16 lg:pb-24 overflow-hidden">
+      <section className="relative pt-8 lg:pt-16 pb-16 lg:pb-32 overflow-hidden">
         {/* Background Accents */}
         <div className="absolute top-0 right-0 w-[50%] h-full bg-soft-orange-radial pointer-events-none"></div>
         <div className="absolute -top-[10%] -right-[10%] w-[800px] h-[800px] bg-brandOrange/5 rounded-full blur-[120px] pointer-events-none"></div>
@@ -37,7 +37,7 @@ export const LandingPage: React.FC = () => {
                   <span className="font-jakarta font-bold text-[13px] text-textPrimary tracking-[0.08em] uppercase">The Future of Doorstep Learning</span>
                 </div>
 
-                <h1 className="font-jakarta font-extrabold text-hero-h1 text-textPrimary leading-[0.95]">
+                <h1 className="font-jakarta font-extrabold text-[44px] sm:text-[56px] lg:text-hero-h1 text-textPrimary leading-[0.95]">
                   Innovation <br />
                   Delivered to <br />
                   <span className="text-brandOrange italic">Your Doorstep.</span>
@@ -117,7 +117,7 @@ export const LandingPage: React.FC = () => {
       {/* =========================================
           SECTION 2: WHY 1-ON-1 MATTERS (ORANGE)
       ========================================= */}
-      <section className="py-[120px] bg-offWhite relative z-10 border-y border-borderSubtle">
+      <section className="py-16 lg:py-[120px] bg-offWhite relative z-10 border-y border-borderSubtle">
         <div className="page-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <FadeIn direction="left">
@@ -126,7 +126,7 @@ export const LandingPage: React.FC = () => {
                   <Users className="w-4 h-4 text-brandOrange" />
                   <span className="caption-label text-brandOrange uppercase">The 1-on-1 Advantage</span>
                 </div>
-                <h2 className="font-jakarta font-extrabold text-section-h2 text-textPrimary leading-[1.1]">
+                <h2 className="font-jakarta font-extrabold text-[32px] md:text-section-h2 text-textPrimary leading-[1.1]">
                   Because your child <br />
                   <span className="text-brandOrange underline decoration-brandOrange/20 italic font-medium">deserves focus.</span>
                 </h2>
@@ -173,13 +173,13 @@ export const LandingPage: React.FC = () => {
       {/* =========================================
           SECTION 3: WHAT WE DO (MNC ORANGE + WHITE)
       ========================================= */}
-      <section className="py-[120px] bg-white relative z-10 overflow-hidden">
+      <section className="py-16 lg:py-[120px] bg-white relative z-10 overflow-hidden">
         <div className="page-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <FadeIn>
               <div className="relative">
                 <div className="absolute -top-20 -left-20 text-[180px] font-jakarta font-extrabold text-offWhite select-none">VISION</div>
-                <h2 className="font-jakarta font-extrabold text-section-h2 text-textPrimary leading-tight mb-8 relative z-10">
+                <h2 className="font-jakarta font-extrabold text-[32px] md:text-section-h2 text-textPrimary leading-tight mb-8 relative z-10">
                   Bridging the gap between <br />
                   <span className="text-brandOrange underline decoration-brandOrange/20">Skills & Your Child.</span>
                 </h2>
@@ -219,11 +219,11 @@ export const LandingPage: React.FC = () => {
       {/* =========================================
           SECTION 4: EXPLORE CATEGORIES (ORANGE)
       ========================================= */}
-      <section className="py-[120px] bg-offWhite relative z-10">
+      <section className="py-16 lg:py-[120px] bg-offWhite relative z-10">
         <div className="page-container">
           <FadeIn>
             <div className="text-center mb-20">
-              <h2 className="font-jakarta font-extrabold text-section-h2 text-textPrimary">What can you learn?</h2>
+              <h2 className="font-jakarta font-extrabold text-[32px] md:text-section-h2 text-textPrimary">What can you learn?</h2>
               <p className="text-textSecondary font-inter text-[18px] max-w-2xl mx-auto mt-4">From beginner coding to advanced robotics, we have a path for every interest.</p>
             </div>
           </FadeIn>
@@ -266,12 +266,12 @@ export const LandingPage: React.FC = () => {
       {/* =========================================
           SECTION 5: HOW IT WORKS (MNC LIGHT)
       ========================================= */}
-      <section className="py-[120px] bg-white relative z-10 overflow-hidden">
+      <section className="py-16 lg:py-[120px] bg-white relative z-10 overflow-hidden">
         <div className="page-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <FadeIn direction="left">
               <div>
-                <h2 className="font-jakarta font-extrabold text-section-h2 text-textPrimary leading-tight mb-8">A Simple Path to <br /><span className="text-brandOrange underline decoration-brandOrange/20">Learning Mastery.</span></h2>
+                <h2 className="font-jakarta font-extrabold text-[32px] md:text-section-h2 text-textPrimary leading-tight mb-8">A Simple Path to <br /><span className="text-brandOrange underline decoration-brandOrange/20">Learning Mastery.</span></h2>
                 <p className="text-textSecondary text-[18px] mb-12">We've simplified the journey from curiosity to expertise. Here is how we ensure your success.</p>
                 
                 <div className="space-y-12">
@@ -314,7 +314,7 @@ export const LandingPage: React.FC = () => {
       {/* =========================================
           SECTION 6: BENEFITS FOR TRAINERS (ORANGE)
       ========================================= */}
-      <section className="py-[120px] bg-offWhite relative z-10 overflow-hidden">
+      <section className="py-16 lg:py-[120px] bg-offWhite relative z-10 overflow-hidden">
         <div className="page-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <FadeIn direction="left">
@@ -322,7 +322,7 @@ export const LandingPage: React.FC = () => {
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brandOrange/10 border border-brandOrange/20 text-brandOrange font-jakarta font-bold text-[12px] uppercase tracking-widest">
                   👨‍🏫 Empowering Mentors
                 </div>
-                <h2 className="font-jakarta font-extrabold text-section-h2 text-textPrimary leading-tight">Earn & Impact in <br />Your Locality.</h2>
+                <h2 className="font-jakarta font-extrabold text-[32px] md:text-section-h2 text-textPrimary leading-tight">Earn & Impact in <br />Your Locality.</h2>
                 <p className="font-inter text-[18px] text-textSecondary leading-relaxed">
                   Join our elite network of mentors. Build your professional brand while helping the next generation of innovators right in your neighborhood.
                 </p>
@@ -371,12 +371,12 @@ export const LandingPage: React.FC = () => {
       {/* =========================================
           SECTION 7: TESTIMONIALS (MNC LIGHT)
       ========================================= */}
-      <section className="py-[120px] bg-white relative z-10">
+      <section className="py-16 lg:py-[120px] bg-white relative z-10">
         <div className="page-container">
           <div className="flex flex-col lg:flex-row justify-between items-end mb-16 gap-8">
             <FadeIn direction="left">
               <div className="max-w-2xl">
-                <h2 className="font-jakarta font-extrabold text-section-h2 text-textPrimary leading-tight mb-4">Loved by Students <br />& Parents alike.</h2>
+                <h2 className="font-jakarta font-extrabold text-[32px] md:text-section-h2 text-textPrimary leading-tight mb-4">Loved by Students <br />& Parents alike.</h2>
                 <p className="text-textSecondary text-[18px]">Trusted by families across Tamil Nadu for quality robotics education at home.</p>
               </div>
             </FadeIn>
@@ -415,11 +415,11 @@ export const LandingPage: React.FC = () => {
       {/* =========================================
           SECTION 8: FAQ (MNC STYLE)
       ========================================= */}
-      <section className="py-[120px] bg-offWhite relative z-10 border-t border-borderSubtle">
+      <section className="py-16 lg:py-[120px] bg-offWhite relative z-10 border-t border-borderSubtle">
         <div className="page-container">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="font-jakarta font-extrabold text-section-h2 text-textPrimary">Common Questions</h2>
+              <h2 className="font-jakarta font-extrabold text-[32px] md:text-section-h2 text-textPrimary">Common Questions</h2>
               <p className="text-textSecondary mt-4 font-inter">Everything you need to know about our doorstep learning model.</p>
             </div>
 
