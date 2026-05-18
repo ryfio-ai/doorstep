@@ -64,13 +64,16 @@ export const Footer: React.FC = () => {
 
           {/* Brand Col */}
           <div className="lg:col-span-4 flex flex-col">
-            <Link to="/" className="flex flex-col leading-none mb-6 group inline-block w-max">
-              <span className="font-tamil font-bold text-[36px] leading-tight text-textPrimary group-hover:text-brandOrange transition-all duration-300">
-                திறனொளி
-              </span>
-              <span className="font-jakarta font-bold text-[13px] tracking-[0.1em] uppercase text-textSecondary group-hover:text-brandOrange mt-1 transition-colors">
-                ThiranOli
-              </span>
+            <Link to="/" className="flex items-center gap-3 mb-6 group inline-block w-max">
+              <img src="/logo.png" alt="ThiranOli Logo" className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
+              <div className="flex flex-col leading-none">
+                <span className="font-tamil font-bold text-[32px] leading-tight text-textPrimary group-hover:text-brandOrange transition-all duration-300">
+                  திறனொளி
+                </span>
+                <span className="font-jakarta font-bold text-[13px] tracking-[0.1em] uppercase text-textSecondary group-hover:text-brandOrange mt-1 transition-colors">
+                  ThiranOli
+                </span>
+              </div>
             </Link>
             <p className="text-[16px] leading-relaxed text-textSecondary mb-8 max-w-sm">
               Tamil Nadu's leading EdTech platform for 1-on-1 doorstep learning in AI, Robotics, and Coding.

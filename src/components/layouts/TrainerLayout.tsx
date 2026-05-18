@@ -22,14 +22,7 @@ export const TrainerLayout: React.FC = () => {
     <>
       <div className="p-8">
         <Link to="/" className="flex items-center gap-3 mb-12">
-           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EA580C" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-            <path d="M2 17l10 5 10-5"></path>
-            <path d="M2 12l10 5 10-5"></path>
-          </svg>
-          <span className="text-[24px] font-jakarta font-extrabold tracking-tight text-white italic">
-            திறனொளி
-          </span>
+          <img src="/logo.png" alt="ThiranOli Logo" className="h-10 w-auto object-contain brightness-0 invert" />
         </Link>
 
         <div className="space-y-1">
@@ -83,9 +76,7 @@ export const TrainerLayout: React.FC = () => {
         >
           <Menu className="w-6 h-6" />
         </button>
-        <span className="font-jakarta font-extrabold text-[18px] text-brandBlue italic">
-          திறனொளி
-        </span>
+        <img src="/logo.png" alt="ThiranOli" className="h-6 w-auto object-contain" />
         <button className="p-2 -mr-2 text-textPrimary relative">
           <Bell className="w-6 h-6" />
           <span className="absolute top-2 right-2 w-2 h-2 bg-brandOrange rounded-full border-2 border-white"></span>

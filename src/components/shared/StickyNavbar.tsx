@@ -58,17 +58,10 @@ export const StickyNavbar: React.FC = () => {
           
           {/* LOGO */}
           <Link to="/" className="flex items-center gap-3 shrink-0 group relative z-10">
-            <div className="flex flex-col leading-none">
-              <div className="flex items-center gap-2">
-                <span className="font-tamil font-bold text-[36px] text-textPrimary transition-all duration-500 italic">
-                  திறனொளி
-                </span>
-                <div className="w-2 h-2 rounded-sm bg-brandOrange mt-2"></div>
-              </div>
-              <span className="font-jakarta font-extrabold text-[10px] tracking-[0.3em] uppercase text-textSecondary opacity-60">
-                THIRANOLI
-              </span>
-            </div>
+            <img src="/logo.png" alt="ThiranOli Logo" className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
+            <span className="font-tamil font-bold text-[32px] md:text-[36px] text-textPrimary transition-all duration-500 italic">
+              திறனொளி
+            </span>
           </Link>
 
           {/* MAIN NAV */}
