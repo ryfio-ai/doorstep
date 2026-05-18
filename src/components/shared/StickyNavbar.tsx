@@ -54,12 +54,12 @@ export const StickyNavbar: React.FC = () => {
             : 'h-[100px] bg-transparent'
         }`}
       >
-        <div className="page-container h-full flex items-center justify-between">
+        <div className="page-container h-full flex items-center justify-between gap-4 lg:gap-8">
           
           {/* LOGO */}
           <Link to="/" className="flex items-center gap-3 shrink-0 group relative z-10">
             <img src="/logo.png" alt="ThiranOli Logo" className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
-            <span className="font-tamil font-bold text-[32px] md:text-[36px] text-textPrimary transition-all duration-500 italic">
+            <span className="font-tamil font-bold text-[28px] lg:text-[32px] text-textPrimary transition-all duration-500 italic tracking-tight">
               திறனொளி
             </span>
           </Link>
