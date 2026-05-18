@@ -5,6 +5,7 @@ import { PageTransition } from '../../components/shared/PageTransition';
 import { Button } from '../../components/ui/button';
 import { Link, useParams } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
+import { SEO } from '../../components/shared/SEO';
 
 const iconMap: Record<string, any> = {
   "Robotics Foundations": Lightbulb,
@@ -64,6 +65,11 @@ const LearningPathsPage: React.FC = () => {
   return (
     <PageTransition>
       <div className="bg-white min-h-screen pt-40 pb-24 font-inter">
+        <SEO 
+          title={`${course.title} Learning Path`}
+          description={`Explore the ${course.title} curriculum at ThiranOli. A curated learning path to master skills from beginner to advanced levels.`}
+          keywords={`${course.title}, curriculum, syllabus, tech education, learning path`}
+        />
         
         {/* Header Section */}
         <div className="page-container text-center mb-24">

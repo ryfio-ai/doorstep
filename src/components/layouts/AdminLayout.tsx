@@ -3,6 +3,7 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { LayoutDashboard, Users, GraduationCap, User, LogOut, Bell, Menu, X, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { SEO } from '../shared/SEO';
 
 export const AdminLayout: React.FC = () => {
   const location = useLocation();
@@ -60,6 +61,11 @@ export const AdminLayout: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-offWhite flex font-inter text-textPrimary">
+      <SEO 
+        title="Admin Dashboard" 
+        description="Private admin area for ThiranOli platform."
+        noindex={true}
+      />
       
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex flex-col w-[300px] bg-brandBlue fixed top-0 h-screen z-20 shadow-2xl border-r border-white/5">

@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Users, Target, Heart, Globe, ShieldCheck, Zap, Sparkles, MapPin, CheckCircle } from 'lucide-react';
 import { PageTransition } from '../../components/shared/PageTransition';
+import { SEO } from '../../components/shared/SEO';
 
 const FadeIn: React.FC<{ children: React.ReactNode, delay?: number }> = ({ children, delay = 0 }) => (
   <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay }}>
@@ -13,6 +14,11 @@ const AboutPage: React.FC = () => {
   return (
     <PageTransition>
       <div className="bg-white min-h-screen pt-40 pb-24 font-inter text-textPrimary">
+        <SEO 
+          title="About Us"
+          description="Learn about ThiranOli's mission to bridge skilled trainers and eager learners by bringing quality robotics, AI, and coding education to your doorstep."
+          keywords="About ThiranOli, EdTech Vision, Tamil Nadu education, AI Mentors, Doorstep education"
+        />
         
         {/* Hero Section */}
         <div className="page-container mb-32">

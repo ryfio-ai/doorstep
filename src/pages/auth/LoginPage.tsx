@@ -119,42 +119,6 @@ const LoginPage: React.FC = () => {
                   {t('auth.createOne')}
                 </Link>
               </div>
-
-              {/* Test Credentials Helper */}
-              <div className="bg-brandOrange/5 border border-brandOrange/10 rounded-3xl p-6">
-                <h4 className="font-jakarta font-extrabold text-[12px] text-brandOrange uppercase tracking-widest mb-4 flex items-center gap-2">
-                  <Star className="w-4 h-4" /> Demo Access (ThiranOli)
-                </h4>
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { role: 'Student', email: 'student@thiranoli.com' },
-                    { role: 'Trainer', email: 'trainer@thiranoli.com' },
-                    { role: 'Parent', email: 'parent@thiranoli.com' },
-                    { role: 'Admin', email: 'admin@thiranoli.com' }
-                  ].map((cred) => (
-                    <button
-                      key={cred.role}
-                      type="button"
-                      onClick={() => {
-                        const emailInput = document.querySelector('input[type="email"]') as HTMLInputElement;
-                        const passInput = document.querySelector('input[type="password"]') as HTMLInputElement;
-                        if (emailInput && passInput) {
-                          emailInput.value = cred.email;
-                          passInput.value = cred.role.toLowerCase() + '123';
-                          // Trigger react-hook-form validation
-                          emailInput.dispatchEvent(new Event('input', { bubbles: true }));
-                          passInput.dispatchEvent(new Event('input', { bubbles: true }));
-                        }
-                      }}
-                      className="flex flex-col items-start p-3 bg-white border border-borderSubtle rounded-xl hover:border-brandOrange transition-all group"
-                    >
-                      <span className="font-jakarta font-extrabold text-[10px] text-textPrimary/40 uppercase tracking-widest group-hover:text-brandOrange">{cred.role}</span>
-                      <span className="font-inter text-[12px] text-textPrimary font-bold truncate w-full">{cred.email}</span>
-                    </button>
-                  ))}
-                </div>
-                <p className="mt-4 text-[10px] text-textSecondary font-medium italic opacity-50 text-center">Password for all: <span className="font-bold text-textPrimary">role123</span> (e.g. student123)</p>
-              </div>
             </div>
           </motion.div>
         </div>

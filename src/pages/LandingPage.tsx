@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Play, ArrowRight, Brain, Cpu, Code, Trophy, Users, Star, CheckCircle, Smartphone, Globe, ShieldCheck, BookOpen, Target, Zap, MonitorPlay, Sparkles } from 'lucide-react';
 import CountUp from 'react-countup';
+import { SEO } from '../components/shared/SEO';
 
 // Reusable Section Fade-in Wrapper
 const FadeIn: React.FC<{ children: React.ReactNode, delay?: number, direction?: 'up' | 'left' | 'right', className?: string }> = ({ children, delay = 0, direction = 'up', className }) => {
@@ -19,6 +20,25 @@ const FadeIn: React.FC<{ children: React.ReactNode, delay?: number, direction?: 
 export const LandingPage: React.FC = () => {
   return (
     <div className="flex flex-col w-full overflow-hidden bg-white">
+      <SEO 
+        title="Innovation at Your Doorstep"
+        description="ThiranOli is a global skills ecosystem bringing world-class Robotics, AI, and Creative Coding education directly to your doorstep with verified expert mentors."
+        keywords="Robotics, AI, Creative Coding in Tamil Nadu, Learn Robotics at Home, ThiranOli, doorstep learning"
+        faqs={[
+          {
+            question: "What is doorstep robotics learning and how does it work?",
+            answer: "Doorstep robotics learning brings elite, 1-on-1 technology education directly to your home. Instead of traveling to crowded tuition centers, a certified home tutor for AI and coding comes to your house. Your child receives personalized, hands-on mentorship, moving through coding, IoT, and electronics concepts at their own comfortable pace."
+          },
+          {
+            question: "Do I need to buy hardware kits for home robotics classes?",
+            answer: "No, parents do not need to purchase expensive tools separately. ThiranOli provides premium, hands-on robotics kits for kids' home learning during every session. Our curriculum includes all necessary electronics, microcontrollers, and internet-of-things (IoT) components, allowing students to build real-world physical projects right at home."
+          },
+          {
+            question: "How are home tutors for AI and robotics verified for safety?",
+            answer: "Student safety is our absolute priority for safe doorstep learning alternatives. Every single mentor undergoes a rigorous 3-step background check and technical screening process conducted by our panel of IIT and MNC alumni. We strictly verify academic credentials, conduct professional background checks, and evaluate teaching empathy before matching a tutor with a student."
+          }
+        ]}
+      />
 
       {/* =========================================
           SECTION 1: HERO (MNC ORANGE + WHITE)
@@ -32,11 +52,6 @@ export const LandingPage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 xl:gap-16 items-center">
             <FadeIn>
               <div className="space-y-10">
-                <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-offWhite border border-borderSubtle shadow-sm">
-                  <Sparkles className="w-5 h-5 text-brandOrange animate-pulse" />
-                  <span className="font-jakarta font-bold text-[13px] text-textPrimary tracking-[0.08em] uppercase">The Future of Doorstep Learning</span>
-                </div>
-
                 <h1 className="font-jakarta font-extrabold text-[44px] sm:text-[56px] lg:text-hero-h1 text-textPrimary leading-[0.95]">
                   Innovation <br />
                   Delivered to <br />
@@ -72,15 +87,18 @@ export const LandingPage: React.FC = () => {
                   ))}
                 </div>
 
-                {/* Social Proof Bar */}
-                <div className="pt-6 flex items-center gap-8">
-                  <div className="flex -space-x-3">
-                    {[1,2,3,4].map(i => <img key={i} src={`https://i.pravatar.cc/100?u=${i}`} className="w-10 h-10 rounded-full border-2 border-white" alt="student" />)}
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-jakarta font-extrabold text-[18px] text-textPrimary">500+ Students</span>
-                    <span className="text-textSecondary text-[13px] font-medium">12 Cities · 50+ Trainers</span>
-                  </div>
+
+                {/* Thirukkural Quote */}
+                <div className="pt-6 border-t border-borderSubtle">
+                  <blockquote className="relative p-6 bg-brandOrange/5 rounded-2xl border-l-4 border-brandOrange">
+                    <div className="font-anek text-[20px] md:text-[22px] font-medium text-textPrimary leading-relaxed mb-2 text-brandOrange">
+                      "உள்ளுவ தெல்லாம் உயர்வுள்ளல் மற்றது<br/>
+                      தள்ளினுந் தள்ளாமை நீர்த்து"
+                    </div>
+                    <footer className="font-jakarta font-bold text-[12px] text-textSecondary uppercase tracking-widest">
+                      - Thirukkural 596
+                    </footer>
+                  </blockquote>
                 </div>
               </div>
             </FadeIn>
@@ -98,15 +116,6 @@ export const LandingPage: React.FC = () => {
                   </div>
                   {/* Floating Tech Elements */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-brandOrange/10 rounded-full blur-3xl animate-pulse"></div>
-                  <div className="absolute bottom-10 xl:bottom-20 -left-4 xl:-left-10 glass-nav p-4 xl:p-6 rounded-2xl border-brandOrange/20 shadow-premium-elevated flex items-center gap-4 animate-float-delayed z-20">
-                    <div className="w-12 h-12 rounded-xl bg-brandOrange flex items-center justify-center">
-                      <Cpu className="text-white w-7 h-7" />
-                    </div>
-                    <div>
-                      <p className="font-jakarta font-bold text-[16px]">Active Mentorship</p>
-                      <p className="text-textSecondary text-[12px]">Real-time doubt clearing</p>
-                    </div>
-                  </div>
                 </div>
               </FadeIn>
             </div>
@@ -345,8 +354,8 @@ export const LandingPage: React.FC = () => {
                 </div>
 
                 <div className="pt-8">
-                  <Button className="btn-primary h-16 px-12 text-[18px]">
-                    Apply as a Trainer
+                  <Button asChild className="btn-primary h-16 px-12 text-[18px]">
+                    <Link to="/signup">Apply as a Trainer</Link>
                   </Button>
                 </div>
               </div>
@@ -425,9 +434,9 @@ export const LandingPage: React.FC = () => {
 
             <div className="space-y-4">
               {[
-                { q: "How do you verify your trainers?", a: "Every trainer undergoes a rigorous 3-step verification process: Document verification, Technical interview by IIT alumni, and a mandatory Demo Session approval." },
-                { q: "Can I choose my own schedule?", a: "Yes! Our platform connects you with local trainers. You can coordinate with them to find a schedule that fits your routine perfectly." },
-                { q: "Do you provide hardware kits?", a: "Absolutely. For all Robotics and Electronics courses, we provide high-quality hardware kits that are brought to your home by the trainer." },
+                { q: "What is doorstep robotics learning and how does it work?", a: "Doorstep robotics learning brings elite, 1-on-1 technology education directly to your home. Instead of traveling to crowded tuition centers, a certified home tutor for AI and coding comes to your house. Your child receives personalized, hands-on mentorship, moving through coding, IoT, and electronics concepts at their own comfortable pace." },
+                { q: "Do I need to buy hardware kits for home robotics classes?", a: "No, parents do not need to purchase expensive tools separately. ThiranOli provides premium, hands-on robotics kits for kids' home learning during every session. Our curriculum includes all necessary electronics, microcontrollers, and internet-of-things (IoT) components, allowing students to build real-world physical projects right at home." },
+                { q: "How are home tutors for AI and robotics verified for safety?", a: "Student safety is our absolute priority for safe doorstep learning alternatives. Every single mentor undergoes a rigorous 3-step background check and technical screening process conducted by our panel of IIT and MNC alumni. We strictly verify academic credentials, conduct professional background checks, and evaluate teaching empathy before matching a tutor with a student." },
                 { q: "What if I am not happy with the trainer?", a: "We offer a 'Satisfaction Guarantee'. If the demo or initial classes don't meet your expectations, we will rematch you with a different trainer immediately." }
               ].map((faq, i) => (
                 <FadeIn key={i} delay={i * 0.05}>

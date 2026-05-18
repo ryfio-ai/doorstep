@@ -70,10 +70,13 @@ import Communications from './pages/admin/Communications';
 import CouponsReferrals from './pages/admin/CouponsReferrals';
 import Reports from './pages/admin/Reports';
 
+import CareersPage from './pages/public/CareersPage';
+import ContactPage from './pages/public/ContactPage';
+
 function AppContent() {
   const location = useLocation();
   const isPortal = location.pathname.startsWith('/student') || 
-                   location.pathname.startsWith('/trainer') || 
+                   (location.pathname.startsWith('/trainer') && !location.pathname.startsWith('/trainers')) || 
                    location.pathname.startsWith('/admin');
 
   return (
@@ -87,8 +90,9 @@ function AppContent() {
           <Route path="/robotics" element={<RoboticsAIPage />} />
           <Route path="/trainers" element={<TrainersPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/careers" element={<CareersPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/how-it-works" element={<LandingPage />} />
-          <Route path="/contact" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />

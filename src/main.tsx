@@ -7,6 +7,7 @@ import { AuthProvider } from './context/AuthContext.tsx';
 import { AppProvider } from './context/AppContext.tsx';
 import { NotificationProvider } from './context/NotificationContext.tsx';
 import { Toaster } from 'sonner';
+import { HelmetProvider } from 'react-helmet-async';
 import './i18n';
 
 const queryClient = new QueryClient({
@@ -20,16 +21,18 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <AppProvider>
-          <NotificationProvider>
-            <App />
-            <Toaster richColors position="top-right" />
-          </NotificationProvider>
-        </AppProvider>
-      </AuthProvider>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <AppProvider>
+            <NotificationProvider>
+              <App />
+              <Toaster richColors position="top-right" />
+            </NotificationProvider>
+          </AppProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   </React.StrictMode>,
 );
 

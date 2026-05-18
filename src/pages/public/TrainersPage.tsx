@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Star, Award, CheckCircle, MapPin, Users, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { PageTransition } from '../../components/shared/PageTransition';
 
 const FadeIn: React.FC<{ children: React.ReactNode, delay?: number }> = ({ children, delay = 0 }) => (
@@ -33,28 +34,28 @@ const TrainersPage: React.FC = () => {
         </div>
 
         {/* Trainers Grid */}
-        <div className="page-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="page-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-12">
           {trainers.map((trainer, i) => (
             <FadeIn key={i} delay={i * 0.1}>
-              <div className="premium-card p-10 text-center relative overflow-hidden group">
-                <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-brandOrange/5 to-transparent"></div>
+              <div className="premium-card p-8 text-center relative overflow-hidden group hover:shadow-premium-elevated transition-all duration-300">
+                <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-brandOrange/5 to-transparent"></div>
                 
-                <div className="relative z-10">
-                  <div className="w-32 h-32 mx-auto rounded-3xl p-1 bg-white shadow-premium-elevated mb-8 border border-borderSubtle flex items-center justify-center group-hover:rotate-6 transition-transform">
-                    <div className="w-full h-full rounded-2xl bg-offWhite flex items-center justify-center text-brandOrange/20">
-                      <User className="w-16 h-16" />
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="w-24 h-24 mx-auto rounded-[24px] p-1 bg-white shadow-sm mb-6 border border-borderSubtle flex items-center justify-center group-hover:rotate-6 transition-transform">
+                    <div className="w-full h-full rounded-[20px] bg-offWhite flex items-center justify-center text-brandOrange/30">
+                      <User className="w-10 h-10" />
                     </div>
                   </div>
                   
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <h3 className="font-jakarta text-[22px] font-extrabold text-textPrimary group-hover:text-brandOrange transition-colors">{trainer.name}</h3>
-                    <CheckCircle className="w-5 h-5 text-green-500 fill-green-50" />
+                  <div className="flex items-center justify-center gap-2 mb-1.5">
+                    <h3 className="font-jakarta text-[20px] font-extrabold text-textPrimary group-hover:text-brandOrange transition-colors leading-tight">{trainer.name}</h3>
+                    <CheckCircle className="w-4 h-4 text-green-500 fill-green-50 shrink-0" />
                   </div>
-                  <p className="text-[12px] font-jakarta font-extrabold text-brandOrange mb-4 uppercase tracking-[0.2em]">Lead Robotics Expert</p>
+                  <p className="text-[11px] font-jakarta font-extrabold text-brandOrange mb-4 uppercase tracking-[0.2em]">Lead Robotics Expert</p>
                   
-                  <p className="text-[15px] font-medium text-textSecondary mb-4">
+                  <p className="text-[14px] font-medium text-textSecondary mb-4">
                     {trainer.role} <br />
-                    <span className="text-textPrimary">at</span>{" "}
+                    <span className="text-textPrimary text-[13px] opacity-60">at</span>{" "}
                     <a 
                       href={trainer.companyUrl} 
                       target="_blank" 
@@ -65,12 +66,12 @@ const TrainersPage: React.FC = () => {
                     </a>
                   </p>
                   
-                  <p className="text-[15px] text-textSecondary leading-relaxed mb-8 italic">
+                  <p className="text-[14px] text-textSecondary leading-relaxed mb-6 italic px-4">
                     "{trainer.bio}"
                   </p>
                   
-                  <div className="flex items-center justify-center gap-6 pt-6 border-t border-offWhite text-[14px] font-jakarta font-bold text-textPrimary">
-                    <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-brandOrange"/> {trainer.location}</span>
+                  <div className="mt-auto pt-6 border-t border-offWhite text-[13px] font-jakarta font-bold text-textPrimary flex justify-center">
+                    <span className="flex items-center gap-2 bg-brandOrange/5 px-4 py-2 rounded-full text-brandOrange"><MapPin className="w-4 h-4"/> {trainer.location}</span>
                   </div>
                 </div>
               </div>
@@ -87,9 +88,9 @@ const TrainersPage: React.FC = () => {
             <div className="relative z-10">
               <h2 className="font-jakarta text-[32px] md:text-[56px] font-extrabold text-white mb-6 leading-tight">Empowering Future <br />Innovators?</h2>
               <p className="text-white/60 mb-12 max-w-2xl mx-auto text-[18px]">Join our elite network of mentors and build your professional brand while helping students right in your neighborhood.</p>
-              <button className="btn-primary h-16 px-12 text-[18px]">
+              <Link to="/signup" className="inline-flex items-center justify-center btn-primary h-16 px-12 text-[18px] rounded-full">
                 Apply as a Mentor
-              </button>
+              </Link>
             </div>
           </div>
         </div>
