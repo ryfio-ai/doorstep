@@ -65,7 +65,7 @@ export const StickyNavbar: React.FC = () => {
           </Link>
 
           {/* MAIN NAV */}
-          <div className="hidden lg:flex items-center gap-10">
+          <div className="hidden lg:flex items-center gap-6 xl:gap-10">
             <div 
               className="relative h-[80px] flex items-center"
               onMouseEnter={() => setActiveDropdown('courses')}
@@ -159,7 +159,7 @@ export const StickyNavbar: React.FC = () => {
           </div>
 
           {/* RIGHT ACTIONS */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-4 xl:gap-8">
             <button
               onClick={toggleLanguage}
               className="flex items-center gap-2 px-4 py-2 rounded-full border border-borderSubtle text-textSecondary hover:bg-offWhite transition-all"
