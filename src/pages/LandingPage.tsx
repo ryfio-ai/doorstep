@@ -91,7 +91,7 @@ export const LandingPage: React.FC = () => {
                 <div className="relative">
                   <div className="relative z-10 animate-float">
                     <img 
-                      src="file:///C:/Users/sathish/.gemini/antigravity/brain/6fe62d0a-46cf-49f5-a6f0-b3670b0514be/hero_robotics_visual_1778910877157.png" 
+                      src="/hero_robotics_visual.png" 
                       alt="Robotics Learning" 
                       className="w-full h-auto drop-shadow-3xl"
                     />
@@ -400,7 +400,6 @@ export const LandingPage: React.FC = () => {
                   </div>
                   <p className="font-inter text-textSecondary text-[17px] leading-relaxed mb-8 italic">"{t.text}"</p>
                   <div className="mt-auto flex items-center gap-4 pt-8 border-t border-offWhite">
-                    <img src={t.img} alt={t.name} className="w-14 h-14 rounded-full border-2 border-brandOrange/10" />
                     <div>
                       <h4 className="font-jakarta font-extrabold text-textPrimary">{t.name}</h4>
                       <p className="text-textSecondary text-[12px] font-bold uppercase tracking-wider">{t.role}</p>
