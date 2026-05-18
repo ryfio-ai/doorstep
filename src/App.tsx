@@ -73,6 +73,8 @@ import Reports from './pages/admin/Reports';
 import CareersPage from './pages/public/CareersPage';
 import ContactPage from './pages/public/ContactPage';
 
+import NotFoundPage from './pages/public/NotFoundPage';
+
 function AppContent() {
   const location = useLocation();
   const isPortal = location.pathname.startsWith('/student') || 
@@ -176,7 +178,7 @@ function AppContent() {
           </Route>
 
           {/* 404 */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
       {!isPortal && <Footer />}
