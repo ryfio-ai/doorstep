@@ -5,7 +5,7 @@ import { GamificationProvider } from './context/GamificationContext';
 import { ProtectedRoute } from './components/layouts/ProtectedRoute';
 import { StickyNavbar } from './components/shared/StickyNavbar';
 import { Footer } from './components/shared/Footer';
-
+import { Analytics } from '@vercel/analytics/react';
 // Public Pages
 import LandingPage from './pages/LandingPage';
 import LearningPathsPage from './pages/public/LearningPathsPage';
@@ -188,6 +188,7 @@ function App() {
           <Router>
             <AppContent />
           </Router>
+          <Analytics />
         </GamificationProvider>
       </NotificationProvider>
     </AuthProvider>
